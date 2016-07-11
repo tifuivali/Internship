@@ -1,5 +1,0 @@
-#######
------------
-AAAAAAA
-BBBBBBB
-CCCCCC
