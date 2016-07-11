@@ -1,1 +1,1 @@
-# Initial Post
+Initial post
