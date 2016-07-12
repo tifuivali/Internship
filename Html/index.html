@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Hoteluri Romanesti</title>
+	<meta charset="utf-8" />
+ 
+</head>
+<body>
+    <header>
+        <a href="index.html"><h1>Hoteluri din Romania</h1></a>
+        <hr />
+        <img src="images/hotel-header.jpg" alt="Hotels" width="100%" height="200" />
+        <form action="#">
+            <label>Cauta un hotel</label>
+            <input type="text" placeholder="Numele Hotelului Cautat" />
+            <input type="submit" value="Cauta" />
+        </form>
+    </header>
+    <nav>
+        <a href="#list_hotels">Lista Hoteluri</a>|
+        <a href="#lista_locatii">Locatii Turistice</a>|
+        <a href="insertHotel.html">Adauga Hotel</a>
+    </nav>
+    <section id="list_hotels">
+        <table id="list">
+            <thead>
+                <tr>
+                    <th>Nume</th>
+                    <th>Adresa</th>
+                    <th>Numar Locuri</th>
+                    <th>Numar Stele</th>
+                    <th>Site</th>
+                    <th>Descriere</th>
+                </tr>  
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Hotel MAESTRO</td>
+                    <td>Orașul Vatra Dornei, Str. Republicii, Jud. Suceava</td>
+                    <td>48</td>
+                    <td>
+                        <div class="rating">
+                            <span>☆</span><span>☆</span><span>☆</span>
+                        </div>
+                    </td>
+                    <td><a href="http://carta.ro/cazare-orasul-vatra-dornei/hotel-maestro/">Hotel Maestro</a></td>
+                    <td>
+                        Situat central in municipiul Vatra Dornei, hotelul reprezinta locul ideal pentru odihna, relaxare si punct de plecare pentru vizitarea obiectivelor turistice din zona,
+                        mentionand Manastirea Voronet, Manastirea Humor, Manastirea Moldovita, Manastirea Sucevita, Manastirea Putna si Arbore.
+                    </td>
+                </tr>
+                <tr>
+                    <td>Hotel LUX DIVINA</td>
+                    <td>Brașov, str.13 Decembrie, nr. 96, jud. Brasov</td>
+                    <td>106</td>
+                    <td>
+                        <div class="rating">
+                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                        </div>
+                    </td>
+                    <td><a href="http://carta.ro/cazare-brasov/hotel-lux-divina/">Hotel Divina</a></td>
+                    <td>Cele doua corpuri de hotel, Dacia si Parc, ofera un numar de 55 de spatii de cazare alcatuite din 50 camere duble, 4 camere single si un apartament.
+                     Fiecare spatiu dispune de conexiune wi-fi gratuita, televiziune prin cablu, aer conditionat si ofera loc de parcare gratuit, monitorizat.
+                     Mic-dejunul, pranzul sau cina sunt pregatite de bucatarii nostri si stim ca avem una dintre cele mai bune echipe de bucatari din Brasov. 
+                    Suntem atenti la fiecare detaliu si putem oferi la cerere servicii suplimentare. Trebuie doar sa iti doresti!</td>
+                </tr>
+                <tr>
+                    <td>Crystal Palace</td>
+                    <td>Strada Alexandru Serbanescu, nr. 18-20, Bucuresti</td>
+                    <td>90</td>
+                    <td>
+                        <div class="rating">
+                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                        </div>
+                    </td>
+                    <td><a href="http://hoteluriromania.ro/ro/hotelul/crystal-palace.html">Crystal Place</a></td>
+                    <td>Localizat in zona rezidentiala de nord a Bucurestiului, Crystal Palace Hotel se afla la o distanta convenabila de cateva dintre cele mai bune locatii 
+                    pentru cumparaturi, divertisment si restaurante. Crystal Palace Hotel este situat in apropiere de faimosul Romexpo - Centrul Expozitional Bucuresti, la 10 
+                    minute de Aeroportul International Otopeni, precum si de centrul orasului.</td>
+                </tr>
+            </tbody>
+        </table>
+    <aside id="rezervare">
+        <h2>Rezerva acum:</h2>
+        <form action="#">
+            <label>Oras:</label>
+            <select>
+                <option>Arad</option>
+                <option>Bacau</option>
+                <option>Baia Mare</option>
+                <option>Bucuresti</option>
+                <option>Constanta</option>
+                <option>Cluj</option>
+                <option>Deva</option>
+                <option>Iasi</option>
+            </select>
+            <br />
+            <label>Nume:</label>
+            <input type="text" id="name" name="name" placeholder="Numele dumneavostra (Ex:Popescu Ionut)" required/><br />
+            <label>Email:</label>
+            <input type="email" placeholder="Email-ul dvs. (Ex:popescu.ionut@server.com)" required /><br />
+            <label>Telefon:</label>
+            <input type="tel" placeholder="Numarul dvs de telefon." required/><br />
+            <label>De la:</label>
+            <input type="date" required /><br />
+            <label>Pana la:</label>
+            <input type="date" required /><br />
+            <input type="submit" value="Rezerva!" />
+        </form>
+    </aside>
+    </section>
+    <h1>Locatii Turistice Romania</h1>
+    <hr />
+    <br />
+    <nav>
+        <a href="#bicaz_chei">Cheile Bicazului</a> |
+        <a href="#scarisoara">Ghetarul de la Scarisoara</a> |
+        <a href="#retezat">Muntii Retezat</a> |
+        <a href="#delta_dunarii">Delta Dunarii</a> 
+    </nav>
+    <section id="lista_locatii">
+       <article id="bicaz_chei">
+           <h2>Cheile Bicazului</h2>
+           <p>
+               <strong>Cheile Bicazului</strong> se numără printre cele mai spectaculoase atracţii naturale din România. Formate în milioane de ani, în urma eroziunii stâncilor de 
+               granit de către apele învolburate ale râului cu acelaşi nume, Cheile Bicazului sunt poarta de trecere între regiunile Transilvania şi Moldova. Din punct de vedere turistic, 
+               Cheile Bicazului sunt absolut spectaculoase, cu succesiuni de curbe şi serpentine care îţi dezvăluie la fiecare pas un peisaj sălbatic şi impresionant.
+           </p>
+           <figure>
+              <img src="images/chei-bicaz.jpg" alt="Cheile Bicazului" />
+               <figcaption> Cheile Bicazului ,Harghita,Romania</figcaption>
+           </figure>
+           <p>Mai multe <strong>informatii</strong>: <a href="http://www.ghiduri-turistice.info/ghid-turistic-destinatie-de-weekend-cheile-bicazului-judetele-neamt-si-harghita">click aici.</a></p>
+       </article>
+        <article id="scarisoara">
+            <h2>Peştera Gheţarul de la Scărişoara, judeţul Alba</h2>
+            <p>Dacă temperaturile ridicate din această perioadă te fac să îţi doreşti să te afli într-un loc cu răcoare, pregăteşte-ţi rucsacul,
+ bocancii şi porneşte în drumeţie în zona staţiunii Arieşeni, unde vei avea prilejul să te răcoreşti în Peştera Gheţarul Scărişoara.
+ Grota se află la o altitudine de peste 1100 de metri şi adăposteşte cel mai mare gheţar subteran din lume. La Gheţarul Scărişoara
+ ajungi pornind din localitatea Garda de Sus, iar şoseaua te va duce până în apropiere de gura peşterii. Un bilet de intrare costă 7 lei,
+ iar ultima intrare se face la ora 18. În Peştera Gheţarul Scărişoara vei avea parte de gheaţă şi răcoare în miezul verii.</p>
+            <figure>
+                <img src="images/Pestera-Scarisoara.jpg" alt="Pestera Scarisoara" />
+                <figcaption>Pestera Scarisoara,Jud Alba</figcaption>
+            </figure>
+            <p>Mai multe <strong>informatii</strong>: <a href="http://www.ghiduri-turistice.info/ghid-turistic-vacanta-in-romania-7-locuri-pe-care-sa-le-vezi-in-sezonul-estival">click aici.</a></p>
+        </article>
+        <article id="retezat">
+            <h2>Munţii Retezat, judeţul Hunedoara</h2>
+            <p>
+                Un loc sălbatic, cu păduri virgine, culmi semeţe şi lacuri cu ape limpezi. Este vorba despre Munţii Retezat şi Parcul Natural cu acelaşi nume,
+                 unde vei putea cutreiera cele mai spectaculoase trasee montane şi vei putea admira privelişti minunate. Masivul Retezat este considerat bijuteria
+                 Munţilor Carpaţi şi este renumit pentru varietatea mare de plante şi animale sălbatice care trăiesc aici, dar şi pentru numărul mare de lacuri glaciare 
+                cu ape extrem de reci chiar şi în timpul verii. Masivul Retezat este locul ideal în care să te ascunzi de căldură în zilele toride de vară şi unde te poţi 
+                bucura de trasee montane care te vor duce pe vârfuri a căror altitudine depăşeşte 2000 de metri.
+            </p>
+            <figure>
+                <img src="images/Retezat.jpg" alt="Retezat" />
+                <figcaption>Muntii retezat,Hunedoara,Romania</figcaption>
+            </figure>
+            <p>Mai multe <strong>informatii</strong>: <a href="http://www.ghiduri-turistice.info/ghid-turistic-vacanta-in-romania-7-locuri-pe-care-sa-le-vezi-in-sezonul-estival">click aici.</a></p>
+        </article>
+        <article id="delta_dunarii">
+            <h2>Delta Dunării, judeţul Tulcea</h2>
+            <p>
+                Delta Dunării este cel mai nou teritoriu din Europa, un loc mlăştinos de o frumuseţe deosebită – al treilea ca mărime din lume, 
+                şi casă pentru milioane de păsări migratoare. Situată la gura de vărsare a Dunării în Marea Neagră, Delta Dunării este locul în care
+                 te vei conecta cu natura, vei putea observa păsările în mediul lor natural, iar la întoarcere, dacă eşti pescar, te vei putea lăuda
+                 prietenilor cu capturi impresionante. Delta Dunării fascinează prin sălbăticie şi simplitate şi este un loc din care te vei întoarce cu bateriile încărcate.
+            </p>
+            <figure>
+                <img src="images/Delta_Dunarii.jpg" alt="Delta Dunarii" />
+                <figcaption>Delta Dunarii,Tulcea,Romania</figcaption>
+            </figure>
+            <p>Mai multe <strong>informatii</strong>: <a href="http://www.ghiduri-turistice.info/ghid-turistic-vacanta-in-romania-7-locuri-pe-care-sa-le-vezi-in-sezonul-estival">click aici.</a></p>
+        </article>
+    </section>
+</body>
+</html>
