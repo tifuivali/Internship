@@ -1,12 +1,14 @@
 ﻿/* Slideshow container */
 .slideshow-container {
-  max-width: 1000px;
+  max-width: 2000px;
   position:relative;
-  margin-left:350px;
   min-width:75%;
   padding:25px;
   float:inherit;
-}
+  display: inline-flex;
+  margin-top: 50px;
+  margin-right:30px;
+  }
 
 /* Next & previous buttons */
 .prev, .next {

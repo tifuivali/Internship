@@ -70,17 +70,20 @@ th {
     font-family:"Comic Sans MS";
     border-bottom:4px solid;
     border-color:darkslategray;
-    margin-bottom:25px;
     border-radius:20px;
     float:left;
     margin-left: 25px;
     font-size: 34px;
     color: darkslategrey;
+    margin-top: 15px;
 }
 
 .header-left-side {
     display:block;
     position:relative;
+    display: inline-flex;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 .container-3{
@@ -89,7 +92,7 @@ th {
   white-space: nowrap;
   position: relative;
   margin-top: 3px;
-  margin-left: 75%;
+  margin-left: 78%;
 }
  
 .container-3 input#search{
@@ -203,14 +206,88 @@ h3 {
 
 footer {
     background-color: #19774a;
+    margin-top:25px;
 }
 
 .footer_utils {
     margin-left: 50px;
     background-color: #1d613a;
     width: 170px;
-    padding-top: 25px;
+    padding-top: 5px;
     padding-bottom: 25px;
     padding-left: 15px;
     padding-right: 15px;
+}
+
+.logo_container {
+    display:block;
+}
+
+.img_logo {
+    width: 300px;
+    height: 169px;
+
+}
+
+#home {
+    margin-top:25px;
+}
+
+
+#links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: auto;
+}
+
+#link_util a {
+    display: block;
+    color: #000;
+    padding: 8px 0 8px 16px;
+    text-decoration: none;
+}
+
+#link_util a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+    #link_util a:hover:not(.active) {
+        background-color: #555;
+        color: white;
+    }
+
+ul.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+ul.pagination li {display: inline;}
+
+ul.pagination li a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+ul.pagination li a.active {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+}
+
+ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+
+
+.paginare {
+    padding-top: 50px;
+    padding-left: 40%;
+}
+#copyright {
+    margin-bottom:10px;
 }

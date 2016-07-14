@@ -10,8 +10,11 @@
 <body>
     <header>
         <div class="header-left-side">
-            <div >
-                <a href="index.html"><span class="logo" >Hoteluri Romania</span></a>    
+            <div class="logo_container" >
+                <a id="home" href="index.html"><span class="logo" >Hoteluri Romania</span></a>
+                <div >
+                    <img src="images/hotel.svg" class="img_logo" alt="Logo"  />
+                </div> 
             </div>
             <div class="slideshow-container">
                 <div class="mySlides fade">
@@ -204,18 +207,33 @@
             </tbody>
         </table>
     </section>
+    <div class="paginare">
+        <ul class="pagination">
+            <li><a href="#">«</a></li>
+            <li><a class="active" href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">6</a></li>
+            <li><a href="#">7</a></li>
+            <li><a href="#">»</a></li>
+        </ul>
+    </div>
     <footer>
         <div class="footer_utils">
-            <h3>
+            <h3 style="background-color:rgba(99, 107, 99, 0.59)">
                 Legaturi Utile:
             </h3>
-            <ul>
-                <li><a href="#">Cazare Romania</a></li>
-                <li><a href="#">Harta Romaniei</a></li>
-                <li><a href="#">Pensiuni Turistice</a></li>
-                <li><a href="#">Zone Camping</a></li>
+            <ul id="links">
+                <li id="link_util"><a href="#">Cazare Romania</a></li>
+                <li id="link_util"><a href="#">Harta Romaniei</a></li>
+                <li id="link_util"><a href="#">Pensiuni Turistice</a></li>
+                <li id="link_util"><a href="#">Zone Camping</a></li>
             </ul>
         </div>
+
+        <h4 id="copyright">©Copyright TeamNet Solutions SRL</h4>
     </footer>
 
    
