@@ -10,8 +10,11 @@
 <body>
     <header>
         <div class="header-left-side">
-            <div>
-                <a href="index.html"><span class="logo">Hoteluri Romania</span></a>
+            <div class="logo_container">
+                <a id="home" href="index.html"><span class="logo">Hoteluri Romania</span></a>
+                <div>
+                    <img src="images/hotel.svg" class="img_logo" alt="Logo" />
+                </div>
             </div>
             <div class="slideshow-container">
                 <div class="mySlides fade">
@@ -66,14 +69,16 @@
     </nav>
 
     <content>
-        <h1>Locatii Turistice Romania</h1>
+        <h1 style="font-size: 30px; margin-top:80px;">Locatii Turistice Romania</h1>
         <hr />
         <br />
         <nav>
-            <a href="#bicaz_chei">Cheile Bicazului</a> |
-            <a href="#scarisoara">Ghetarul de la Scarisoara</a> |
-            <a href="#retezat">Muntii Retezat</a> |
-            <a href="#delta_dunarii">Delta Dunarii</a>
+            <ul style="width:35%" class="items_menu">
+                <li class="menu_item"><a href="#bicaz_chei">Cheile Bicazului</a> </li>
+                <li class="menu_item"><a href="#scarisoara">Ghetarul de la Scarisoara</a> </li>
+                <li class="menu_item"><a href="#retezat">Muntii Retezat</a> </li>
+                <li class="menu_item"><a href="#delta_dunarii">Delta Dunarii</a></li>
+            </ul>
         </nav>
         <section id="lista_locatii">
             <article id="bicaz_chei">
@@ -87,7 +92,7 @@
                     <img src="images/chei-bicaz.jpg" alt="Cheile Bicazului" />
                     <figcaption> Cheile Bicazului ,Harghita,Romania</figcaption>
                 </figure>
-                <p>Mai multe <strong>informatii</strong>: <a href="http://www.ghiduri-turistice.info/ghid-turistic-destinatie-de-weekend-cheile-bicazului-judetele-neamt-si-harghita">click aici.</a></p>
+                <p class="detail">Mai multe <strong>informatii</strong>: <a href="http://www.ghiduri-turistice.info/ghid-turistic-destinatie-de-weekend-cheile-bicazului-judetele-neamt-si-harghita">click aici.</a></p>
             </article>
             <article id="scarisoara">
                 <h2>Peştera Gheţarul de la Scărişoara, judeţul Alba</h2>
@@ -102,7 +107,7 @@
                     <img src="images/Pestera-Scarisoara.jpg" alt="Pestera Scarisoara" />
                     <figcaption>Pestera Scarisoara,Jud Alba</figcaption>
                 </figure>
-                <p>Mai multe <strong>informatii</strong>: <a href="http://www.ghiduri-turistice.info/ghid-turistic-vacanta-in-romania-7-locuri-pe-care-sa-le-vezi-in-sezonul-estival">click aici.</a></p>
+                <p class="detail">Mai multe <strong>informatii</strong>: <a href="http://www.ghiduri-turistice.info/ghid-turistic-vacanta-in-romania-7-locuri-pe-care-sa-le-vezi-in-sezonul-estival">click aici.</a></p>
             </article>
             <article id="retezat">
                 <h2>Munţii Retezat, judeţul Hunedoara</h2>
@@ -117,7 +122,7 @@
                     <img src="images/Retezat.jpg" alt="Retezat" />
                     <figcaption>Muntii retezat,Hunedoara,Romania</figcaption>
                 </figure>
-                <p>Mai multe <strong>informatii</strong>: <a href="http://www.ghiduri-turistice.info/ghid-turistic-vacanta-in-romania-7-locuri-pe-care-sa-le-vezi-in-sezonul-estival">click aici.</a></p>
+                <p class="detail">Mai multe <strong>informatii</strong>: <a href="http://www.ghiduri-turistice.info/ghid-turistic-vacanta-in-romania-7-locuri-pe-care-sa-le-vezi-in-sezonul-estival">click aici.</a></p>
             </article>
             <article id="delta_dunarii">
                 <h2>Delta Dunării, judeţul Tulcea</h2>
@@ -131,9 +136,29 @@
                     <img src="images/Delta_Dunarii.jpg" alt="Delta Dunarii" />
                     <figcaption>Delta Dunarii,Tulcea,Romania</figcaption>
                 </figure>
-                <p>Mai multe <strong>informatii</strong>: <a href="http://www.ghiduri-turistice.info/ghid-turistic-vacanta-in-romania-7-locuri-pe-care-sa-le-vezi-in-sezonul-estival">click aici.</a></p>
+                <p class="detail">Mai multe <strong>informatii</strong>: <a href="http://www.ghiduri-turistice.info/ghid-turistic-vacanta-in-romania-7-locuri-pe-care-sa-le-vezi-in-sezonul-estival">click aici.</a></p>
             </article>
         </section>
     </content>
+
+    <footer>
+        <div class="footer_top">
+            <div class="footer_utils">
+                <h3 style="background-color:rgba(99, 107, 99, 0.59)">
+                    Legaturi Utile:
+                </h3>
+                <ul id="links">
+                    <li id="link_util"><a href="#">Cazare Romania</a></li>
+                    <li id="link_util"><a href="#">Harta Romaniei</a></li>
+                    <li id="link_util"><a href="#">Pensiuni Turistice</a></li>
+                    <li id="link_util"><a href="#">Zone Camping</a></li>
+                </ul>
+            </div>
+            <div class="map_footer">
+                <img width="600" src="http://maps.googleapis.com/maps/api/staticmap?center=Iasi&zoom=13&scale=1&size=1200x200&maptype=roadmap&format=png&visual_refresh=true" alt="Google Map of Iasi" />
+            </div>
+        </div>
+        <h4 id="copyright">©Copyright TeamNet Solutions SRL</h4>
+    </footer>
 </body>
 </html>

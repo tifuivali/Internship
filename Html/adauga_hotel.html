@@ -10,8 +10,11 @@
 <body>
     <header>
         <div class="header-left-side">
-            <div>
-                <a href="index.html"><span class="logo">Hoteluri Romania</span></a>
+            <div class="logo_container">
+                <a id="home" href="index.html"><span class="logo">Hoteluri Romania</span></a>
+                <div>
+                    <img src="images/hotel.svg" class="img_logo" alt="Logo" />
+                </div>
             </div>
             <div class="slideshow-container">
                 <div class="mySlides fade">
@@ -65,38 +68,78 @@
         </ul>
     </nav>
     <section>
-        <hr />
-        <h1>Publica hotelul tau la noi</h1>
-        <hr />
-        <form action="#">
-            <label>Alege Orasul:</label>
-            <select>
-                <option>Arad</option>
-                <option>Bacau</option>
-                <option>Baia Mare</option>
-                <option>Bucuresti</option>
-                <option>Constanta</option>
-                <option>Cluj</option>
-                <option>Deva</option>
-                <option>Iasi</option>
-            </select><br />
-            <label>Numele Hotelului*: </label>
-            <input type="text" id="name" name="name" required /><br />
-            <label>Adresa*: </label>
-            <input type="text" id="adress" name="adress" required /><br />
-            <label>Numar Locuri*: </label>
-            <input type="number" min="1" max="1000" name="rooms" id="rooms" required /><br />
-            <label>Rating: </label>
-            <input type="range" min="0" max="7" id="rating" name="rating" required /><br />
-            <label>Web Site: </label>
-            <input type="url" id="web_site" name="web_site"/><br />
-            <label>Descriere: </label><br />
-            <textarea cols="100" rows="10" id="description" name="description">
-                Poti spune ceva despre hotel aici.
-            </textarea><br />
-            <p>Toate campurile marcate cu <strong>*</strong> sunt <strong>obligatorii.</strong></p>
-            <input type="submit" value="Adauga" />
+      
+        <h1 style="font-size:30px; margin-top:50px; margin-left:80px;">Publica hotelul tau la noi</h1>
+        <hr style="margin-left:80px;" />
+        <form id="form_adauga" action="#">
+            <div id="top_side_form">
+                <div id="left_side_form">
+                    <div class="form_input">
+                        <label>Alege Orasul:</label><br />
+                        <select>
+                            <option>Arad</option>
+                            <option>Bacau</option>
+                            <option>Baia Mare</option>
+                            <option>Bucuresti</option>
+                            <option>Constanta</option>
+                            <option>Cluj</option>
+                            <option>Deva</option>
+                            <option>Iasi</option>
+                        </select><br />
+                    </div>
+                    <div class="form_input">
+                        <label>Numele Hotelului*: </label><br />
+                        <input type="text" id="name" name="name" required /><br />
+                    </div>
+                    <div class="form_input">
+                        <label>Adresa*: </label><br />
+                        <input type="text" id="adress" name="adress" required /><br />
+                    </div>
+                </div>
+                <div id="right_side_form">
+                    <div class="form_input">
+                        <label>Numar Locuri*: </label><br />
+                        <input type="number" min="1" max="1000" name="rooms" id="rooms" required /><br />
+                    </div>
+                    <div class="form_input">
+                        <label>Rating: </label><br />
+                        <input type="range" min="0" max="7" id="rating" name="rating" required /><br />
+                    </div>
+                    <div class="form_input">
+                        <label>Web Site: </label><br />
+                        <input type="url" id="web_site" name="web_site" /><br />
+                    </div>
+                </div>
+            </div>
+            <div id="bootom_side_form">
+                <div class="form_input">
+                    <label>Descriere: </label><br />
+                    <textarea cols="100" rows="10" id="description" name="description">Poti spune ceva despre hotel aici.</textarea><br />
+                </div>
+                <p>Toate campurile marcate cu <strong>*</strong> sunt <strong>obligatorii.</strong></p>
+                <input type="submit" value="Adauga" />
+            </div>
         </form>
     </section>
+
+    <footer>
+        <div class="footer_top">
+            <div class="footer_utils">
+                <h3 style="background-color:rgba(99, 107, 99, 0.59)">
+                    Legaturi Utile:
+                </h3>
+                <ul id="links">
+                    <li id="link_util"><a href="#">Cazare Romania</a></li>
+                    <li id="link_util"><a href="#">Harta Romaniei</a></li>
+                    <li id="link_util"><a href="#">Pensiuni Turistice</a></li>
+                    <li id="link_util"><a href="#">Zone Camping</a></li>
+                </ul>
+            </div>
+            <div class="map_footer">
+                <img width="600" src="http://maps.googleapis.com/maps/api/staticmap?center=Iasi&zoom=13&scale=1&size=1200x200&maptype=roadmap&format=png&visual_refresh=true" alt="Google Map of Iasi" />
+            </div>
+        </div>
+        <h4 id="copyright">©Copyright TeamNet Solutions SRL</h4>
+    </footer>
 </body>
 </html>

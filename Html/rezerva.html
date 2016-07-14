@@ -10,9 +10,11 @@
 <body>
     <header>
         <div class="header-left-side">
-            <div class="logo_conainer">
-                <a href="index.html"><span class="logo">Hoteluri Romania</span></a>
-                <img src="images/hotel.svg" alt="Hotel Logo" />
+            <div class="logo_container">
+                <a id="home" href="index.html"><span class="logo">Hoteluri Romania</span></a>
+                <div>
+                    <img src="images/hotel.svg" class="img_logo" alt="Logo" />
+                </div>
             </div>
             <div class="slideshow-container">
                 <div class="mySlides fade">
@@ -67,9 +69,10 @@
     </nav>
 
     <content>
-            <h2>Rezerva acum:</h2>
-            <form action="#">
-                <label>Oras:</label>
+            <h1 style="font-size:30px; margin-top:20px; margin-left:80px;">Rezerva acum:</h1>
+            <hr style="margin-left:80px;" />
+            <form id="rezerva_form" action="#">
+                <label>Oras:</label><br />
                 <select>
                     <option>Arad</option>
                     <option>Bacau</option>
@@ -81,19 +84,39 @@
                     <option>Iasi</option>
                 </select>
                 <br />
-                <label>Nume:</label>
+                <label>Nume:</label><br />
                 <input type="text" id="name" name="name" placeholder="Numele dumneavostra (Ex:Popescu Ionut)" required /><br />
-                <label>Email:</label>
+                <label>Email:</label><br />
                 <input type="email" placeholder="Email-ul dvs. (Ex:popescu.ionut@server.com)" required /><br />
-                <label>Telefon:</label>
+                <label>Telefon:</label><br />
                 <input type="tel" placeholder="Numarul dvs de telefon." required /><br />
-                <label>De la:</label>
+                <label>De la:</label><br />
                 <input type="date" required /><br />
-                <label>Pana la:</label>
+                <label>Pana la:</label><br />
                 <input type="date" required /><br />
                 <input type="submit" value="Rezerva!" />
             </form>
     </content>
+
+    <footer>
+        <div class="footer_top">
+            <div class="footer_utils">
+                <h3 style="background-color:rgba(99, 107, 99, 0.59)">
+                    Legaturi Utile:
+                </h3>
+                <ul id="links">
+                    <li id="link_util"><a href="#">Cazare Romania</a></li>
+                    <li id="link_util"><a href="#">Harta Romaniei</a></li>
+                    <li id="link_util"><a href="#">Pensiuni Turistice</a></li>
+                    <li id="link_util"><a href="#">Zone Camping</a></li>
+                </ul>
+            </div>
+            <div class="map_footer">
+                <img width="600" src="http://maps.googleapis.com/maps/api/staticmap?center=Iasi&zoom=13&scale=1&size=1200x200&maptype=roadmap&format=png&visual_refresh=true" alt="Google Map of Iasi" />
+            </div>
+        </div>
+        <h4 id="copyright">©Copyright TeamNet Solutions SRL</h4>
+    </footer>
 
 </body>
 </html>
