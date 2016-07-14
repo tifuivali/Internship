@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>Adauga Hotel</title>
+    <title>Despre Noi</title>
 	<meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="css/slideshow.css" />
@@ -52,10 +52,10 @@
 
     <nav class="menu_horizontal">
         <ul class="items_menu">
-            <li class="menu_item"><a href="index.html">Home</a></li>
+            <li class="menu_item active"><a href="index.html">Home</a></li>
             <li class="menu_item"><a href="rezerva.html">Rezerva Acum!</a></li>
             <li class="menu_item"><a href="locatii.html">Locatii Turistice</a></li>
-            <li class="menu_item active"><a href="adauga_hotel.html">Adauga Hotel</a></li>
+            <li class="menu_item"><a href="adauga_hotel.html">Adauga Hotel</a></li>
             <li class="menu_item"><a href="despre.html">Despre Noi</a></li>
             <li>
                 <div class="box">
@@ -65,63 +65,25 @@
                     </div>
                 </div>
             </li>
+
+
         </ul>
     </nav>
-    <section>
-      
-        <h1 style="font-size:30px; margin-top:50px; margin-left:80px;">Publica hotelul tau la noi</h1>
-        <hr style="margin-left:80px;" />
-        <form id="form_adauga" action="#">
-            <div id="top_side_form">
-                <div id="left_side_form">
-                    <div class="form_input">
-                        <label>Alege Orasul:</label><br />
-                        <select>
-                            <option>Arad</option>
-                            <option>Bacau</option>
-                            <option>Baia Mare</option>
-                            <option>Bucuresti</option>
-                            <option>Constanta</option>
-                            <option>Cluj</option>
-                            <option>Deva</option>
-                            <option>Iasi</option>
-                        </select><br />
-                    </div>
-                    <div class="form_input">
-                        <label>Numele Hotelului*: </label><br />
-                        <input type="text" id="name" name="name" required /><br />
-                    </div>
-                    <div class="form_input">
-                        <label>Adresa*: </label><br />
-                        <input type="text" id="adress" name="adress" required /><br />
-                    </div>
-                </div>
-                <div id="right_side_form">
-                    <div class="form_input">
-                        <label>Numar Locuri*: </label><br />
-                        <input type="number" min="1" max="1000" name="rooms" id="rooms" required /><br />
-                    </div>
-                    <div class="form_input">
-                        <label>Rating: </label><br />
-                        <input type="range" min="0" max="7" id="rating" name="rating" required /><br />
-                    </div>
-                    <div class="form_input">
-                        <label>Web Site: </label><br />
-                        <input type="url" id="web_site" name="web_site" /><br />
-                    </div>
-                </div>
-            </div>
-            <div id="bootom_side_form">
-                <div class="form_input">
-                    <label>Descriere: </label><br />
-                    <textarea cols="100" rows="10" id="description" name="description">Poti spune ceva despre hotel aici.</textarea><br />
-                </div>
-                <p>Toate campurile marcate cu <strong>*</strong> sunt <strong>obligatorii.</strong></p>
-                <input type="submit" value="Adauga" />
-            </div>
-        </form>
-        <hr class="margin margintop50"/>
-    </section>
+    <content>
+        <h1>Despre noi</h1>
+        <hr />
+
+        <p>
+            Un hotel este un stabiliment care oferă servicii de cazare contra cost, în general pentru perioade scurte de timp.[1] Hotelurile oferă adesea clienților și alte servicii, cum sunt cele de restaurant, sau de săli pentru reuniuni și conferințe.
+
+            Hotelurile se clasifică în funcție de gradul de confort și serviciile oferite. Clasificarea diferă de la țară la țară și se poate marca prin (de la cele mai austere la cele mai luxoase):
+
+            stele (de la 1 la 5);
+            litere (de la E la A);
+            clase (de la a patra la întâi).
+            De obicei, sistemul de gradare a hotelurilor permite maxim 5 stele, dar în lume există și hoteluri clasificate la 7 stele, cele mai multe fiind situate în Dubai (Burj Al Arab, Dubai, Pentominium, Dubai, iSquare Hotel & Mall, Orlando, PanguPlaza (MorganPlaza), Beijing, Emirates Palace, Abu Dhabi, Seven Stars Galleria, Milano).
+        </p>
+    </content>
 
     <footer>
         <div class="footer_top">
@@ -142,5 +104,6 @@
         </div>
         <h4 id="copyright">©Copyright TeamNet Solutions SRL</h4>
     </footer>
+
 </body>
 </html>
