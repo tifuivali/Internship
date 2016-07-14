@@ -1,5 +1,9 @@
 ﻿body {
+    padding-left: 100px;
+    padding-right: 100px;
+    background-color: rgba(191, 191, 191, 0.79);
 }
+
 
 header {
     background-color:seagreen;
@@ -7,35 +11,56 @@ header {
 }
 
 hr{
-    color:darkblue;
+    color: #13136b;
+    background-color: #736a6a;
+    height: 2px;
 }
 
 h1 {
     font-family:'Comic Sans MS';
-    font-size:24px;
+    font-size:34px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+p {
+    font-family: comic sans ms; text-indent: inherit;
 }
 
 table {
-    border-collapse:collapse;
-    width:100%;
-}
-
-th,td {
-    padding:10px;
-    text-align:left;
-}
-
-tr:nth-child(even) {
-    background-color:#808080;
-}
-
-tr {
-    border-bottom:2px solid #0094ff;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
 }
 
 th {
-    background-color:mediumslateblue;
-    color:paleturquoise;
+   
+    text-align:left;
+    padding-left: 50px;
+}
+
+td {
+    padding: 50px;
+    text-align: left;
+    margin-top: 30px;
+    font-size: 16px;
+    font-family: comic sans ms;
+}
+
+tr:nth-child(even) {
+    background-color:rgba(213, 228, 213, 0.59);
+}
+
+tr {
+    border-bottom: 4px solid #216b20;
+    margin-top: 40px;
+}
+
+th {
+    background-color: #19774a;
+    color: #f2f2f2;
+    font-family: comic sans ms;
+    font-size: 14px;
 }
 
 .logo {
@@ -63,7 +88,8 @@ th {
   vertical-align: middle;
   white-space: nowrap;
   position: relative;
-  margin-top:25px;
+  margin-top: 3px;
+  margin-left: 75%;
 }
  
 .container-3 input#search{
@@ -116,8 +142,7 @@ th {
 }
 
 .box {
-    position:absolute;
-    margin-top:120px;
+       
 }
 
 .fa-fa-search {
@@ -125,4 +150,67 @@ th {
     text-align: center;
     font-size: 25px;
     margin-left: 10px;
+}
+
+
+.items_menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #19774a;
+    border-radius: 200px;
+    margin-top:5px;
+}
+
+.menu_item {
+    float: left;
+}
+
+.menu_item a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.menu_item a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #4CAF50;
+}
+
+.intro {
+    margin-left:70px;
+    
+}
+
+.img_table {
+    width:150px;
+    height:150px;
+    border: 7px solid rgba(101, 115, 126, 0.33);
+    border-radius: 20px;
+}
+
+h3 {
+    font-family:'Comic Sans MS';
+    font-style: italic;
+    font-weight: bold;
+}
+
+footer {
+    background-color: #19774a;
+}
+
+.footer_utils {
+    margin-left: 50px;
+    background-color: #1d613a;
+    width: 170px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    padding-left: 15px;
+    padding-right: 15px;
 }

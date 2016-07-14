@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>Adauga Hotel</title>
+    <title>Rezervare hotel</title>
 	<meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="css/slideshow.css" />
@@ -12,6 +12,7 @@
         <div class="header-left-side">
             <div>
                 <a href="index.html"><span class="logo">Hoteluri Romania</span></a>
+                <img src="images/hotel.svg" alt="Hotel Logo" />
             </div>
             <div class="slideshow-container">
                 <div class="mySlides fade">
@@ -50,9 +51,9 @@
     <nav class="menu_horizontal">
         <ul class="items_menu">
             <li class="menu_item"><a href="index.html">Home</a></li>
-            <li class="menu_item"><a href="rezerva.html">Rezerva Acum!</a></li>
+            <li class="menu_item active"><a href="rezerva.html">Rezerva Acum!</a></li>
             <li class="menu_item"><a href="locatii.html">Locatii Turistice</a></li>
-            <li class="menu_item active"><a href="adauga_hotel.html">Adauga Hotel</a></li>
+            <li class="menu_item"><a href="adauga_hotel.html">Adauga Hotel</a></li>
             <li class="menu_item"><a href="despre.html">Despre Noi</a></li>
             <li>
                 <div class="box">
@@ -64,39 +65,35 @@
             </li>
         </ul>
     </nav>
-    <section>
-        <hr />
-        <h1>Publica hotelul tau la noi</h1>
-        <hr />
-        <form action="#">
-            <label>Alege Orasul:</label>
-            <select>
-                <option>Arad</option>
-                <option>Bacau</option>
-                <option>Baia Mare</option>
-                <option>Bucuresti</option>
-                <option>Constanta</option>
-                <option>Cluj</option>
-                <option>Deva</option>
-                <option>Iasi</option>
-            </select><br />
-            <label>Numele Hotelului*: </label>
-            <input type="text" id="name" name="name" required /><br />
-            <label>Adresa*: </label>
-            <input type="text" id="adress" name="adress" required /><br />
-            <label>Numar Locuri*: </label>
-            <input type="number" min="1" max="1000" name="rooms" id="rooms" required /><br />
-            <label>Rating: </label>
-            <input type="range" min="0" max="7" id="rating" name="rating" required /><br />
-            <label>Web Site: </label>
-            <input type="url" id="web_site" name="web_site"/><br />
-            <label>Descriere: </label><br />
-            <textarea cols="100" rows="10" id="description" name="description">
-                Poti spune ceva despre hotel aici.
-            </textarea><br />
-            <p>Toate campurile marcate cu <strong>*</strong> sunt <strong>obligatorii.</strong></p>
-            <input type="submit" value="Adauga" />
-        </form>
-    </section>
+
+    <content>
+            <h2>Rezerva acum:</h2>
+            <form action="#">
+                <label>Oras:</label>
+                <select>
+                    <option>Arad</option>
+                    <option>Bacau</option>
+                    <option>Baia Mare</option>
+                    <option>Bucuresti</option>
+                    <option>Constanta</option>
+                    <option>Cluj</option>
+                    <option>Deva</option>
+                    <option>Iasi</option>
+                </select>
+                <br />
+                <label>Nume:</label>
+                <input type="text" id="name" name="name" placeholder="Numele dumneavostra (Ex:Popescu Ionut)" required /><br />
+                <label>Email:</label>
+                <input type="email" placeholder="Email-ul dvs. (Ex:popescu.ionut@server.com)" required /><br />
+                <label>Telefon:</label>
+                <input type="tel" placeholder="Numarul dvs de telefon." required /><br />
+                <label>De la:</label>
+                <input type="date" required /><br />
+                <label>Pana la:</label>
+                <input type="date" required /><br />
+                <input type="submit" value="Rezerva!" />
+            </form>
+    </content>
+
 </body>
 </html>
