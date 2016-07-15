@@ -110,48 +110,76 @@ console.log("Array length shift:" + array.length);
 //Exercise 5
 
 
-function Hotel_list()
+function Hotels()
 {
     this.list = [];
 
-
 }
 
-Hotel_list.prototype.add = function (hotel) {
-    this.list[this.count] = hotel;
-    this.count++;
+Hotels.prototype.add = function (hotel) {
+    var exists = false;
+    for (var item in this.list)
+    {
+        if(this.list[item].id===hotel.id)
+        {
+            exists = true;
+        }
+    }
+    if (exists)
+    {
+        throw {
+            message:"Hotels with the same id:"+hotel.id+ " already exists!"
+        }
+    }
+   
+    this.list.push(hotel);
 };
 
-Hotel_list.prototype.update = function (hotel) {
+Hotels.prototype.update = function (hotel) {
+    var exists = false;
     for (var item in this.list) {
         if (this.list[item].id === hotel.id) {
-            this.list[item] = hotel;
+            exists = true;
+            this.list[item]=hotel;
+        }
+    }
+    if (!exists)
+    {
+        throw {
+            message: "Hotel doesn't exists!"
         }
     }
 };
 
-Hotel_list.prototype.delete = function (id) {
+Hotels.prototype.delete = function (id) {
+    var exists = false;
     for (var item in this.list) {
-        if (this.list[item].id === hotel.id) {
-            this.list[item] = null;
+        if (this.list[item].id === id) {
+            exists = true;
+            this.list.splice(item, 1);
+        }
+    }
+    if (!exists) {
+        throw {
+            message: "Hotel doesn't exists!"
         }
     }
 };
 
 
-Hotel_list.prototype.getInfo = function (id) {
+Hotels.prototype.getInfo = function (id) {
     for (var item in this.list) {
-        if (this.list[item].id === hotel.id) {
+        if (this.list[item].id ===id) {
             return this.list[item].name + "-" + this.list[item].city + "-" + this.list[item].stars_count + " stele";
         }
     }
 }
 
 
-Hotel_list.prototype.getAllInfo = function () {
+Hotels.prototype.getAllInfo = function () {
     var infos = [];
     for (var item in this.list) {
-        infos[item] = getInfo(this.list[item].id);
+        infos.push(this.getInfo(this.list[item].id));
     }
     return infos;
 }
@@ -159,16 +187,45 @@ Hotel_list.prototype.getAllInfo = function () {
 
 
 
-var listHotels = new Hotel_list();
+var listHotels = new Hotels();
 
 listHotels.add(hotel1);
 listHotels.add(hotel2);
-
+console.log(listHotels.getAllInfo());
 console.log("hotel: " + listHotels.getInfo(hotel1.id));
 
+listHotels.delete(1);
+
+console.log(listHotels.list.length);
+
+console.log(listHotels.getAllInfo());
 
 
 
+//Exercise 6
 
+function writeSpaces() {
+    console.log();
+    console.log();
+    console.log();
+}
 
+console.log("Exercise 6");
+console.log("Hotels container :"+document.getElementById("hotelsContainer"));
+console.log("third span "+document.querySelectorAll("#third span"));
+console.log("right " + document.getElementsByClassName("right"));
 
+var headers = document.getElementsByTagName("h1");
+
+for (var i = 0; i < headers.length;i++)
+{
+    //if (headers[item].style)
+    headers[i].style.color = "red";
+}
+
+var spans = document.getElementsByTagName("span");
+
+for (var i = 0; i < spans.length;i++)
+{
+    spans[i].style.color = "blue";
+}
