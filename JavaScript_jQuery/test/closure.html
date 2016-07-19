@@ -15,10 +15,13 @@
 </body>
   <script type='text/javascript'>
     var buttons = $('input');
+   
     for(var i=0 ; i<buttons.length ; i++){
+       (function (i){
        $(buttons[i]).click(function (){
          console.log(i);
-       });    
+       });
+       })(i);    
     }
   </script>
 </html>
