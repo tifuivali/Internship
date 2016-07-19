@@ -16,8 +16,7 @@ function Hotel(id, name, description, city, rooms_count, stars_count) {
 };
 
 
-var hotel1 = new Hotel(1, "Hotel1", "aaa", "Iasi", 30, 4);
-var hotel2 = new Hotel(2, "Hotel2", "bbbb", "Cluj Napoca", 100, 5);
+
 
 
 function Hotels() {
@@ -126,15 +125,27 @@ $(document).ready(function () {
         hotels: new Hotels(),
         container: $('#hotelsContainer')
     };
+    var hotel1 = new Hotel(1, "Hotel1", "aaa", "Iasi", 30, 4);
+    var hotel2 = new Hotel(2, "Hotel2", "bbbb", "Cluj Napoca", 100, 5);
+    var hotel3 = new Hotel(3, "Hotel3", "cccc", "Bucuresti", 40, 4);
+    var hotel4 = new Hotel(4, "Hotel4", "dddd", "Constanta", 150, 5);
+    var hotel5 = new Hotel(5, "Hotel5", "fff", "Pitesti", 20, 1);
     args.hotels.add(hotel1);
     args.hotels.add(hotel2);
+    console.log(args);
+
+    
+    /*
+       Exercices
+    */
     // Exercise1();
     exercise2(args);
     exercise3(args);
     exercise4(args);
     exercise5(args);
-
-
+    args.url = 'scripts/hotels.json';
+    exercise6(args);
+    exercise7(args);
 });
 
 
@@ -165,8 +176,10 @@ HotelsTableGenerator.prototype.generateTable = function () {
     var tableHotels = $(container).find('table');
     var tbody=tableHotels.append('<tbody></tbody>').find('tbody');
     for (var i = 0 ; i < this.args.hotels.length() ; i++) {
-        tbody.append(createRow(this.args.hotels.get(i)));
+        tbody.append(createRow(this.args.hotels.get(i)));    
     }
+    $(container).append('<input id=\'addButton\' type=\'button\' value=\'Add\'/>')
+                .append('<input id=\'btnLoad\' type=\'button\' value=\'Load\'/>');
 };
 
 function createRow(hotel) {
@@ -203,7 +216,7 @@ function generate2HotelsTest(args) {
 function exercise3(args) {
    
    
-    var container = args.container.append('<input id=\'addButton\' type=\'button\' value=\'Add\'/>');
+    var container = args.container;
     var btnAdd = $(container).find('#addButton');
     $(container).on('click', '#addButton', function () {
         var tbody = $(container).find('tbody').prepend(createInputsRow());
@@ -257,12 +270,12 @@ function exercise4(args){
 
 function createInputsRow() {
     var row = '<tr>';
-    row += '<td><input data-id=\'id\' type=\'text\'/></td>';
+    row += '<td><input data-id=\'id\' type=\'number\'/></td>';
     row += '<td><input data-id=\'name\' type=\'text\'/></td>';
     row += '<td><input data-id=\'description\' type=\'text\'/></td>';
     row += '<td><input data-id=\'city\' type=\'text\'/></td>';
-    row += '<td><input data-id=\'rooms_count\' type=\'text\'/></td>';
-    row += '<td><input data-id=\'stars_count\' type=\'text\'/></td>';
+    row += '<td><input data-id=\'rooms_count\' type=\'number\'/></td>';
+    row += '<td><input data-id=\'stars_count\' type=\'number\'/></td>';
     var divOp = createDivOperations();
     row += '<td>' + divOp;
     row += '</td>';
@@ -272,12 +285,12 @@ function createInputsRow() {
 
 function createEditRow(hotel) {
     var row = '<tr>';
-    row += '<td><input data-id=\'id\' value=\'' + hotel.id+ '\' type=\'text\' readonly /></td>';
+    row += '<td><input data-id=\'id\' value=\'' + hotel.id+ '\' type=\'number\' readonly /></td>';
     row += '<td><input data-id=\'name\' value=\'' + hotel.name +'\' type=\'text\'/></td>';
     row += '<td><input data-id=\'description\' value=\'' + hotel.description + '\' type=\'text\'/></td>';
     row += '<td><input data-id=\'city\' value=\'' + hotel.city + '\' type=\'text\'/></td>';
-    row += '<td><input data-id=\'rooms_count\' value=\'' + hotel.rooms_count + '\' type=\'text\'/></td>';
-    row += '<td><input data-id=\'stars_count\' value=\'' + hotel.stars_count + '\' type=\'text\'/></td>';
+    row += '<td><input data-id=\'rooms_count\' value=\'' + hotel.rooms_count + '\' type=\'number\'/></td>';
+    row += '<td><input data-id=\'stars_count\' value=\'' + hotel.stars_count + '\' type=\'number\'/></td>';
     var divOp = createDivOperations();
     row += '<td>' + divOp;
     row += '</td>';
@@ -285,7 +298,7 @@ function createEditRow(hotel) {
     return row;
 }
 
-
+//exercise5
 function exercise5(args) {
     args.container.on('click', '.btnEdit', function () {
         var restoreRow = $(this).closest('tr').html();
@@ -305,6 +318,65 @@ function exercise5(args) {
         });
     });
 
+}
+
+
+//exercise 6
+function exercise6(args,url) {
+    var container = args.container;
+    $(container).on('click', '#btnLoad', function () {
+        $(container).children().remove();
+        $.ajax({
+            url: args.url,
+            dataType: 'json',
+            success: function (data, status, xhr) {
+                var hotels = new Hotels();
+                hotels.list = data.list;
+                var argss = {
+                    hotels: hotels,
+                    container: $('#hotelsContainer')
+                };
+                var tableGenerator = new HotelsTableGenerator(argss);
+                tableGenerator.generateTable();
+                args.hotels.list = argss.hotels.list;
+            },
+            error: function (xhr, status, error) {
+                alert("Fail load hotels! \n"+error);
+            }
+        });
+    }); 
+}
+
+
+//exercise 7
+function exercise7(args){
+    var inputSearch = $('#searchInput');
+    var btnClear = $('#btnClear');
+    btnClear.click(function () {
+        args.container.find('tr[data-id]').css('display', '');
+    });
+    inputSearch.on('input',function (e) {
+        var nameHotel = inputSearch.val();
+        filterByName(nameHotel, args);
+    });
+    var searchContainer = $('.SearchContainer');
+    searchContainer.on('click', '#btnSearch', function () {
+        
+    });
+}
+
+function filterByName(name,args){
+    var container = args.container;
+    container.find('tr[data-id]').each(function () {
+        var hotelName = $(this).find('td:eq(1)').text();
+        if(hotelName.toLowerCase().includes(name.toLowerCase())) {
+            $(this).css('display', '');
+        }
+        else {
+            $(this).css('display', 'none');
+        }
+        
+    });
 }
 
 function createDivOperations(){
