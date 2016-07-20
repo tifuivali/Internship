@@ -9,6 +9,84 @@ section {
     margin-top:50px;
 }
 
+section input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 1px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+section #btnConfirm {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color:#19774a;
+}
+
+section #btnCancel {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color:#d12f2f;
+}
+
+section  #addButton{
+    width: 10%;
+    background-color: #19774a;
+    color: white;
+    padding: 14px 20px;
+    margin-left: 320px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+section  #btnLoad{
+    width: 10%;
+    background-color: #19774a;
+    color: white;
+    padding: 14px 20px;
+    margin-left: 25px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+section .btnDelete {
+    width: 40%;
+    background-color: #19774a;
+    color: white;
+    padding: 14px 20px;
+    margin-left: 320px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+section .btnEdit {
+    width: 40%;
+    background-color: #19774a;
+    color: white;
+    padding: 14px 20px;
+    margin-left: 25px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 header {
     background-color:seagreen;
     border-radius: 200px;
@@ -44,7 +122,7 @@ th {
 }
 
 td {
-    padding: 50px;
+    padding: 10px;
     text-align: left;
     margin-top: 30px;
     font-size: 16px;
@@ -57,7 +135,7 @@ tr:nth-child(even) {
 
 tr {
     border-bottom: 4px solid #216b20;
-    margin-top: 40px;
+    margin-top: 15px;
 }
 
 th {
@@ -267,15 +345,15 @@ footer {
         color: white;
     }
 
-ul.pagination {
+.pagination {
     display: inline-block;
     padding: 0;
     margin: 0;
 }
 
-ul.pagination li {display: inline;}
+.pagination li {display: inline;}
 
-ul.pagination li a {
+.pagination li  {
     color: black;
     float: left;
     padding: 8px 16px;
@@ -283,13 +361,13 @@ ul.pagination li a {
     border-radius: 5px;
 }
 
-ul.pagination li a.active {
+.pagination li .active {
     background-color: #4CAF50;
     color: white;
     border-radius: 5px;
 }
 
-ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+.pagination li:hover:not(.active) {background-color: #ddd;}
 
 
 .paginare {
@@ -340,7 +418,6 @@ article .detail {
     background-color: #c3c7c3;
     width: 15%;
 }
-
 article img {
     border:3px solid #c3c7c3;
 }

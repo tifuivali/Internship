@@ -131,19 +131,23 @@
             container: $('#list_hotels'),
         };
         args.url = 'scripts/hotels.json';
-         //exercise2(args);
         var generator = new  HotelsTableGenerator(args);
         generator.generateTable();;
         activateTableFeatures(args);
 
+        
+
         var args2 = {
             hotels: new Hotels(),
-            container: $('#list_hotels2')
+            container: $('#list_hotels2'),
+            itemsPerPage: 3,
+            page:1
         };
         args2.url = 'scripts/hotels.json';
         generator = new HotelsTableGenerator(args2);
         generator.generateTable();
-        activateTableFeatures(args2);
+
+       
     });
 
     function activateTableFeatures(args) {
@@ -152,6 +156,7 @@
         exercise5(args);
         exercise6(args);
         exercise7(args);
+        addPaginationBehavior(args);
     }
 
 
@@ -170,6 +175,20 @@
     }
 
 
+
+
+    function addPaginationBehavior(args){
+        var container = args.container;
+        var pagination = container.find('.pagination');
+        pagination.on('click', 'li[data-id]', function () {
+            var page = parseInt($(this).attr('data-id'));
+            args.page = page;
+            var generator = new HotelsTableGenerator(args);
+            generator.generateTable();
+        });
+        console.log(pagination);
+    }
+
     //exercise2
 
     function HotelsTableGenerator(args) {
@@ -178,7 +197,7 @@
 
     HotelsTableGenerator.prototype.generateTable = function () {
         var container = this.args.container;
-        $(container).children().remove();
+        $(container).empty();
         if (this.args.url !== undefined || this.args.url !== null) {
             (function (args) {
                 $.ajax({
@@ -187,6 +206,7 @@
                     success: function (data, status, xhr) {
                         args.hotels.list = data.list;
                         generateTable(args);
+                        activateTableFeatures(args);
                     },
                     error: function (xhr, status, error) {
                         alert("Fail load hotels! \n" + error);
@@ -195,15 +215,41 @@
             })(this.args);
         } else {
             generateTable(this.args);
+            activateTableFeatures(this.args);
         }
 
        
     };
 
+    function generatePaginationContainer(args) {
+        var tableContainer = args.container;
+        var paginationList = tableContainer.append('<div class="paginare"><ul class="pagination"></ul></div>').find('ul');
+        var nrPages = 0;
+        var itemsPerPage =args.itemsPerPage;
 
+        nrPages = parseInt(args.hotels.list.length / itemsPerPage) + 1;
+        paginationList.append('<li>«</li>');
+        for (var i = 1 ; i <= nrPages ; i++) {
+            if (args.page === i) {
+                paginationList.append('<li class="active" data-id=' + i + '>' + i + '</li>');
+            } else {
+                var itemList = $('<li></li>');
+                itemList.attr('data-id', i);
+                itemList.text(i);
+                paginationList.append(itemList);
+            }
+        }
+        paginationList.append('<li>»</li>');
+    }
 
     function generateTable(args) {
         var container;
+        if (args.page === undefined || args.page === null) {
+            args.page = 1;
+        }
+        if (args.itemsPerPage === undefined || args.itemsPerPage === null) {
+            args.itemsPerPage = 10;
+        }
         if (args.columns === null || args.columns === undefined) {
             container = args.container.append('<table><thead><th>ID</th><th>Name</th><th>Description</th><th>City</th><th>Rooms Count</th><th>Rating</th><th>Operations</th></thead></table>');
         } else {
@@ -215,12 +261,27 @@
             container = args.container.append(table);
         }
         var tableHotels = $(container).find('table');
+        var itemsPage = getItemsPage(args);
         var tbody = tableHotels.append('<tbody></tbody>').find('tbody');
-        for (var i = 0 ; i < args.hotels.list.length ; i++) {
-            tbody.append(createRow(args.hotels.get(i), args.columns));
+        for (var i = 0 ; i < itemsPage.length ; i++) {
+            tbody.append(createRow(itemsPage[i], args.columns));
         }
         $(container).append('<input id=\'addButton\' type=\'button\' value=\'Add\'/>')
                     .append('<input id=\'btnLoad\' type=\'button\' value=\'Load\'/>');
+        generatePaginationContainer(args);
+    }
+
+    function getItemsPage(args)
+    {
+        var startItem = args.itemsPerPage * (args.page-1) ;
+        if (startItem > args.hotels.list.length)
+            startItem = 0;
+        var endItem = args.itemsPerPage * args.page;
+        if (endItem > args.hotels.list.length) {
+            endItem = args.hotels.list.length
+        }
+        var itemsPage = args.hotels.list.slice(startItem, endItem);
+        return itemsPage;
     }
 
     function createRow(hotel, columns) {
@@ -269,8 +330,9 @@
 
 
         var container = args.container;
-        var btnAdd = $(container).find('#addButton');
-        $(container).on('click', '#addButton', function () {
+        var btnAdd = container.find('#addButton');
+        console.log($(container).find('#addButton'));
+        $(btnAdd).click( function () {
             var tbody = $(container).find('tbody').prepend(createInputsRow(args.columns));
             $(tbody).find('#btnConfirm').click(function () {
                 var hotel = getHotelFromRow($(this).closest('tr'));
@@ -306,7 +368,8 @@
 
     // exercise 4
     function exercise4(args) {
-        args.container.on('click', '.btnDelete', function () {
+        var btnDelete = args.container.find('.btnDelete');
+        btnDelete.on('click', function () {
             var currentRow = $(this).closest('tr');
             var hotelID = parseInt(currentRow.attr('data-id'));
             var response = confirm("Do you want to delete this hotel?");
@@ -417,14 +480,16 @@
     //exercise 6
     function exercise6(args) {
         var container = args.container;
-        $(container).on('click', '#btnLoad', function () {
-            $(container).children().remove();
+        var btnLoad = args.container.find("#btnLoad");
+        $(btnLoad).on('click', function () {
+            $(container).children('*').remove();
             $.ajax({
                 url: args.url,
                 dataType: 'json',
                 success: function (data, status, xhr) {
                     args.hotels.list = data.list;
                     generateTable(args);
+                    activateTableFeatures(args);
                 },
                 error: function (xhr, status, error) {
                     alert("Fail load hotels! \n" + error);
@@ -475,7 +540,7 @@
         var container = args.container;
         container.find('tr[data-id]').each(function () {
             var cellData = $(this).find('td:eq(' + column + ')').text();
-            if (cellData.toLowerCase().includes(key.toLowerCase().trim())) {
+            if (cellData.toUpperCase().includes(key.toUpperCase().trim())) {
                 $(this).show();
             }
             else {
