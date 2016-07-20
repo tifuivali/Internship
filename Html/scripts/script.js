@@ -515,23 +515,12 @@
         var container = args.container;
         var btnLoad = args.container.find("#btnLoad");
         $(btnLoad).on('click', function () {
-            $(container).children('*').remove();
-            $.ajax({
-                url: args.url,
-                dataType: 'json',
-                success: function (data, status, xhr) {
-                    args.hotels.list = data.list;
-                    var url = container.find('#inputLoad').val();
-                    if(url.length>0 && url.starWith('http')) {
-                        args.url=url;
-                    }
-                    generateTable(args);
-                    activateTableFeatures(args);
-                },
-                error: function (xhr, status, error) {
-                    alert("Fail load hotels! \n" + error);
-                }
-            });
+            
+            var url = container.find('#inputLoad').val();
+            if (url ) {
+                args.url = url;
+            }
+            loadTable(args);
         });
     }
 
@@ -558,6 +547,14 @@
         var generator = new HotelsTableGenerator(args);
         generator.generateTable();
     }
+
+
+    function loadTable(args) {
+        // args.container.empty();
+        var generator = new HotelsTableGenerator(args);
+        generator.generateTable();
+    }
+
 
     function exercise7(args) {
         var inputSearch = $('#search');
