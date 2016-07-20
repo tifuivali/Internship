@@ -22,12 +22,23 @@ section input {
 section #btnConfirm {
     width: 100%;
     padding: 12px 20px;
-    margin: 8px 0;
+    margin-top:25px;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
     background-color:#19774a;
+    
+}
+
+#inputLoad {
+    width: 200px;
+    padding: 12px 20px;
+    margin-left:25px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 section #btnCancel {

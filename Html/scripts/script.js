@@ -111,6 +111,16 @@
         return this.list[index];
     }
 
+    ///column must be the name of column
+    Hotels.prototype.filter = function (key,column) {
+        var filtredElements = [];
+        for(var i=0 ; i<this.list.length; i++){
+            if(this.list[i][column].toUpperCase().includes(key.toUpperCase().trim())){
+                filtredElements.push(this.list[i]);
+            }
+        }
+        return filtredElements;
+    }
 
 
 
@@ -129,6 +139,7 @@
         var args = {
             hotels: new Hotels(),
             container: $('#list_hotels'),
+            filter: true
         };
         args.url = 'scripts/hotels.json';
         var generator = new  HotelsTableGenerator(args);
@@ -141,7 +152,8 @@
             hotels: new Hotels(),
             container: $('#list_hotels2'),
             itemsPerPage: 3,
-            page:1
+            page: 1,
+            filter: true
         };
         args2.url = 'scripts/hotels.json';
         generator = new HotelsTableGenerator(args2);
@@ -155,7 +167,8 @@
         exercise4(args);
         exercise5(args);
         exercise6(args);
-        exercise7(args);
+        if(args.filter === true)
+          exercise7(args);
         addPaginationBehavior(args);
     }
 
@@ -197,8 +210,8 @@
 
     HotelsTableGenerator.prototype.generateTable = function () {
         var container = this.args.container;
-        $(container).empty();
-        if (this.args.url !== undefined || this.args.url !== null) {
+      //  $(container).empty();
+        if (this.args.url !== undefined && this.args.url !== null) {
             (function (args) {
                 $.ajax({
                     url: args.url,
@@ -244,6 +257,8 @@
 
     function generateTable(args) {
         var container;
+        container = args.container;
+        var divTemp = $('<div/>');
         if (args.page === undefined || args.page === null) {
             args.page = 1;
         }
@@ -251,25 +266,38 @@
             args.itemsPerPage = 10;
         }
         if (args.columns === null || args.columns === undefined) {
-            container = args.container.append('<table><thead><th>ID</th><th>Name</th><th>Description</th><th>City</th><th>Rooms Count</th><th>Rating</th><th>Operations</th></thead></table>');
+            divTemp =divTemp.append('<table><thead><th>ID</th><th>Name</th><th>Description</th><th>City</th><th>Rooms Count</th><th>Rating</th><th>Operations</th></thead></table>');
         } else {
             var table = '<table><thead>';
             for (var i = 0 ; i < args.columns.length; i++) {
                 table += '<th>' + args.columns[i].header + '</th>';
             }
             table += '</thead></table>';
-            container = args.container.append(table);
+            divTemp= args.container.append(table);
         }
-        var tableHotels = $(container).find('table');
+        var tableHotels = $(divTemp).find('table');
         var itemsPage = getItemsPage(args);
         var tbody = tableHotels.append('<tbody></tbody>').find('tbody');
         for (var i = 0 ; i < itemsPage.length ; i++) {
             tbody.append(createRow(itemsPage[i], args.columns));
         }
-        $(container).append('<input id=\'addButton\' type=\'button\' value=\'Add\'/>')
+        $(divTemp).append('<input id=\'addButton\' type=\'button\' value=\'Add\'/>')
                     .append('<input id=\'btnLoad\' type=\'button\' value=\'Load\'/>');
+        $(divTemp).append('<input id="inputLoad" type="url" placeholder="adress content"/>');
+        container.html(divTemp.html());
         generatePaginationContainer(args);
     }
+
+    function generateStarsRating(numberOfStars) {
+        var star = '<span>☆</span>';
+        var divRating = '<div class="rating">';
+        for (var i = 0 ; i < numberOfStars ; i++) {
+            divRating += star;
+        }
+        divRating += '</div>';
+        return divRating;
+    }
+                            
 
     function getItemsPage(args)
     {
@@ -294,7 +322,7 @@
             cell += '<td>' + hotel.description + '</td>';
             cell += '<td>' + hotel.city + '</td>';
             cell += '<td>' + hotel.rooms_count + '</td>';
-            cell += '<td>' + hotel.stars_count + '</td>';
+            cell += '<td>' + generateStarsRating(hotel.stars_count) + '</td>';
             cell += '<td><input type=\'button\' class=\'btnDelete\' value=\'Delete\'/> <input type=\'button\' class=\'btnEdit\' value=\'Edit\'/></td>';
             row += cell;
         }
@@ -304,6 +332,11 @@
                 if (columns[i].field.toLowerCase() === 'operations') {
                     cell += '<td><input type=\'button\' class=\'btnDelete\' value=\'Delete\'/> <input type=\'button\' class=\'btnEdit\' value=\'Edit\'/></td>';
                 }
+                if (columns[i].field.toLowerCase() === 'stars_count') {
+                    var numberOfStars = hotel.stars_count;
+                    cell += generateStarsRating(numberOfStars);
+                }
+                
             }
             row += cell;
             row += '</tr>';
@@ -338,8 +371,7 @@
                 var hotel = getHotelFromRow($(this).closest('tr'));
                 try {
                     args.hotels.add(hotel);
-                    $(tbody).append(createRow(hotel, args.columns));
-                    $(tbody).find('tr:first-child').remove();
+                    refreshTable(args);
                     btnAdd.prop('disabled', false);
                 } catch (e) {
                     alert(e.message);
@@ -369,13 +401,14 @@
     // exercise 4
     function exercise4(args) {
         var btnDelete = args.container.find('.btnDelete');
+       
         btnDelete.on('click', function () {
             var currentRow = $(this).closest('tr');
             var hotelID = parseInt(currentRow.attr('data-id'));
             var response = confirm("Do you want to delete this hotel?");
             if (response === true) {
                 args.hotels.delete(hotelID);
-                currentRow.remove();
+                refreshTable(args);
             }
 
         });
@@ -466,7 +499,7 @@
                 var currentRow = $(this).closest('tr');
                 var editedHotel = getHotelFromRow(currentRow);
                 args.hotels.update(editedHotel);
-                currentRow.replaceWith(createRow(editedHotel));
+                refreshTable(args);
             });
             tbody.on('click', '#btnCancel', function () {
                 var tr = $(this).closest('tr');
@@ -488,6 +521,10 @@
                 dataType: 'json',
                 success: function (data, status, xhr) {
                     args.hotels.list = data.list;
+                    var url = container.find('#inputLoad').val();
+                    if(url.length>0 && url.starWith('http')) {
+                        args.url=url;
+                    }
                     generateTable(args);
                     activateTableFeatures(args);
                 },
@@ -515,28 +552,36 @@
 
     //exercise 7
 
+    function refreshTable(args){
+        // args.container.empty();
+        args.url = undefined;
+        var generator = new HotelsTableGenerator(args);
+        generator.generateTable();
+    }
 
     function exercise7(args) {
         var inputSearch = $('#search');
         var btnClear = $('#btnClear');
         btnClear.click(function () {
-            args.container.find('tr[data-id]').css('display', '');
+            alert("clear");
+            refreshTable(args);
         });
         inputSearch.on('input', function (e) {
             var nameHotel = inputSearch.val();
-               filter(nameHotel, args, 1);
+            // filterDom(nameHotel, args, 1);
+            filterElements(nameHotel, args, 'name');
 
         });
         var searchContainer = $('.container-3');
         searchContainer.on('click', '#btnSearch', function () {
 
             var nameHotel = inputSearch.val();
-            filter(nameHotel, args, 1);
+            filterDom(nameHotel, args, 1);
         });
     }
 
 
-    function filter(key, args, column) {
+    function filterDom(key, args, column) {
         var container = args.container;
         container.find('tr[data-id]').each(function () {
             var cellData = $(this).find('td:eq(' + column + ')').text();
@@ -548,6 +593,21 @@
             }
 
         });
+    }
+
+    function filterElements(key, args, column) {
+        var container = args.container;
+        var filtredHotels = new Hotels();
+        filtredHotels.list = args.hotels.filter(key, column);
+        var filtredHotelsArgs = {
+            container: args.container,
+            hotels: filtredHotels,
+            page: args.page,
+            itemsPerPage: args.itemsPerPage,
+            columns:args.columns
+        }
+        var generator = new HotelsTableGenerator(filtredHotelsArgs);
+        generator.generateTable();
     }
 
     function filterRange(min, max, args, column) {
