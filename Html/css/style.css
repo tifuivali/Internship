@@ -5,6 +5,10 @@
 }
 
 
+section {
+    margin-top:50px;
+}
+
 header {
     background-color:seagreen;
     border-radius: 200px;

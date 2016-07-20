@@ -117,31 +117,42 @@
 
     $(document).ready(function () {
 
-
+        /*
         var hotel1 = new Hotel(1, "Hotel1", "aaa", "Iasi", 30, 4);
         var hotel2 = new Hotel(2, "Hotel2", "bbbb", "Cluj Napoca", 100, 5);
         var hotel3 = new Hotel(3, "Hotel3", "cccc", "Bucuresti", 40, 4);
         var hotel4 = new Hotel(4, "Hotel4", "dddd", "Constanta", 150, 5);
         var hotel5 = new Hotel(5, "Hotel5", "fff", "Pitesti", 20, 1);
+        */
 
 
         var args = {
             hotels: new Hotels(),
-            container: $('#hotelsContainer'),
+            container: $('#list_hotels'),
         };
-        args.hotels.add(hotel1);
-        args.hotels.add(hotel2);
         args.url = 'scripts/hotels.json';
          //exercise2(args);
         var generator = new  HotelsTableGenerator(args);
         generator.generateTable();;
+        activateTableFeatures(args);
+
+        var args2 = {
+            hotels: new Hotels(),
+            container: $('#list_hotels2')
+        };
+        args2.url = 'scripts/hotels.json';
+        generator = new HotelsTableGenerator(args2);
+        generator.generateTable();
+        activateTableFeatures(args2);
+    });
+
+    function activateTableFeatures(args) {
         exercise3(args);
         exercise4(args);
         exercise5(args);
-       
         exercise6(args);
         exercise7(args);
-    });
+    }
 
 
     function exercise1() {
@@ -441,19 +452,17 @@
 
 
     function exercise7(args) {
-        var inputSearch = $('#searchInput');
+        var inputSearch = $('#search');
         var btnClear = $('#btnClear');
         btnClear.click(function () {
             args.container.find('tr[data-id]').css('display', '');
         });
         inputSearch.on('input', function (e) {
             var nameHotel = inputSearch.val();
-            if (nameHotel.length >= 3) {
-                filter(nameHotel, args, 1);
-            }
+               filter(nameHotel, args, 1);
 
         });
-        var searchContainer = $('.searchContainer');
+        var searchContainer = $('.container-3');
         searchContainer.on('click', '#btnSearch', function () {
 
             var nameHotel = inputSearch.val();

@@ -1,0 +1,44 @@
+{  
+   "list":[  
+      {  
+         "id":1,
+         "name":"Hotel1",
+         "description":"aaa",
+         "city":"Iasi",
+         "rooms_count":30,
+         "stars_count":4
+      },
+      {  
+         "id":2,
+         "name":"Hotel2",
+         "description":"bbbb",
+         "city":"Cluj Napoca",
+         "rooms_count":100,
+         "stars_count":5
+      },
+      {  
+         "id":3,
+         "name":"Hotel3",
+         "description":"cccc",
+         "city":"Bucuresti",
+         "rooms_count":40,
+         "stars_count":4
+      },
+      {  
+         "id":4,
+         "name":"Hotel4",
+         "description":"dddd",
+         "city":"Constanta",
+         "rooms_count":150,
+         "stars_count":5
+      },
+      {  
+         "id":5,
+         "name":"Hotel5",
+         "description":"fff",
+         "city":"Pitesti",
+         "rooms_count":20,
+         "stars_count":1
+      }
+   ]
+}
