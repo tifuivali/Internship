@@ -11,12 +11,12 @@ namespace ExercisePart2
     {
         static void Main(string[] args)
         {
-            Exercise1();
+            Exercise2();
             Console.WriteLine();
 
-            //Exercise2
-            Hotel hotel = CreateHotel();
+            //Exercise3
 
+            Hotel hotel = CreateHotel();
             //Exercise3
             hotel.DisplayInfo();
 
@@ -29,7 +29,7 @@ namespace ExercisePart2
             Console.ReadKey();
         }
 
-        static void Exercise1()
+        static void Exercise2()
         {
             Hotel hotel = CreateHotel();
             Console.WriteLine("Name:"+hotel.name);
@@ -69,9 +69,7 @@ namespace ExercisePart2
         {
             Room room1 = new Room("Description room 12", 2, 12, 2, RoomType.Double);
             Room room2 = new Room("Description room 42", 5, 42, 4, RoomType.Duplex);
-            var rooms = new Room[2];
-            rooms[0] = room1;
-            rooms[1] = room2;
+            var rooms = new []{room1, room2};
             Hotel hotel = new Hotel("Intarnational", "Description hotel Intarnational", "Str Palat nr 23 Iasi", 5, 1, new DateTime(2016, 7, 3), rooms);
             hotel.DisplayInfo();
         }
@@ -84,8 +82,8 @@ namespace ExercisePart2
             rooms[0] = room1;
             rooms[1] = room2;
             Hotel hotel = new Hotel("Moldova", "Description hotel Moldova", "Str Palas nr 15 Iasi", 5, 1, new DateTime(1997, 8, 15), rooms);
-            hotel.SetDistanceMeasurementUnit("KM");
-            Console.WriteLine("New measure unit is "+hotel.GetDistanceMeasurementUnit());
+            Hotel.SetDistanceMeasurementUnit("KM");
+            Console.WriteLine("New measure unit is "+Hotel.GetDistanceMeasurementUnit());
             hotel.DisplayInfo();
         }
     }

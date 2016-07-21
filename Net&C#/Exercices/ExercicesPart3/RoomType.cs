@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExercisePart2
+namespace ExercisePart3
 {
 
    public enum RoomType

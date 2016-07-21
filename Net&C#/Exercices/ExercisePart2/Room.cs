@@ -34,7 +34,6 @@ namespace ExercisePart2
             Console.WriteLine("\tFloor:" + this.floor);
             Console.WriteLine("\tPlaces:" + this.places);
             Console.WriteLine("\tRoom Type:" + this.type);
-            Console.WriteLine();
         }
     }
 }
