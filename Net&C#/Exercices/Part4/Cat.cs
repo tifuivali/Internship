@@ -6,11 +6,22 @@ using System.Threading.Tasks;
 
 namespace Part4
 {
+    [Serializable()]
     public class Cat:Mamal
     {
+        public Cat(string name)
+        {
+            Name = name;
+        }
+
+        public Cat()
+        {
+            
+        }
+
         public override void Speak()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"Im a Cat , my name is: {Name}");
         }
 
         public override void Move()

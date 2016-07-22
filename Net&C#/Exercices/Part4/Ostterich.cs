@@ -1,16 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Part4
 {
-    public class Ostterich:Bird
+    [Serializable()]
+    public class Ostterich : Bird
     {
+        public Ostterich(string name)
+        {
+            Name = name;
+        }
+
         public override void Speak()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"Im a Ostterich , my name is: {Name}");
         }
 
         public override void Move()

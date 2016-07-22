@@ -6,11 +6,23 @@ using System.Threading.Tasks;
 
 namespace Part4
 {
+    [Serializable()]
     public class Dog:Mamal
     {
+
+        public Dog(string name)
+        {
+            Name = name;
+        }
+
+        public Dog()
+        {
+            
+        }
+
         public override void Speak()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"Im a Dog, my name is: {Name}");
         }
 
         public override void Move()

@@ -6,11 +6,22 @@ using System.Threading.Tasks;
 
 namespace Part4
 {
-    public class Snake:Reptila
+    [Serializable()]
+    public class Snake : Reptila
     {
+        public Snake(string name)
+        {
+            Name = name;
+        }
+
+        public Snake()
+        {
+            
+        }
+
         public override void Speak()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"Im a snake , my name is: {Name}");
         }
 
         public override void Move()

@@ -6,11 +6,22 @@ using System.Threading.Tasks;
 
 namespace Part4
 {
-    public class Meduza:Fish
+    [Serializable()]
+    public class Meduza : Fish
     {
+        public Meduza(string name)
+        {
+            Name = name;
+        }
+
+        public Meduza()
+        {
+            
+        }
+
         public override void Speak()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"Im a meduza , my name is: {Name}");
         }
 
         public override void Move()

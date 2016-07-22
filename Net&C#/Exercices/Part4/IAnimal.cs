@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Part4
 {
+   
     public interface IAnimal
     {
         string Name { get; set; }

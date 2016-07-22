@@ -6,16 +6,26 @@ using System.Threading.Tasks;
 
 namespace Part4
 {
-   public class Pastrav:Fish
+    [Serializable()]
+    public class Pastrav : Fish
     {
-       public override void Speak()
-       {
-           throw new NotImplementedException();
-       }
+        public Pastrav(string name)
+        {
+            Name = name;
+        }
 
-       public override void Move()
-       {
-           throw new NotImplementedException();
-       }
+        public Pastrav()
+        {
+
+        }
+        public override void Speak()
+        {
+            Console.WriteLine($"Im a Pastrav , my name is: {Name}");
+        }
+
+        public override void Move()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

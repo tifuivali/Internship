@@ -6,11 +6,23 @@ using System.Threading.Tasks;
 
 namespace Part4
 {
-    public class Pigeon:Bird
+    [Serializable()]
+    public class Pigeon : Bird
     {
+
+        public Pigeon(string name)
+        {
+            Name = name;
+        }
+
+        public Pigeon()
+        {
+            
+        }
+
         public override void Speak()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"Im a pigeon , my name is: {Name}");
         }
 
         public override void Move()
