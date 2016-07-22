@@ -30,6 +30,26 @@ namespace ExercicesPart3
             };
             hotel2.DisplayInfo();
 
+
+            //Exercise 7
+            Room room2 =new Room("Description rtoom 15",2,15,1,RoomType.Double);
+            GuestHouse guestHouse = new GuestHouse("Guest House 1", "Description for this guest house", "no adress", 3,
+                2, new DateTime(1900, 12, 1), new Room[] {room1, room2});
+            guestHouse.DisplayInfo();
+
+            //Exercise 8
+            hotel2.SeHotelAdress("New adress");
+            hotel2.DisplayInfo();
+
+            //Exercise 9
+            Proprety hotelProprety = hotel2 as Proprety;
+            double rating = hotelProprety.CalculateRating();
+            Console.WriteLine("Rarting Hotel "+rating);
+
+            Proprety guestHouseProprety = guestHouse as Proprety;
+            rating = guestHouseProprety.CalculateRating();
+            Console.WriteLine("Rating guset house "+rating);
+
             Console.ReadKey();
         }
     }

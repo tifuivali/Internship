@@ -11,7 +11,7 @@ namespace ExercicesPart3
     {
         private string name;
         private string description;
-        private string adress;
+        protected string adress;
         private int stars;
         private double distanceToCenter;
         private DateTime openningDate;
@@ -135,7 +135,7 @@ namespace ExercicesPart3
         {
             get
             {
-                return rooms;
+                return rooms.ToArray();
             }
 
             set
@@ -144,6 +144,11 @@ namespace ExercicesPart3
             }
         }
 
+
+       public virtual double CalculateRating()
+       {
+           return 2*Stars;
+       }
 
         public void SetDistanceMeasurementUnit(string unit)
         {
@@ -155,7 +160,7 @@ namespace ExercicesPart3
             return DistanceMeasurementUnit;
         }
 
-        public void DisplayInfo()
+        public virtual void  DisplayInfo()
         {
             Console.WriteLine("Hotel " + Name);
             Console.WriteLine("Adress: " + Adress);
@@ -167,7 +172,6 @@ namespace ExercicesPart3
             {
                 room.DisplayInfo();
             }
-            Console.WriteLine();
         }
     }
 }
