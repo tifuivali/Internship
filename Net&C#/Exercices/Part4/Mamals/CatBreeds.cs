@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Part4
+namespace Part4.Mamals
 {
-   
-    public interface IAnimal
+    public enum CatBreeds
     {
-        string Name { get; set; }
+        Bengal,
+        Birman,
+        Himalayan
     }
 }

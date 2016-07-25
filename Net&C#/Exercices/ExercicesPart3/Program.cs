@@ -50,6 +50,13 @@ namespace ExercicesPart3
             rating = guestHouseProprety.CalculateRating();
             Console.WriteLine("Rating guset house "+rating);
 
+
+            //
+            Room room3 =new Room("room12",2,12,1,RoomType.Double);
+            room3.Type=RoomType.Single;
+            room3.DisplayInfo();
+           // Hotel hotel3 =new Hotel("Hotel test" , "adress","add",4,12,new DateTime(1998,12,1),new Room[] );
+
             Console.ReadKey();
         }
     }

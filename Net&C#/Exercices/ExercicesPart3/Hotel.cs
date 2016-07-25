@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using ExercicesPart3;
 
 namespace ExercisePart3
 {
     public sealed class Hotel : Proprety
     {
+     
 
         public int Likes { get; set; }
 
@@ -29,7 +25,7 @@ namespace ExercisePart3
          DateTime openingDate, Room[] rooms,int likes)
          : base(name, description, adress, stars, distanceToCenter, openingDate, rooms)
         {
-            Likes = Likes;
+            Likes = likes;
         }
 
         public void SeHotelAdress(string newAdress)
@@ -41,8 +37,8 @@ namespace ExercisePart3
 
         public override void DisplayInfo()
         {
-            base.DisplayInfo();
             Console.WriteLine($"Likes: {Likes}");
+            base.DisplayInfo();
             Console.WriteLine();
         }
     }

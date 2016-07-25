@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExercicesPart3", "Exercices
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Part4", "Part4\Part4.csproj", "{F56DEF83-F188-4CAD-A164-ED42DD6509DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuessTheWord", "GuessTheWord\GuessTheWord.csproj", "{6026F0B8-CBFD-4699-8685-C6640890DA4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{F56DEF83-F188-4CAD-A164-ED42DD6509DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F56DEF83-F188-4CAD-A164-ED42DD6509DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F56DEF83-F188-4CAD-A164-ED42DD6509DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6026F0B8-CBFD-4699-8685-C6640890DA4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6026F0B8-CBFD-4699-8685-C6640890DA4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6026F0B8-CBFD-4699-8685-C6640890DA4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6026F0B8-CBFD-4699-8685-C6640890DA4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

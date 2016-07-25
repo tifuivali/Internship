@@ -162,11 +162,11 @@ namespace ExercicesPart3
 
         public virtual void  DisplayInfo()
         {
-            Console.WriteLine("Hotel " + Name);
-            Console.WriteLine("Adress: " + Adress);
-            Console.WriteLine("Distance to center:{0} {1}", DistanceToCenter, DistanceMeasurementUnit);
-            Console.WriteLine("Date opening:" + OpenningDate.ToShortDateString());
-            Console.WriteLine("Stars:" + Stars);
+            Console.WriteLine($"Hotel {Name}");
+            Console.WriteLine($"Adress: {Adress}");
+            Console.WriteLine($"Distance to center:{DistanceToCenter} {DistanceMeasurementUnit}");
+            Console.WriteLine($"Date opening:{OpenningDate.ToShortDateString()}");
+            Console.WriteLine($"Stars:{Stars}");
             Console.WriteLine("Rooms:");
             foreach (var room in Rooms)
             {

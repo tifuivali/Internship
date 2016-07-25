@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ExercicesPart3;
 
 namespace ExercisePart3
 {
@@ -15,9 +12,9 @@ namespace ExercisePart3
         private RoomType type;
 
 
-        public bool hasAirConditioning {get; set; }
+        public bool HasAirConditioning { get; set; }
 
-        public bool hasFlatTv { get; set; }
+        public bool HasFlatTv { get; set; }
 
         public RoomType Type
         {
@@ -28,7 +25,39 @@ namespace ExercisePart3
 
             set
             {
-                type = value;
+                switch (value)
+                {
+                    case RoomType.Single:
+                        if (Places != 1)
+                        {
+                            throw new ValidationException($"Room type cannot be {value} because places is {places}");
+                        }
+                        break;
+                    case RoomType.Double:
+                        if (places > 2)
+                        {
+                            throw new ValidationException($"Room type cannot be {value} because places is {places}");
+                        }
+                        break;
+                    case RoomType.Twin:
+                        if (places > 2)
+                        {
+                            throw new ValidationException($"Room type cannot be {value} because places is {places}");
+                        }
+                        break;
+                    case RoomType.Duplex:
+                        if (places < 2 || places > 6)
+                        {
+                            throw new ValidationException($"Room type cannot be {value} because places is {places}");
+                        }
+                        break;
+                    case RoomType.KingBedroom:
+                        if (places < 2 || places > 4)
+                        {
+                            throw new ValidationException($"Room type cannot be {value} because places is {places}");
+                        }
+                        break;
+                }
             }
         }
 
@@ -43,6 +72,7 @@ namespace ExercisePart3
             {
                 if (value.Length > 500)
                     throw new Exception($"Maxim length of description must be 500! Curent:{value.Length}");
+
                 description = value;
             }
         }
@@ -56,7 +86,7 @@ namespace ExercisePart3
 
             set
             {
-                switch (this.type)
+                switch (type)
                 {
                     case RoomType.Single:
                         if (value != 1)
@@ -89,7 +119,8 @@ namespace ExercisePart3
             }
 
             set
-            {   if(number<0 || number > 10000)
+            {
+                if (number < 0 || number > 10000)
                     throw new Exception($"Number canot be negative and must be under 10 000! Curent value is:{value}");
                 number = value;
             }
@@ -104,7 +135,7 @@ namespace ExercisePart3
 
             set
             {
-                if(floor<0 || floor > 1000)
+                if (floor < 0 || floor > 1000)
                     throw new Exception($"Floor canot be negative and must be under 1000! Curent value is:{value}");
                 floor = value;
             }
@@ -120,7 +151,7 @@ namespace ExercisePart3
             Number = number;
             Description = description;
             Floor = floor;
-            Places = places; 
+            Places = places;
         }
 
         public void DisplayInfo()

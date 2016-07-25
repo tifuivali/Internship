@@ -43,24 +43,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Animal.cs" />
-    <Compile Include="Bird.cs" />
-    <Compile Include="Cameleon.cs" />
-    <Compile Include="Cat.cs" />
-    <Compile Include="Dog.cs" />
-    <Compile Include="Fish.cs" />
-    <Compile Include="IAnimal.cs" />
-    <Compile Include="Lion.cs" />
-    <Compile Include="Mamal.cs" />
-    <Compile Include="Meduza.cs" />
-    <Compile Include="Ostterich.cs" />
-    <Compile Include="Pastrav.cs" />
-    <Compile Include="Pigeon.cs" />
+    <Compile Include="Animal\Animal.cs" />
+    <Compile Include="Birds\Bird.cs" />
+    <Compile Include="Birds\Color.cs" />
+    <Compile Include="ListAnimals.cs" />
+    <Compile Include="Mamals\CatBreeds.cs" />
+    <Compile Include="Mamals\ColorEye.cs" />
+    <Compile Include="Mamals\DogBreeds.cs" />
+    <Compile Include="ReadAheadStreamReader.cs" />
+    <Compile Include="Reptila\Cameleon.cs" />
+    <Compile Include="Mamals\Cat.cs" />
+    <Compile Include="DeserializeException.cs" />
+    <Compile Include="Mamals\Dog.cs" />
+    <Compile Include="Fish\Fish.cs" />
+    <Compile Include="Animal\IAnimal.cs" />
+    <Compile Include="Mamals\Lion.cs" />
+    <Compile Include="Mamals\Mamal.cs" />
+    <Compile Include="Fish\Meduza.cs" />
+    <Compile Include="Birds\Ostterich.cs" />
+    <Compile Include="Fish\Pastrav.cs" />
+    <Compile Include="Birds\Pigeon.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reptila.cs" />
-    <Compile Include="Snake.cs" />
-    <Compile Include="Whale.cs" />
+    <Compile Include="Reptila\Reptila.cs" />
+    <Compile Include="Reptila\Snake.cs" />
+    <Compile Include="Mamals\Whale.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

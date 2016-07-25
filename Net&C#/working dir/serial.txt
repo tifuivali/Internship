@@ -1,0 +1,3 @@
+Lion,Lion L,False,3,7,True
+Pigeon,Jonny,0,False
+Cameleon,Cam1

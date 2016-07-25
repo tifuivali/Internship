@@ -21,12 +21,8 @@ namespace Part4
 
         public override void Speak()
         {
-            Console.WriteLine($"Im a snake , my name is: {Name}");
+            Console.WriteLine("SSS SSSSSS SSSSSS");
         }
 
-        public override void Move()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2CCEECF3-6854-4269-89AA-AD01780917E6}</ProjectGuid>
+    <ProjectGuid>{6026F0B8-CBFD-4699-8685-C6640890DA4A}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ExercicesPart3</RootNamespace>
-    <AssemblyName>ExercicesPart3</AssemblyName>
+    <RootNamespace>GuessTheWord</RootNamespace>
+    <AssemblyName>GuessTheWord</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,14 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GuestHouse.cs" />
-    <Compile Include="Hotel.cs" />
+    <Compile Include="ComputerPlayer.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="HumanPlayer.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Proprety.cs" />
-    <Compile Include="Room.cs" />
-    <Compile Include="RoomType.cs" />
-    <Compile Include="ValidationException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
