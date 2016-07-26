@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Part4.Birds;
 using Part4.Mamals;
 
 namespace Part4
@@ -13,7 +14,7 @@ namespace Part4
             List<Animal> listAnimals = new List<Animal>();
             Lion lion = new Lion("Lion L", 7);
             Pigeon pigeon = new Pigeon("Jonny");
-            Cameleon cameleon = new Cameleon("Cam1");
+            Cameleon cameleon = new Cameleon();
             listAnimals.Add(lion);
             listAnimals.Add(pigeon);
             listAnimals.Add(cameleon);
@@ -21,8 +22,12 @@ namespace Part4
 
             lion.ColorEyes=ColorEye.Brown;
             lion.HasChildrens = true;
+            cameleon.Name = "Cameleon";
+            pigeon.Name = "John";
+            pigeon.Color=Color.Green;
+            pigeon.CanSpeak = true;
             ListAnimals animals =new ListAnimals();
-            /*
+            
             using (TextWriter writer = File.CreateText(fileName))
             {
                 animals.Add(lion);
@@ -31,7 +36,7 @@ namespace Part4
                 animals.Serialize(writer);
             }
 
-            */
+            
             using (ReadAheadStreamReader reader = new ReadAheadStreamReader(File.OpenText(fileName)))
             {
                animals.Deserialize(reader);
