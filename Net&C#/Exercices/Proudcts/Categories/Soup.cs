@@ -16,5 +16,22 @@ namespace Products.Categories
                    "in a pot until the flavors are extracted, forming a broth.";
         }
 
+        public override void PrepareIngredents()
+        {
+            Console.WriteLine("Soup");
+            Console.WriteLine("Preapare Ingredients:");
+            Ingredients.ForEach(Console.WriteLine);
+        }
+
+        public override void ShuffleIngredients()
+        {
+            Console.WriteLine("Shuffle ingredients...");
+        }
+
+        public override void FinalizeCooking()
+        {
+            Console.WriteLine("Finalize Cooking");
+        }
+
     }
 }

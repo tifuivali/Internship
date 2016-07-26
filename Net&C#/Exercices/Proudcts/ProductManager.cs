@@ -16,9 +16,14 @@ namespace Products
 
         private static uint idGenerator = 0;
 
+        public List<Product> Products
+        {
+            get { return products.ToList(); }
+        }
+
         private ProductManager()
         {
-
+            products = new List<Product>();
         }
 
         public static ProductManager GetInstance()
@@ -77,6 +82,52 @@ namespace Products
         {
             products.RemoveAt(index);
             products.Insert(index, product);
+        }
+
+        public List<Product> FindProductsContainsAllIngredients(List<Ingredient> ingredients)
+        {
+            List<Product> products =
+                Products.FindAll(item => item.Ingredients.Intersect(ingredients).Count() == ingredients.Count);
+
+            return products;
+        }
+
+        public List<Product> FindProductsContainsOneOrMoreIngredients(List<Ingredient> ingredients)
+        {
+            List<Product> products =
+                Products.FindAll(item => item.Ingredients.Intersect(ingredients).Any());
+
+            return products;
+        }
+
+        public List<Product> FindProductsNotContainsIngredients(List<Ingredient> ingredients)
+        {
+            List<Product> products =
+                Products.FindAll(item => !item.Ingredients.Intersect(ingredients).Any());
+
+            return products;
+
+        }
+
+        public List<Product> FindProductsNotAlergic(List<Alergen> alergens)
+        {
+            List<Product> products =
+                Products.FindAll(
+                    item => item.Ingredients.FindAll(ingredient => !ingredient.Alergens.Intersect(alergens).Any()).Any());
+
+            return products;
+        }
+
+        public List<Product> FindProduct(List<Ingredient> containIngredients, List<Ingredient> requeirdIngredients,
+            List<Ingredient> notContainIngredients, List<Alergen> alergens)
+        {
+            List<Product> products = (List<Product>)
+                FindProductsContainsAllIngredients(containIngredients)
+                    .Intersect(FindProductsContainsOneOrMoreIngredients(requeirdIngredients))
+                    .Intersect(FindProductsNotContainsIngredients(notContainIngredients))
+                    .Intersect(FindProductsNotAlergic(alergens));
+
+            return products;
         }
 
     }

@@ -20,5 +20,22 @@ namespace Products
                    " as xocolātl Nahuatl pronunciation: [ʃoˈkolaːt͡ɬ], a Nahuatl word meaning 'bitter water'." +
                    " The seeds of the cacao tree have an intense bitter taste and must be fermented to develop the flavor.";
         }
+
+        public override void PrepareIngredents()
+        {
+            Console.WriteLine("Chocolate");
+            Console.WriteLine("Preapare Ingredients:");
+            Ingredients.ForEach(Console.WriteLine);
+        }
+
+        public override void ShuffleIngredients()
+        {
+            Console.WriteLine("Shuffle ingredients...");
+        }
+
+        public override void FinalizeCooking()
+        {
+            Console.WriteLine("Finalize Cooking");
+        }
     }
 }

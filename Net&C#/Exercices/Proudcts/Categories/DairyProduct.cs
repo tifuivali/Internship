@@ -16,5 +16,22 @@ namespace Products.Categories
                    " Middle Eastern, South Asian, and Central Asian cuisines, but are largely absent from East Asian" +
                    " and Southeast Asian cuisines.";
         }
+
+        public override void PrepareIngredents()
+        {
+            Console.WriteLine("DairyProduct");
+            Console.WriteLine("Preapare Ingredients:");
+            Ingredients.ForEach(Console.WriteLine);
+        }
+
+        public override void ShuffleIngredients()
+        {
+            Console.WriteLine("Shuffle ingredients...");
+        }
+
+        public override void FinalizeCooking()
+        {
+            Console.WriteLine("Finalize Cooking");
+        }
     }
 }

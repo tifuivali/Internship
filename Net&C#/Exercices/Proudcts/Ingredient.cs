@@ -17,7 +17,15 @@ namespace Products
         public List<Alergen> Alergens
         {
             get { return alergens.ToList(); }
-            private set { alergens = value; }
+            set { alergens = value; }
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != typeof(Ingredient))
+                return false;
+            Ingredient ingredient = (Ingredient)obj;
+            return ingredient.Id == this.Id;
         }
     }
 }

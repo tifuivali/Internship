@@ -22,5 +22,13 @@ namespace Products
             Id = id;
             Name = name;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != typeof(Alergen))
+                return false;
+            Alergen alergen = (Alergen) obj;
+            return alergen.Id == this.Id;
+        }
     }
 }
