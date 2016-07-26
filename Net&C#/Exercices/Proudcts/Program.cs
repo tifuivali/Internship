@@ -29,7 +29,7 @@ namespace Products
             };
             product.Name = "Pizza Max";
             product.Description = "Large pizza";
-            product.Ingredients = 
+             
         }
     }
 }
