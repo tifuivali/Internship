@@ -20,6 +20,11 @@ namespace Products
             set { alergens = value; }
         }
 
+        public Ingredient()
+        {
+            Alergens = new List<Alergen>();
+        }
+
         public override bool Equals(object obj)
         {
             if (obj.GetType() != typeof(Ingredient))

@@ -47,6 +47,7 @@
     <Compile Include="Categories\Chocolate.cs" />
     <Compile Include="Categories\DairyProduct.cs" />
     <Compile Include="Categories\FastFood.cs" />
+    <Compile Include="Categories\Sauce.cs" />
     <Compile Include="Categories\Soup.cs" />
     <Compile Include="Display\DisplayException.cs" />
     <Compile Include="Display\IDisplay.cs" />

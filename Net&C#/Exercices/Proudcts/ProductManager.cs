@@ -38,6 +38,14 @@ namespace Products
             products.Add(product);
         }
 
+        public void AddProducts(params Product[] products)
+        {
+            foreach (var product in products)
+            {
+                AddProduct(product);
+            }
+        }
+
         public void Update(Product product)
         {
             int index = -1;
@@ -113,7 +121,7 @@ namespace Products
         {
             List<Product> products =
                 Products.FindAll(
-                    item => item.Ingredients.FindAll(ingredient => !ingredient.Alergens.Intersect(alergens).Any()).Any());
+                    item => !item.Ingredients.FindAll(ingredient => ingredient.Alergens.Intersect(alergens).Any()).Any());
 
             return products;
         }

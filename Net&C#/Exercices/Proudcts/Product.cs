@@ -21,7 +21,7 @@ namespace Products
         public List<Ingredient> Ingredients
         {
             get { return ingredients.ToList(); }
-            private set { ingredients = value; }
+            set { ingredients = value; }
         }
 
         public IDisplay InfoDisplayer { get; set; }
@@ -50,6 +50,11 @@ namespace Products
                 return false;
             Product product = (Product) obj;
             return this.Id == product.Id;
+        }
+
+        public override string ToString()
+        {
+            return $"Name:{Name} \r\nDescription:{Description}";
         }
 
         public abstract void PrepareIngredents();
