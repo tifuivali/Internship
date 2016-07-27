@@ -1,0 +1,263 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hoteluri Romanesti</title>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" type="text/css" href="css/slideshow.css" />
+    <script src="scripts/slide.js" type="text/javascript"></script>
+    <script type="text/javascript" src="scripts/jquery-3.1.0.min.js"></script>
+    <script src="scripts/script.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+<body>
+    <header>
+        <div class="header-left-side">
+            <div class="logo_container">
+                <a id="home" href="index.html"><span class="logo">Hoteluri Romania</span></a>
+                <div>
+                    <img src="images/hotel.svg" class="img_logo" alt="Logo" />
+                </div>
+            </div>
+            <div class="slideshow-container">
+                <div class="mySlides fade">
+                    <div class="numbertext">1 / 3</div>
+                    <img class="imgslide" src="images/img3.jpg" style="width:100%">
+                    <div class="text">Caption Text</div>
+                </div>
+
+                <div style="display:none" class="mySlides fade">
+                    <div class="numbertext">2 / 3</div>
+                    <img class="imgslide" src="images/img1.jpg" style="width:100%">
+                    <div class="text">Caption Two</div>
+                </div>
+
+                <div style="display:none" class="mySlides fade">
+                    <div class="numbertext">3 / 3</div>
+                    <img class="imgslide" src="images/img2.jpg" style="width:100%">
+                    <div class="text">Caption Three</div>
+                </div>
+
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="dots" style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+    </header>
+
+
+    <nav class="menu_horizontal">
+        <ul class="items_menu">
+            <li class="menu_item active"><a href="index.html">Home</a></li>
+            <li class="menu_item"><a href="rezerva.html">Rezerva Acum!</a></li>
+            <li class="menu_item"><a href="locatii.html">Locatii Turistice</a></li>
+            <li class="menu_item"><a href="adauga_hotel.html">Adauga Hotel</a></li>
+            <li class="menu_item"><a href="despre.html">Despre Noi</a></li>
+            <li>
+                <div class="box">
+                    <div class="container-3">
+                        <span class="icon"> 🔎</span>
+                        <input type="search" id="search" placeholder="Cauta..." />
+                    </div>
+                </div>
+            </li>
+
+
+        </ul>
+    </nav>
+
+    <div class="intro">
+        <h1>
+            Hoteluri Romania
+        </h1>
+        <hr />
+        <p>
+            Acest site ofera o lista variata cu hoteluri din diferite zone ale Romaniei. Poti cauta un hotel ,rezerva camere ,sau vizualiza locuri frumoase din romania unde sa iti petreci vacantele.
+
+        </p>
+        <p>
+            Poti vizualiza lista cu hotelurile inscrise la noi pe site in lista de mai jos:
+
+        </p>
+
+
+
+    </div>
+
+    <section id="list_hotels" style="overflow-x:auto">
+        <table id="list">
+            <thead>
+                <tr>
+                    <th>Imagine</th>
+                    <th>Nume</th>
+                    <th>Adresa</th>
+                    <th>Numar Locuri</th>
+                    <th>Numar Stele</th>
+                    <th>Site</th>
+                    <th>Descriere</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><img src="images/hotel-maestro.jpg" alt="Hotel maestro" class="img_table" /></td>
+                    <td>Hotel MAESTRO</td>
+                    <td>Orașul Vatra Dornei, Str. Republicii, Jud. Suceava</td>
+                    <td>48</td>
+                    <td>
+                        <div class="rating">
+                            <span>☆</span><span>☆</span><span>☆</span>
+                        </div>
+                    </td>
+                    <td><a href="http://carta.ro/cazare-orasul-vatra-dornei/hotel-maestro/">Hotel Maestro</a></td>
+                    <td>
+                        Situat central in municipiul Vatra Dornei, hotelul reprezinta locul ideal pentru odihna, relaxare si punct de plecare pentru vizitarea obiectivelor turistice din zona,
+                        mentionand Manastirea Voronet, Manastirea Humor, Manastirea Moldovita, Manastirea Sucevita, Manastirea Putna si Arbore.
+                    </td>
+                </tr>
+                <tr>
+                    <td><img src="images/hotel-lux-divina.jpg" alt="Hotel maestro" class="img_table" /></td>
+                    <td>Hotel LUX DIVINA</td>
+                    <td>Brașov, str.13 Decembrie, nr. 96, jud. Brasov</td>
+                    <td>106</td>
+                    <td>
+                        <div class="rating">
+                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                        </div>
+                    </td>
+                    <td><a href="http://carta.ro/cazare-brasov/hotel-lux-divina/">Hotel Divina</a></td>
+                    <td>
+                        Cele doua corpuri de hotel, Dacia si Parc, ofera un numar de 55 de spatii de cazare alcatuite din 50 camere duble, 4 camere single si un apartament.
+                        Fiecare spatiu dispune de conexiune wi-fi gratuita, televiziune prin cablu, aer conditionat si ofera loc de parcare gratuit, monitorizat.
+                        Mic-dejunul, pranzul sau cina sunt pregatite de bucatarii nostri si stim ca avem una dintre cele mai bune echipe de bucatari din Brasov.
+                        Suntem atenti la fiecare detaliu si putem oferi la cerere servicii suplimentare. Trebuie doar sa iti doresti!
+                    </td>
+                </tr>
+                <tr>
+                    <td><img src="images/crystal.jpg" alt="crystal place" class="img_table" /></td>
+                    <td>Crystal Palace</td>
+                    <td>Strada Alexandru Serbanescu, nr. 18-20, Bucuresti</td>
+                    <td>90</td>
+                    <td>
+                        <div class="rating">
+                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                        </div>
+                    </td>
+                    <td><a href="http://hoteluriromania.ro/ro/hotelul/crystal-palace.html">Crystal Place</a></td>
+                    <td>
+                        Localizat in zona rezidentiala de nord a Bucurestiului, Crystal Palace Hotel se afla la o distanta convenabila de cateva dintre cele mai bune locatii
+                        pentru cumparaturi, divertisment si restaurante. Crystal Palace Hotel este situat in apropiere de faimosul Romexpo - Centrul Expozitional Bucuresti, la 10
+                        minute de Aeroportul International Otopeni, precum si de centrul orasului.
+                    </td>
+                </tr>
+                <tr>
+                    <td><img src="images/opera plaza.jpg" alt="crystal place" class="img_table" /></td>
+                    <td>Hotel Opera Plaza </td>
+                    <td>Str. G-ral Traian Mosoiu, Nr. 10-12, Cluj-Napoca,Romania</td>
+                    <td>89</td>
+                    <td>
+                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                    </td>
+                    <td><a href="http://www.hotellist.ro/173/Cluj-Napoca/Hotel-Opera-Plaza.html">Hotel Opera Plaza</a></td>
+                    <td>
+                        Situat in centrul istoric al orasului, hotelul Opera Plaza isi alimenteaza corpul arhitectonic cu vibratiile Operei Romane,
+                        aflata la doar cativa pasi. Prin imbinarea armonioasa dintre clasic si modern, acest spatiu este dincolo de dimensiunea temporala,
+                        adaptandu-se perfect varstei si asteptarilor tuturor celor care-i trec pragul. Linia calda si eleganta a hotelului se inscrie in atmosfera
+                        celei mai frumoase piete a orasului vechi. Beneficiind de o tratare inovativa, hotelul ofera toate avantajele tehnologiei moderne.
+                    </td>
+
+
+                </tr>
+                <tr>
+                    <td><img src="images/tarnava.jpg" alt="crystal place" class="img_table" /></td>
+                    <td>Hotel Tarnava </td>
+                    <td>P-ta Primariei nr. 16,Odorheiu Secuiesc,Harghita,Romania</td>
+                    <td>107</td>
+                    <td>
+                        <div class="rating">
+                            <span>☆</span><span>☆</span><span>☆</span>
+                        </div>
+                    </td>
+                    <td><a href="http://www.hotellist.ro/204/Odorheiu-Secuiesc/Hotel-Tarnava.html"></a>Hotel Tarnava</td>
+                    <td>
+                        Odorheiu Secuiesc este situat pe latura sud estica a bazinului transilvanean pe valea Tarnavei Mari. Premisele sale geografice se datoreaza pozitionarii,
+                        la intalnirea platoului vulcanic al muntilor Harghita cu dealurile mai joase de-alungul vaii Tarnavei.
+                        Hotelul Tarnava*** isi asteapta clientii cu 72 de camere, din care 10 simple, 58 cu doua paturi, respectiv 4 apartamente,
+                        avand o capacitatea de 143 de locuri
+                        Serviciile oferite: receptie non-stop cu personal cunoscator de limbi straine, pastrarea bunurilor valorice, telefon, internet,
+                        fax, xerox, intermedierea mesajelor, comanda taxi si flori, boutique, trezire telefonica, spalatorie, pastrarea bagajelor, inchirieri de jocuri
+                        (romi, carti, domino, sah), organizarea excursiilor, sala de fitness, solar, sauna, jacuzzi, masaj, drink bar.
+                    </td>
+                </tr>
+                <tr>
+                    <td><img src="images/crystal.jpg" alt="crystal place" class="img_table" /></td>
+                    <td>Hotel Opera Plaza </td>
+                    <td>Str. G-ral Traian Mosoiu, Nr. 10-12, Cluj-Napoca,Romania</td>
+                    <td>89</td>
+                    <td>
+                        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                    </td>
+                    <td><a href="http://www.hotellist.ro/173/Cluj-Napoca/Hotel-Opera-Plaza.html">Hotel Opera Plaza</a></td>
+                    <td>
+                        Situat in centrul istoric al orasului, hotelul Opera Plaza isi alimenteaza corpul arhitectonic cu vibratiile Operei Romane,
+                        aflata la doar cativa pasi. Prin imbinarea armonioasa dintre clasic si modern, acest spatiu este dincolo de dimensiunea temporala,
+                        adaptandu-se perfect varstei si asteptarilor tuturor celor care-i trec pragul. Linia calda si eleganta a hotelului se inscrie in atmosfera
+                        celei mai frumoase piete a orasului vechi. Beneficiind de o tratare inovativa, hotelul ofera toate avantajele tehnologiei moderne.
+                    </td>
+
+
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section id="list_hotels2"></section>
+
+    <!--
+     <div class="paginare">
+        <ul class="pagination">
+            <li><a href="#">«</a></li>
+            <li><a class="active" href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">6</a></li>
+            <li><a href="#">7</a></li>
+            <li><a href="#">»</a></li>
+        </ul>
+    </div>
+     -->
+    <footer>
+        <div class="footer_top">
+            <div class="footer_utils">
+                <h3 style="background-color:rgba(99, 107, 99, 0.59)">
+                    Legaturi Utile:
+                </h3>
+                <ul id="links">
+                    <li id="link_util"><a href="#">Cazare Romania</a></li>
+                    <li id="link_util"><a href="#">Harta Romaniei</a></li>
+                    <li id="link_util"><a href="#">Pensiuni Turistice</a></li>
+                    <li id="link_util"><a href="#">Zone Camping</a></li>
+                </ul>
+            </div>
+            <div class="map_footer">
+                <img width="600" src="images/map.png" alt="Google Map of Iasi" />
+            </div>
+        </div>
+        <h4 id="copyright">©Copyright TeamNet Solutions SRL</h4>
+    </footer>
+
+
+</body>
+</html>
+
