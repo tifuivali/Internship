@@ -18,5 +18,14 @@ namespace HotelApi_.Models
         public uint RoomsCount { get; set; }
 
         public short Rating { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != typeof(Hotel))
+                return false;
+            Hotel hotel = (Hotel)obj;
+            return hotel.Id == Id;
+        }
     }
+
 }

@@ -139,16 +139,14 @@
         var args = {
             hotels: new Hotels(),
             container: $('#list_hotels'),
+            url : 'http://localhost:50581/api/Hotels',
             filter: true,
             page:1
         };
 
         var generator = new HotelsTableGenerator(args);
-        generateListHotel(args, 'http://localhost:50581/api/Hotels')
-        //generator.generateTable();;
-        //activateTableFeatures(args);
-
-       
+        //generateListHotel(args, 'http://localhost:50581/api/Hotels')
+        generator.generateTable();;
     });
 
     function activateTableFeatures(args) {
@@ -184,13 +182,13 @@
                 dataType: 'json',
                 success: function (data, status, xhr) {
                     for (var i = 0; i < data.length; i++) {
-                        var hotel = new Hotel(data[i].ID,
+                        var hotel = new Hotel(data[i].Id,
                             data[i].Name,
                             data[i].Description,
                             data[i].City,
                             data[i].RoomsCount,
                             data[i].Rating);
-                        args.hotels.push(hotel);
+                        args.hotels.add(hotel);
                     }
                     generateTable(args);
                     activateTableFeatures(args);
@@ -230,7 +228,15 @@
                     url: args.url,
                     dataType: 'json',
                     success: function (data, status, xhr) {
-                        args.hotels.list = data.list;
+                        for (var i = 0; i < data.length; i++) {
+                            var hotel = new Hotel(data[i].Id,
+                                data[i].Name,
+                                data[i].Description,
+                                data[i].City,
+                                data[i].RoomsCount,
+                                data[i].Rating);
+                            args.hotels.add(hotel);
+                        }
                         generateTable(args);
                         activateTableFeatures(args);
                     },
@@ -383,8 +389,18 @@
             $(tbody).find('#btnConfirm').click(function () {
                 var hotel = getHotelFromRow($(this).closest('tr'));
                 try {
-                    args.hotels.add(hotel);
-                    refreshTable(args);
+                    //args.hotels.add(hotel);
+                    var hotelToSend = convertHotel(hotel);
+                    $.post({
+                        url: 'http://localhost:50581/api/Hotels/Add',
+                        data: hotelToSend,
+                        success: function(data, status, xhr) {
+                            refreshTableWithUrl(args);
+                        },
+                        error: function(xhr, status, err) {
+                            alert("Fail to add hotel! \n" + xhr.responseText);
+                        }
+                    });
                     btnAdd.prop('disabled', false);
                 } catch (e) {
                     alert(e.message);
@@ -420,8 +436,23 @@
             var hotelID = parseInt(currentRow.attr('data-id'));
             var response = confirm("Do you want to delete this hotel?");
             if (response === true) {
-                args.hotels.delete(hotelID);
-                refreshTable(args);
+                //args.hotels.delete(hotelID);
+                $.ajax({
+                    url: 'http://localhost:50581/api/Hotels/Delete' +
+                        '?' +
+                        $.param({
+                               "id":hotelID
+                        }),
+                    type: 'DELETE',
+                    success: function(data, status, xhr) {
+                        refreshTableWithUrl(args);
+                    },
+                    error: function(xhr, status, err) {
+                        alert("Canot delete! \n" + err);
+                    }
+
+            });
+                
             }
 
         });
@@ -465,7 +496,7 @@
     }
 
     function createEditRow(hotel, columns) {
-        var row = '<tr>';
+        var row = '<tr data-id="'+hotel.id+'">';
         if (columns === undefined || columns === null) {
             row += '<td><input data-id=\'id\' value=\'' + hotel.id + '\' type=\'number\' readonly /></td>';
             row += '<td><input data-id=\'name\' value=\'' + hotel.name + '\' type=\'text\'/></td>';
@@ -500,23 +531,49 @@
         return row;
     }
 
+    //covert Hotel
+
+    function convertHotel(hotel) {
+        var hotelToSend = {
+            Id: hotel.id,
+            City: hotel.city,
+            Description: hotel.description,
+            Name: hotel.name,
+            Rating: hotel.stars_count,
+            RoomsCount: hotel.rooms_count
+        };
+        return hotelToSend;
+    }
+
     //exercise5
     function exercise5(args) {
         args.container.on('click', '.btnEdit', function () {
             var restoreRow = $(this).closest('tr').html();
             var tr = $(this).closest('tr');
             var hotelToEdit = args.hotels.getHotelById(parseInt(tr.attr('data-id')));
-            tr = tr.replaceWith(createEditRow(hotelToEdit, args.columns));
+            tr.replaceWith(createEditRow(hotelToEdit, args.columns));
             var tbody = args.container.find('tbody');
             tbody.on('click', '#btnConfirm', function () {
                 var currentRow = $(this).closest('tr');
                 var editedHotel = getHotelFromRow(currentRow);
-                args.hotels.update(editedHotel);
-                refreshTable(args);
+                var hotelToSend = convertHotel(editedHotel);
+                $.post({
+                    
+                    url: 'http://localhost:50581/api/Hotels/Update',
+                    data: hotelToSend,
+                    success:function(data, status) {
+                        refreshTableWithUrl(args);
+                    },
+                    error: function(xhr,status,err) {
+                        alert("Cannot update hotel! \n" + xhr.responseText);
+                    }
+                });
+                //args.hotels.update(editedHotel);
+               
             });
             tbody.on('click', '#btnCancel', function () {
-                var tr = $(this).closest('tr');
-                tr.replaceWith(restoreRow);
+                tr = $(this).closest('tr');
+                tr.html(restoreRow);
             });
         });
 
@@ -561,6 +618,12 @@
         generator.generateTable();
     }
 
+    function refreshTableWithUrl(args) {
+        // args.container.empty();
+        args.hotels.list = [];
+        var generator = new HotelsTableGenerator(args);
+        generator.generateTable();
+    }
 
     function loadTable(args) {
         // args.container.empty();

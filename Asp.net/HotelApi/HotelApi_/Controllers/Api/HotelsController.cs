@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
+using HotelApi_.ManagerHotel;
 using HotelApi_.Models;
 
 namespace HotelApi_.Controllers
@@ -8,40 +11,9 @@ namespace HotelApi_.Controllers
     public class HotelsController : ApiController
     {
 
-        List<Hotel> hotels = new List<Hotel>();
+        HotelManager hotelManager = HotelManager.GetInstance();
 
-        private void PopulateHotels()
-        {
-            hotels.Add(new Hotel()
-            {
-                Id = 1,
-                Name = "Hotel Victoria",
-                City = "Bucuresti",
-                Description = "Un hotel ok",
-                Rating = 3,
-                RoomsCount = 60
-            });
-
-            hotels.Add(new Hotel()
-            {
-                Id = 2,
-                City = "Iasi",
-                Description = "Plasat in centrul orasului",
-                Name = "Hotel Traian",
-                Rating = 5,
-                RoomsCount = 200
-            });
-
-            hotels.Add(new Hotel()
-            {
-                Id = 3,
-                City = "Cluj Napoca",
-                Description = "Fara",
-                Name = "Hotel Europa",
-                Rating = 4,
-                RoomsCount = 140
-            });
-        }
+        
 
         /// <summary>
         /// Get All Products
@@ -49,31 +21,58 @@ namespace HotelApi_.Controllers
         /// <returns></returns>
         public IEnumerable<Hotel> GetAllHotels()
         {
-            if (hotels.Count > 0)
+            if (hotelManager.Hotels.Count > 0)
             {
-                return hotels;
+                return hotelManager.Hotels;
             }
-            PopulateHotels();
-            return hotels;
+            hotelManager.PopulateHotels();
+            return hotelManager.Hotels;
         }
 
         public IEnumerable<Hotel> GetHotelByName(string name)
         {
-            if (hotels.Count > 0)
+            if (hotelManager.Hotels.Count > 0)
             {
-                return hotels.Where(h => h.Name == name);
+                return hotelManager.Hotels.Where(h => h.Name == name);
             }
-            PopulateHotels();
-            return hotels.Where(h => h.Name == name);
+            hotelManager.PopulateHotels();
+            return hotelManager.Hotels.Where(h => h.Name == name);
 
+        }
+
+
+        [HttpPost]
+        [Route("api/Hotels/Add")]
+        public HttpResponseMessage Add([FromBody] Hotel hotel)
+        {
+            if(!hotelManager.Add(hotel))
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Hotel with the same id already exists!");
+            return Request.CreateResponse(HttpStatusCode.OK, "Succes");
+        }
+
+        [HttpPost]
+        [Route("api/Hotels/Update")]
+        public HttpResponseMessage Update([FromBody] Hotel hotel)
+        {
+            if (!hotelManager.Update(hotel))
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Hotel doesn't exists!");
+            return Request.CreateResponse(HttpStatusCode.OK, "Succes");
+        }
+
+        [Route("api/Hotels/Delete")]
+        public HttpResponseMessage Delete(uint id)
+        {
+            if(!hotelManager.Delete(id))
+                return Request.CreateResponse(HttpStatusCode.NotFound, "Not fund hotel with id:" + id);
+            return Request.CreateResponse(HttpStatusCode.OK, "Success!");
         }
 
         [Route("api/Hotels/GetHotelById")]
         public Hotel GetHotelById(int id)
         {
-            if (hotels.Count <= 0)
-                 PopulateHotels();
-            return hotels.First(h => h.Id == id);
+            if (hotelManager.Hotels.Count <= 0)
+                 hotelManager.PopulateHotels();
+            return hotelManager.Hotels.First(h => h.Id == id);
 
         }
 
