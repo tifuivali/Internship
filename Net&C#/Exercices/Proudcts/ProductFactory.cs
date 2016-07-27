@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 using Products;
@@ -13,7 +14,6 @@ namespace Products
 {
     public class ProductFactory
     {
-
         public Product CreateConcreteProduct(Type t)
         {
             if (t == typeof(Chocolate))

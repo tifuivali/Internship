@@ -122,7 +122,6 @@ namespace Products
             List<Product> products =
                 Products.FindAll(
                     item => !item.Ingredients.FindAll(ingredient => ingredient.Alergens.Intersect(alergens).Any()).Any());
-
             return products;
         }
 
