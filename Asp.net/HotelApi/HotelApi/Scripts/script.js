@@ -112,10 +112,10 @@
     }
 
     ///column must be the name of column
-    Hotels.prototype.filter = function (key,column) {
+    Hotels.prototype.filter = function (key, column) {
         var filtredElements = [];
-        for(var i=0 ; i<this.list.length; i++){
-            if(this.list[i][column].toUpperCase().includes(key.toUpperCase().trim())){
+        for (var i = 0 ; i < this.list.length; i++) {
+            if (this.list[i][column].toUpperCase().includes(key.toUpperCase().trim())) {
                 filtredElements.push(this.list[i]);
             }
         }
@@ -139,23 +139,53 @@
         var args = {
             hotels: new Hotels(),
             container: $('#list_hotels'),
-            url : 'http://localhost:50581/api/Hotels',
+            url: 'http://localhost:50581/api/Hotels',
             filter: true,
-            page:1
+            page: 1,
+            getNumberOfItems:true
         };
 
+        addFilterPage();
+        //activate search
+        exercise7(args);
+        addNumberOfPageBehavior(args);
         var generator = new HotelsTableGenerator(args);
         //generateListHotel(args, 'http://localhost:50581/api/Hotels')
         generator.generateTable();;
     });
+
+
+    function addFilterPage() {
+        //  $('.filterContent-expanded').hide();
+        $('.filterContent-expanded button[value=x]')
+            .click(function() {
+                $('.filterContent-expanded').hide();
+            });
+        $('.filterContent input')
+            .click(function () {
+                $('.filterContent-expanded').show();
+            });
+        $('section')
+            .click(function () {
+                $('.filterContent-expanded').hide();
+            });
+    }
+
+    function addNumberOfPageBehavior(args) {
+        $('.numberOfPage select').change(
+                function () {
+                    var itemsPerPage = parseInt($(this).val());
+                    args.itemsPerPage = itemsPerPage;
+                    var gen = new HotelsTableGenerator(args);
+                    gen.generateTable();
+                });
+    }
 
     function activateTableFeatures(args) {
         exercise3(args);
         exercise4(args);
         exercise5(args);
         exercise6(args);
-        if(args.filter === true)
-          exercise7(args);
         addPaginationBehavior(args);
     }
 
@@ -175,7 +205,7 @@
     }
 
 
-    function generateListHotel(args,url) {
+    function generateListHotel(args, url) {
         (function (args) {
             $.ajax({
                 url: url,
@@ -201,7 +231,7 @@
     }
 
 
-    function addPaginationBehavior(args){
+    function addPaginationBehavior(args) {
         var container = args.container;
         var pagination = container.find('.pagination');
         pagination.on('click', 'li[data-id]', function () {
@@ -227,7 +257,7 @@
             this.args.page = 1;
         this.args.hotels.list = [];
         //  $(container).empty();
-        generatePageOfTable(this.args);    
+        generatePageOfTable(this.args);
     };
 
 
@@ -235,7 +265,7 @@
         args.hotels.list = [];
         (function (args) {
             $.ajax({
-                url: 'http://localhost:50581/api/Hotels/GetPage' +'?' + $.param({
+                url: 'http://localhost:50581/api/Hotels/GetPage' + '?' + $.param({
                     page: args.page,
                     itemsPerPage: args.itemsPerPage,
                     searchText: args.searchText
@@ -265,7 +295,7 @@
         var tableContainer = args.container;
         var paginationList = tableContainer.append('<div class="paginare"><ul class="pagination"></ul></div>').find('ul');
         var nrPages = 0;
-        var itemsPerPage =args.itemsPerPage;
+        var itemsPerPage = args.itemsPerPage;
 
         nrPages = parseInt(args.hotels.list.length / itemsPerPage) + 1;
         paginationList.append('<li>«</li>');
@@ -287,27 +317,19 @@
         var paginationList = tableContainer.append('<div class="paginare"><ul class="pagination"></ul></div>').find('ul');
         var nrPages = 0;
         var itemsPerPage = args.itemsPerPage;
-        $.get({
-            url: 'http://localhost:50581/api/Hotels/GetNumberItems',
-            success : function(data, status, xhr) {
-                nrPages = parseInt(data / itemsPerPage) + 1;
-                paginationList.append('<li>«</li>');
-                for (var i = 1 ; i <= nrPages ; i++) {
-                    if (args.page === i) {
-                        paginationList.append('<li class="active" data-id=' + i + '>' + i + '</li>');
-                    } else {
-                        var itemList = $('<li></li>');
-                        itemList.attr('data-id', i);
-                        itemList.text(i);
-                        paginationList.append(itemList);
-                    }
-                }
-                paginationList.append('<li>»</li>');
-            },
-            error: function(xhr, status, err) {
-                alert("An error ocured at pagination!");
+        nrPages = args.nrPages;
+        paginationList.append('<li>«</li>');
+        for (var i = 1; i <= nrPages; i++) {
+            if (args.page === i) {
+                paginationList.append('<li class="active" data-id=' + i + '>' + i + '</li>');
+            } else {
+                var itemList = $('<li></li>');
+                itemList.attr('data-id', i);
+                itemList.text(i);
+                paginationList.append(itemList);
             }
-        });
+        }
+        paginationList.append('<li>»</li>');
         
     }
 
@@ -322,14 +344,14 @@
             args.itemsPerPage = 10;
         }
         if (args.columns === null || args.columns === undefined) {
-            divTemp =divTemp.append('<table><thead><th>ID</th><th>Name</th><th>Description</th><th>City</th><th>Rooms Count</th><th>Rating</th><th>Operations</th></thead></table>');
+            divTemp = divTemp.append('<table><thead><th>ID</th><th>Name</th><th>Description</th><th>City</th><th>Rooms Count</th><th>Rating</th><th>Operations</th></thead></table>');
         } else {
             var table = '<table><thead>';
             for (var i = 0 ; i < args.columns.length; i++) {
                 table += '<th>' + args.columns[i].header + '</th>';
             }
             table += '</thead></table>';
-            divTemp= args.container.append(table);
+            divTemp = args.container.append(table);
         }
         var tableHotels = $(divTemp).find('table');
         //var itemsPage = getItemsPage(args);
@@ -354,11 +376,10 @@
         divRating += '</div>';
         return divRating;
     }
-                            
 
-    function getItemsPage(args)
-    {
-        var startItem = args.itemsPerPage * (args.page-1) ;
+
+    function getItemsPage(args) {
+        var startItem = args.itemsPerPage * (args.page - 1);
         if (startItem > args.hotels.list.length)
             startItem = 0;
         var endItem = args.itemsPerPage * args.page;
@@ -393,7 +414,7 @@
                     var numberOfStars = hotel.stars_count;
                     cell += generateStarsRating(numberOfStars);
                 }
-                
+
             }
             row += cell;
             row += '</tr>';
@@ -421,9 +442,13 @@
 
         var container = args.container;
         var btnAdd = container.find('#addButton');
-        console.log($(container).find('#addButton'));
-        $(btnAdd).click( function () {
+        $(btnAdd).click(function () {
             var tbody = $(container).find('tbody').prepend(createInputsRow(args.columns));
+            $.get('api/Hotels/GetValidId',
+                    function (data) {
+                        $(tbody).find('input[data-id=id]').val(data);
+                    });
+                    
             $(tbody).find('#btnConfirm').click(function () {
                 var hotel = getHotelFromRow($(this).closest('tr'));
                 try {
@@ -432,10 +457,10 @@
                     $.post({
                         url: 'http://localhost:50581/api/Hotels/Add',
                         data: hotelToSend,
-                        success: function(data, status, xhr) {
+                        success: function (data, status, xhr) {
                             refreshTableWithUrl(args);
                         },
-                        error: function(xhr, status, err) {
+                        error: function (xhr, status, err) {
                             alert("Fail to add hotel! \n" + xhr.responseText);
                         }
                     });
@@ -468,7 +493,7 @@
     // exercise 4
     function exercise4(args) {
         var btnDelete = args.container.find('.btnDelete');
-       
+
         btnDelete.on('click', function () {
             var currentRow = $(this).closest('tr');
             var hotelID = parseInt(currentRow.attr('data-id'));
@@ -479,18 +504,18 @@
                     url: 'http://localhost:50581/api/Hotels/Delete' +
                         '?' +
                         $.param({
-                               "id":hotelID
+                            "id": hotelID
                         }),
                     type: 'DELETE',
-                    success: function(data, status, xhr) {
+                    success: function (data, status, xhr) {
                         refreshTableWithUrl(args);
                     },
-                    error: function(xhr, status, err) {
+                    error: function (xhr, status, err) {
                         alert("Canot delete! \n" + err);
                     }
 
-            });
-                
+                });
+
             }
 
         });
@@ -513,6 +538,7 @@
         } else {
             for (var i = 0 ; i < columns.length; i++) {
                 if (columns[i].type === undefined || columns[i].type === null) {
+                 
                     if (columns[i].toLowerCase() !== 'operations') {
                         row += '<td><input data-id=' + columns[i].type + 'type="text" /></td>';
                     }
@@ -534,7 +560,7 @@
     }
 
     function createEditRow(hotel, columns) {
-        var row = '<tr data-id="'+hotel.id+'">';
+        var row = '<tr data-id="' + hotel.id + '">';
         if (columns === undefined || columns === null) {
             row += '<td><input data-id=\'id\' value=\'' + hotel.id + '\' type=\'number\' readonly /></td>';
             row += '<td><input data-id=\'name\' value=\'' + hotel.name + '\' type=\'text\'/></td>';
@@ -596,18 +622,18 @@
                 var editedHotel = getHotelFromRow(currentRow);
                 var hotelToSend = convertHotel(editedHotel);
                 $.post({
-                    
+
                     url: 'http://localhost:50581/api/Hotels/Update',
                     data: hotelToSend,
-                    success:function(data, status) {
+                    success: function (data, status) {
                         refreshTableWithUrl(args);
                     },
-                    error: function(xhr,status,err) {
+                    error: function (xhr, status, err) {
                         alert("Cannot update hotel! \n" + xhr.responseText);
                     }
                 });
                 //args.hotels.update(editedHotel);
-               
+
             });
             tbody.on('click', '#btnCancel', function () {
                 tr = $(this).closest('tr');
@@ -623,9 +649,9 @@
         var container = args.container;
         var btnLoad = args.container.find("#btnLoad");
         $(btnLoad).on('click', function () {
-            
+
             var url = container.find('#inputLoad').val();
-            if (url ) {
+            if (url) {
                 args.url = url;
             }
             loadTable(args);
@@ -649,7 +675,7 @@
 
     //exercise 7
 
-    function refreshTable(args){
+    function refreshTable(args) {
         // args.container.empty();
         args.url = undefined;
         var generator = new HotelsTableGenerator(args);
@@ -659,6 +685,7 @@
     function refreshTableWithUrl(args) {
         // args.container.empty();
         args.hotels.list = [];
+        args.getNumberOfItems = true;
         var generator = new HotelsTableGenerator(args);
         generator.generateTable();
     }
@@ -683,6 +710,11 @@
             //filterElements(nameHotel, args, 'name');
             args.searchText = nameHotel;
             args.page = 1;
+            if(nameHotel.trim().length>0)
+                args.getNumberOfItems = false;
+            else {
+                args.getNumberOfItems = true;
+            }
             var generator = new HotelsTableGenerator(args);
             generator.generateTable();
         });
@@ -718,7 +750,7 @@
             hotels: filtredHotels,
             page: args.page,
             itemsPerPage: args.itemsPerPage,
-            columns:args.columns
+            columns: args.columns
         }
         var generator = new HotelsTableGenerator(filtredHotelsArgs);
         generator.generateTable();

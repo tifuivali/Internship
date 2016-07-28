@@ -6,7 +6,59 @@
 
 
 section {
-    margin-top:50px;
+    margin-top: 10px;
+}
+
+
+.filterContent {
+    float: left;
+    left: 3%;
+    position: relative;
+}
+
+#selectPageSize {
+    width: 200px;
+    padding: 12px 20px;
+    margin-left: 25px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.filterContent-expanded {
+    position: absolute;
+    width: 25%;
+    height: 400px;
+    background-color: #d3d3d3;
+    padding: 8px;
+    border: 2px solid #19774a;;
+    border-radius: 15px;
+
+    
+}
+
+.filterContent-expanded button[value=x] {
+    margin-left: 94%;
+    width: 5%;
+}
+
+.input {
+    width: 100%;
+    padding: 12px 20px;
+    margin-left: 10px;
+    margin-top: 8px;
+    display: inline-block;
+    border-color: #19774a;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+.numberOfPage {
+    margin-top: 40px;
+    width: 40%;
+    display: flex;
 }
 
 section input {
@@ -123,7 +175,7 @@ p {
 table {
     border-collapse: collapse;
     width: 100%;
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 th {
@@ -457,6 +509,8 @@ figcaption {
     border-radius: 4px;
     box-sizing: border-box;
 }
+
+
 
 #rezerva_form input[type=date] {
     width: 30%;

@@ -76,6 +76,12 @@ namespace HotelApi_.Controllers
             return hotelManager.GetHotelSearch(searchText, page, itemsPerPage);
         }
 
+        [Route("api/Hotels/GetValidId")]
+        public uint GetValidId()
+        {
+            return hotelManager.GetValidId();
+        }
+
         [Route("api/Hotels/Delete")]
         public HttpResponseMessage Delete(uint id)
         {

@@ -54,6 +54,20 @@ namespace HotelApi_.ManagerHotel
             return hotels.Skip(startIndex).Take(itemsPerPage);
         }
 
+
+        public uint GetValidId()
+        {
+            uint maxId=0;
+            foreach (var hotel in hotels)
+            {
+                if (hotel.Id > maxId)
+                {
+                    maxId = hotel.Id;
+                }
+            }
+            return maxId + 1;
+        }
+
         public void PopulateHotels()
         {
             Add(new Hotel()
@@ -86,7 +100,7 @@ namespace HotelApi_.ManagerHotel
                 RoomsCount = 140
             });
 
-            for (int i = 4; i < 50; i++)
+            for (int i = 4; i < 100; i++)
             {
                 Add(new Hotel()
                 {

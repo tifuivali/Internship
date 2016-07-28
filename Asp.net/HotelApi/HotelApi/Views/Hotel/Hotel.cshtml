@@ -94,6 +94,34 @@
 
 
     </div>
+    <div class="numberOfPage">
+        <label>Items Per page:</label>
+        <select id="selectPageSize">
+            <option value="5">5</option>
+            <option value="10" selected>10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="200">200</option>
+        </select>
+        <div class="filterContent">
+            <input class="input"  type="button" " value="Filter"></input>
+        </div>
+
+    </div>
+    <div class="filterContent-expanded">
+        <button value="x">X</button>
+        <label>City:</label>
+        <select>
+            <option value="Iasi">Iasi</option>
+        </select>
+        <label>Rooms Count:</label>
+        <input type="range" min="0" value="0" max="500"/>
+        <label>Rating:</label>
+        <input type="range" min="0" max="5"/>
+    </div>
+
+
 
     <section id="list_hotels" style="overflow-x:auto">
         <table id="list">
@@ -108,15 +136,13 @@
                     <th>Descriere</th>
                 </tr>
             </thead>
-            <tbody>
-               
-            </tbody>
+            <tbody></tbody>
         </table>
     </section>
     <section id="list_hotels2"></section>
 
     <!--
-     <div class="paginare">
+    <div class="paginare">
         <ul class="pagination">
             <li><a href="#">«</a></li>
             <li><a class="active" href="#">1</a></li>
@@ -129,7 +155,8 @@
             <li><a href="#">»</a></li>
         </ul>
     </div>
-     -->
+    -->
+
     <footer>
         <div class="footer_top">
             <div class="footer_utils">
