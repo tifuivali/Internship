@@ -143,7 +143,7 @@
             page: 1,
         };
 
-        addFilterPage();
+        addFilterPage(args);
         //activate search
         exercise7(args);
         addNumberOfPageBehavior(args);
@@ -152,8 +152,8 @@
     });
 
 
-    function addFilterPage() {
-        //  $('.filterContent-expanded').hide();
+    function addFilterPage(args) {
+         $('.filterContent-expanded').hide();
         $('.filterContent-expanded button[value=x]')
             .click(function() {
                 $('.filterContent-expanded').hide();
@@ -165,6 +165,28 @@
         $('section')
             .click(function () {
                 $('.filterContent-expanded').hide();
+            });
+
+        $('.filterContent-expanded input[name=filter]')
+            .click(function() {
+                //filter elements
+                var expandedContainer = $(this).closest('.filterContent-expanded');
+                var city = expandedContainer.find('select').val();
+                var minRoomsCount = parseInt(expandedContainer.find('input[name=minRoomsCount]').val());
+                var maxRoomsCount = parseInt(expandedContainer.find('input[name=maxRoomsCount]').val());
+                var minRating = parseInt(expandedContainer.find('input[name=minRating]').val());
+                var maxRating = parseInt(expandedContainer.find('input[name=maxRating]').val());
+                var nameToSearch = $('#search').val();
+                args.city = city;
+                args.itemsPerPage = parseInt($('.numberOfPage select').val());
+                args.page = 1;
+                args.nameToSearch = nameToSearch;
+                args.minRating = minRating;
+                args.maxRating = maxRating;
+                args.minRoomsCount = minRoomsCount;
+                args.maxRoomsCount = maxRoomsCount;
+                var generator = new HotelsTableGenerator(args);
+                generator.generateTable();
             });
     }
 
