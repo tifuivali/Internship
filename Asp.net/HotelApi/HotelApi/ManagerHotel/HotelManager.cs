@@ -34,20 +34,52 @@ namespace HotelApi_.ManagerHotel
         }
 
 
-        public IEnumerable<Hotel> GetHotelSearch(string searchText, int page, int itemsPerPage)
+        public IEnumerable<Hotel> GetHotelsByCity(string city)
         {
-            if (hotels.Count <= 0)
-                PopulateHotels();
-            int startIndex = itemsPerPage * (page - 1);
-            return
-                hotels.Where(h => h.Name.ToUpper().Contains(searchText.ToUpper().Trim()))
-                      .Skip(startIndex)
-                      .Take(itemsPerPage);
+            if (city == null)
+                return Hotels;
+            return hotels.Where(h => h.City == city);
         }
 
 
-        public IEnumerable<Hotel> GetHotelsOnPage(int page, int itemsPerPage)
+        public IEnumerable<Hotel> GetHotesByRooms(int minRooms, int maxRooms)
         {
+            if (minRooms <= 0 || maxRooms <= 0)
+                return Hotels;
+            return hotels.Where(h => h.RoomsCount >= minRooms && h.RoomsCount <= maxRooms);
+        }
+
+
+        public IEnumerable<Hotel> GetHotelByRating(int minRating, int maxRating)
+        {
+            if (minRating <= 0 || maxRating <= 0)
+                return Hotels;
+            return hotels.Where(h => h.Rating >= minRating && h.Rating <= maxRating);
+        }
+
+        public IEnumerable<Hotel> GetHotelSearchByName(string searchText)
+        {
+            if (hotels.Count <= 0)
+                PopulateHotels();
+            if (searchText == null)
+                return Hotels;
+            return
+                hotels.Where(h => h.Name.ToUpper().Contains(searchText.ToUpper().Trim()));
+        }
+
+
+        public IEnumerable<Hotel> GetHotelsPageOf(int page, int itemsPerPage,IEnumerable<Hotel> listHotels )
+        {
+            
+            if (hotels.Count <= 0)
+                PopulateHotels();
+            int startIndex = itemsPerPage * (page - 1);
+            return listHotels.Skip(startIndex).Take(itemsPerPage);
+        }
+
+        public IEnumerable<Hotel> GetHotelsPage(int page, int itemsPerPage)
+        {
+
             if (hotels.Count <= 0)
                 PopulateHotels();
             int startIndex = itemsPerPage * (page - 1);

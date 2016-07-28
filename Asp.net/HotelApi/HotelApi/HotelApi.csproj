@@ -201,6 +201,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\AddExternalLoginBindingModel.cs" />
+    <Compile Include="Models\HotelRequest.cs" />
+    <Compile Include="Models\HotelResponse.cs" />
     <Compile Include="Models\ManageInfoViewModel.cs" />
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />

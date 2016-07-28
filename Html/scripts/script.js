@@ -144,10 +144,6 @@
         };
 
         var generator = new HotelsTableGenerator(args);
-        generateListHotel(args, 'http://localhost:50581/api/Hotels')
-        //generator.generateTable();;
-        //activateTableFeatures(args);
-
        
     });
 
@@ -177,30 +173,6 @@
     }
 
 
-    function generateListHotel(args,url) {
-        (function (args) {
-            $.ajax({
-                url: url,
-                dataType: 'json',
-                success: function (data, status, xhr) {
-                    for (var i = 0; i < data.length; i++) {
-                        var hotel = new Hotel(data[i].ID,
-                            data[i].Name,
-                            data[i].Description,
-                            data[i].City,
-                            data[i].RoomsCount,
-                            data[i].Rating);
-                        args.hotels.push(hotel);
-                    }
-                    generateTable(args);
-                    activateTableFeatures(args);
-                },
-                error: function (xhr, status, error) {
-                    alert("Fail load hotels! \n" + error);
-                }
-            });
-        })(args);
-    }
 
 
     function addPaginationBehavior(args){
@@ -223,7 +195,6 @@
 
     HotelsTableGenerator.prototype.generateTable = function () {
         var container = this.args.container;
-      //  $(container).empty();
         if (this.args.url !== undefined && this.args.url !== null) {
             (function (args) {
                 $.ajax({

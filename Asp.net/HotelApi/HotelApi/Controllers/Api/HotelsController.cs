@@ -14,32 +14,34 @@ namespace HotelApi_.Controllers
 
         HotelManager hotelManager = HotelManager.GetInstance();
 
-        
+
 
         /// <summary>
         /// Get All Products
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Hotel> GetAllHotels()
+        [Route("api/Hotels/GetHotels")]
+        public HotelResponse GetHotels([FromUri] HotelRequest hotelRequest)
         {
-            if (hotelManager.Hotels.Count > 0)
+            if (hotelRequest == null)
+                return new HotelResponse()
+                {
+                    Hotels = hotelManager.GetHotelsPage(1, 10),
+                    TotalItems = hotelManager.Count
+                };
+            IEnumerable<Hotel> hotelFiltred = hotelManager.GetHotelSearchByName(hotelRequest.Name)
+                .Intersect(hotelManager.GetHotelByRating(hotelRequest.MinRating, hotelRequest.MaxRating))
+                .Intersect(hotelManager.GetHotelsByCity(hotelRequest.City))
+                .Intersect(hotelManager.GetHotesByRooms(hotelRequest.MinRoomsCount, hotelRequest.MaxRoomsCount));
+            return new HotelResponse()
             {
-                return hotelManager.Hotels;
-            }
-            hotelManager.PopulateHotels();
-            return hotelManager.Hotels;
-        }
-
-        public IEnumerable<Hotel> GetHotelByName(string name)
-        {
-            if (hotelManager.Hotels.Count > 0)
-            {
-                return hotelManager.Hotels.Where(h => h.Name == name);
-            }
-            hotelManager.PopulateHotels();
-            return hotelManager.Hotels.Where(h => h.Name == name);
+                Hotels = hotelManager.GetHotelsPageOf(hotelRequest.Page,hotelRequest.PageSize,hotelFiltred),
+                TotalItems = hotelFiltred.Count()
+            };
 
         }
+        
+
 
 
         [HttpPost]
@@ -50,7 +52,7 @@ namespace HotelApi_.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Hotel with the same id already exists!");
             return Request.CreateResponse(HttpStatusCode.OK, "Succes");
         }
-
+       
         [HttpGet]
         [Route("api/Hotels/GetNumberItems")]
         public int GetNumberItems()
@@ -66,15 +68,7 @@ namespace HotelApi_.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Hotel doesn't exists!");
             return Request.CreateResponse(HttpStatusCode.OK, "Succes");
         }
-        [HttpGet]
-        [Route("api/Hotels/GetPage")]
-        public IEnumerable<Hotel> GetPage(int page,int itemsPerPage,string searchText )
-        {
-            if(searchText == null)
-             return hotelManager.GetHotelsOnPage(page, itemsPerPage);
-
-            return hotelManager.GetHotelSearch(searchText, page, itemsPerPage);
-        }
+     
 
         [Route("api/Hotels/GetValidId")]
         public uint GetValidId()

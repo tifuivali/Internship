@@ -140,9 +140,7 @@
             hotels: new Hotels(),
             container: $('#list_hotels'),
             url: 'http://localhost:50581/api/Hotels',
-            filter: true,
             page: 1,
-            getNumberOfItems:true
         };
 
         addFilterPage();
@@ -150,7 +148,6 @@
         exercise7(args);
         addNumberOfPageBehavior(args);
         var generator = new HotelsTableGenerator(args);
-        //generateListHotel(args, 'http://localhost:50581/api/Hotels')
         generator.generateTable();;
     });
 
@@ -205,31 +202,6 @@
     }
 
 
-    function generateListHotel(args, url) {
-        (function (args) {
-            $.ajax({
-                url: url,
-                dataType: 'json',
-                success: function (data, status, xhr) {
-                    for (var i = 0; i < data.length; i++) {
-                        var hotel = new Hotel(data[i].Id,
-                            data[i].Name,
-                            data[i].Description,
-                            data[i].City,
-                            data[i].RoomsCount,
-                            data[i].Rating);
-                        args.hotels.add(hotel);
-                    }
-                    generateTable(args);
-                    activateTableFeatures(args);
-                },
-                error: function (xhr, status, error) {
-                    alert("Fail load hotels! \n" + error);
-                }
-            });
-        })(args);
-    }
-
 
     function addPaginationBehavior(args) {
         var container = args.container;
@@ -240,7 +212,6 @@
             var generator = new HotelsTableGenerator(args);
             generator.generateTable();
         });
-        console.log(pagination);
     }
 
     //exercise2
@@ -265,22 +236,23 @@
         args.hotels.list = [];
         (function (args) {
             $.ajax({
-                url: 'http://localhost:50581/api/Hotels/GetPage' + '?' + $.param({
-                    page: args.page,
-                    itemsPerPage: args.itemsPerPage,
-                    searchText: args.searchText
+                url: 'http://localhost:50581/api/Hotels/GetHotels' + '?' + $.param({
+                    Page: args.page,
+                    PageSize: args.itemsPerPage,
+                    Name: args.nameToSearch,
+                    MaxRating: args.maxRating,
+                    MinRating: args.minRating,
+                    MinRoomsCount: args.minRoomsCount,
+                    MaxRoomsCount: args.maxRoomsCount,
+                    City:args.city
                 }),
                 dataType: 'json',
                 success: function (data, status, xhr) {
-                    for (var i = 0; i < data.length; i++) {
-                        var hotel = new Hotel(data[i].Id,
-                            data[i].Name,
-                            data[i].Description,
-                            data[i].City,
-                            data[i].RoomsCount,
-                            data[i].Rating);
+                    for (var i = 0; i < data.Hotels.length; i++) {
+                        var hotel = convertHotelToLocal(data.Hotels[i]);
                         args.hotels.add(hotel);
                     }
+                    args.totalItems = data.TotalItems;
                     generateTable(args);
                     activateTableFeatures(args);
                 },
@@ -317,7 +289,7 @@
         var paginationList = tableContainer.append('<div class="paginare"><ul class="pagination"></ul></div>').find('ul');
         var nrPages = 0;
         var itemsPerPage = args.itemsPerPage;
-        nrPages = args.nrPages;
+        nrPages = parseInt(args.totalItems / args.itemsPerPage);
         paginationList.append('<li>«</li>');
         for (var i = 1; i <= nrPages; i++) {
             if (args.page === i) {
@@ -609,6 +581,19 @@
         return hotelToSend;
     }
 
+    function convertHotelToLocal(hotel) {
+        var hotelToSend = {
+            id: hotel.Id,
+            city: hotel.City,
+            description: hotel.Description,
+            name: hotel.Name,
+            stars_count: hotel.Rating,
+            rooms_count: hotel.RoomsCount
+        };
+        return hotelToSend;
+    }
+
+
     //exercise5
     function exercise5(args) {
         args.container.on('click', '.btnEdit', function () {
@@ -632,7 +617,6 @@
                         alert("Cannot update hotel! \n" + xhr.responseText);
                     }
                 });
-                //args.hotels.update(editedHotel);
 
             });
             tbody.on('click', '#btnCancel', function () {
@@ -676,16 +660,12 @@
     //exercise 7
 
     function refreshTable(args) {
-        // args.container.empty();
-        args.url = undefined;
         var generator = new HotelsTableGenerator(args);
         generator.generateTable();
     }
 
     function refreshTableWithUrl(args) {
-        // args.container.empty();
         args.hotels.list = [];
-        args.getNumberOfItems = true;
         var generator = new HotelsTableGenerator(args);
         generator.generateTable();
     }
@@ -706,15 +686,8 @@
         });
         inputSearch.on('input', function (e) {
             var nameHotel = inputSearch.val();
-            // filterDom(nameHotel, args, 1);
-            //filterElements(nameHotel, args, 'name');
-            args.searchText = nameHotel;
             args.page = 1;
-            if(nameHotel.trim().length>0)
-                args.getNumberOfItems = false;
-            else {
-                args.getNumberOfItems = true;
-            }
+            args.nameToSearch = nameHotel;
             var generator = new HotelsTableGenerator(args);
             generator.generateTable();
         });

@@ -481,7 +481,7 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
-        <member name="M:HotelApi_.Controllers.HotelsController.GetAllHotels">
+        <member name="M:HotelApi_.Controllers.HotelsController.GetHotels(HotelApi_.Models.HotelRequest)">
             <summary>
             Get All Products
             </summary>
