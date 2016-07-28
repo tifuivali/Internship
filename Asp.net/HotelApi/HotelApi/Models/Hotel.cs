@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace HotelApi_.Models
+﻿namespace HotelApi_.Models
 {
     public class Hotel
     {
