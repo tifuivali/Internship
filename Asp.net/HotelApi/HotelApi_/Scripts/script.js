@@ -221,37 +221,45 @@
 
     HotelsTableGenerator.prototype.generateTable = function () {
         var container = this.args.container;
-      //  $(container).empty();
-        if (this.args.url !== undefined && this.args.url !== null) {
-            (function (args) {
-                $.ajax({
-                    url: args.url,
-                    dataType: 'json',
-                    success: function (data, status, xhr) {
-                        for (var i = 0; i < data.length; i++) {
-                            var hotel = new Hotel(data[i].Id,
-                                data[i].Name,
-                                data[i].Description,
-                                data[i].City,
-                                data[i].RoomsCount,
-                                data[i].Rating);
-                            args.hotels.add(hotel);
-                        }
-                        generateTable(args);
-                        activateTableFeatures(args);
-                    },
-                    error: function (xhr, status, error) {
-                        alert("Fail load hotels! \n" + error);
-                    }
-                });
-            })(this.args);
-        } else {
-            generateTable(this.args);
-            activateTableFeatures(this.args);
-        }
-
-       
+        if (this.args.itemsPerPage === null || this.args.itemsPerPage === undefined)
+            this.args.itemsPerPage = 10;
+        if ((this.args.page === undefined || this.args.page === null))
+            this.args.page = 1;
+        this.args.hotels.list = [];
+        //  $(container).empty();
+        generatePageOfTable(this.args);    
     };
+
+
+    function generatePageOfTable(args) {
+        args.hotels.list = [];
+        (function (args) {
+            $.ajax({
+                url: 'http://localhost:50581/api/Hotels/GetPage' +'?' + $.param({
+                    page: args.page,
+                    itemsPerPage: args.itemsPerPage,
+                    searchText: args.searchText
+                }),
+                dataType: 'json',
+                success: function (data, status, xhr) {
+                    for (var i = 0; i < data.length; i++) {
+                        var hotel = new Hotel(data[i].Id,
+                            data[i].Name,
+                            data[i].Description,
+                            data[i].City,
+                            data[i].RoomsCount,
+                            data[i].Rating);
+                        args.hotels.add(hotel);
+                    }
+                    generateTable(args);
+                    activateTableFeatures(args);
+                },
+                error: function (xhr, status, error) {
+                    alert("Fail load hotels! \n" + error);
+                }
+            });
+        })(args);
+    }
 
     function generatePaginationContainer(args) {
         var tableContainer = args.container;
@@ -272,6 +280,35 @@
             }
         }
         paginationList.append('<li>»</li>');
+    }
+
+    function generatePaginationContainerApi(args) {
+        var tableContainer = args.container;
+        var paginationList = tableContainer.append('<div class="paginare"><ul class="pagination"></ul></div>').find('ul');
+        var nrPages = 0;
+        var itemsPerPage = args.itemsPerPage;
+        $.get({
+            url: 'http://localhost:50581/api/Hotels/GetNumberItems',
+            success : function(data, status, xhr) {
+                nrPages = parseInt(data / itemsPerPage) + 1;
+                paginationList.append('<li>«</li>');
+                for (var i = 1 ; i <= nrPages ; i++) {
+                    if (args.page === i) {
+                        paginationList.append('<li class="active" data-id=' + i + '>' + i + '</li>');
+                    } else {
+                        var itemList = $('<li></li>');
+                        itemList.attr('data-id', i);
+                        itemList.text(i);
+                        paginationList.append(itemList);
+                    }
+                }
+                paginationList.append('<li>»</li>');
+            },
+            error: function(xhr, status, err) {
+                alert("An error ocured at pagination!");
+            }
+        });
+        
     }
 
     function generateTable(args) {
@@ -295,16 +332,17 @@
             divTemp= args.container.append(table);
         }
         var tableHotels = $(divTemp).find('table');
-        var itemsPage = getItemsPage(args);
+        //var itemsPage = getItemsPage(args);
         var tbody = tableHotels.append('<tbody></tbody>').find('tbody');
-        for (var i = 0 ; i < itemsPage.length ; i++) {
-            tbody.append(createRow(itemsPage[i], args.columns));
+        for (var i = 0 ; i < args.hotels.list.length ; i++) {
+            tbody.append(createRow(args.hotels.list[i], args.columns));
         }
         $(divTemp).append('<input id=\'addButton\' type=\'button\' value=\'Add\'/>')
                     .append('<input id=\'btnLoad\' type=\'button\' value=\'Load\'/>');
         $(divTemp).append('<input id="inputLoad" type="url" placeholder="adress content"/>');
         container.html(divTemp.html());
-        generatePaginationContainer(args);
+        //generatePaginationContainer(args);
+        generatePaginationContainerApi(args);
     }
 
     function generateStarsRating(numberOfStars) {
@@ -642,8 +680,11 @@
         inputSearch.on('input', function (e) {
             var nameHotel = inputSearch.val();
             // filterDom(nameHotel, args, 1);
-            filterElements(nameHotel, args, 'name');
-
+            //filterElements(nameHotel, args, 'name');
+            args.searchText = nameHotel;
+            args.page = 1;
+            var generator = new HotelsTableGenerator(args);
+            generator.generateTable();
         });
         var searchContainer = $('.container-3');
         searchContainer.on('click', '#btnSearch', function () {

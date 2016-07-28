@@ -21,6 +21,8 @@ namespace HotelApi_.ManagerHotel
             return true;
         }
 
+        public int Count => hotels.Count;
+
         public bool Update(Hotel hotel)
         {
             if (!hotels.Contains(hotel))
@@ -29,6 +31,27 @@ namespace HotelApi_.ManagerHotel
             hotelManager.hotels.RemoveAt(index);
             hotelManager.hotels.Insert(index, hotel);
             return true;
+        }
+
+
+        public IEnumerable<Hotel> GetHotelSearch(string searchText, int page, int itemsPerPage)
+        {
+            if (hotels.Count <= 0)
+                PopulateHotels();
+            int startIndex = itemsPerPage * (page - 1);
+            return
+                hotels.Where(h => h.Name.ToUpper().Contains(searchText.ToUpper().Trim()))
+                      .Skip(startIndex)
+                      .Take(itemsPerPage);
+        }
+
+
+        public IEnumerable<Hotel> GetHotelsOnPage(int page, int itemsPerPage)
+        {
+            if (hotels.Count <= 0)
+                PopulateHotels();
+            int startIndex = itemsPerPage * (page - 1);
+            return hotels.Skip(startIndex).Take(itemsPerPage);
         }
 
         public void PopulateHotels()
@@ -62,6 +85,19 @@ namespace HotelApi_.ManagerHotel
                 Rating = 4,
                 RoomsCount = 140
             });
+
+            for (int i = 4; i < 50; i++)
+            {
+                Add(new Hotel()
+                {
+                    Id = (uint)i,
+                    City = "Cluj Napoca",
+                    Description = "Fara",
+                    Name = "Hotel Europa",
+                    Rating = 4,
+                    RoomsCount = 140
+                });
+            }
         }
 
         public bool Delete(uint id)

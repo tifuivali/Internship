@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -50,6 +51,13 @@ namespace HotelApi_.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, "Succes");
         }
 
+        [HttpGet]
+        [Route("api/Hotels/GetNumberItems")]
+        public int GetNumberItems()
+        {
+            return hotelManager.Count;
+        }
+
         [HttpPost]
         [Route("api/Hotels/Update")]
         public HttpResponseMessage Update([FromBody] Hotel hotel)
@@ -57,6 +65,15 @@ namespace HotelApi_.Controllers
             if (!hotelManager.Update(hotel))
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Hotel doesn't exists!");
             return Request.CreateResponse(HttpStatusCode.OK, "Succes");
+        }
+        [HttpGet]
+        [Route("api/Hotels/GetPage")]
+        public IEnumerable<Hotel> GetPage(int page,int itemsPerPage,string searchText )
+        {
+            if(searchText == null)
+             return hotelManager.GetHotelsOnPage(page, itemsPerPage);
+
+            return hotelManager.GetHotelSearch(searchText, page, itemsPerPage);
         }
 
         [Route("api/Hotels/Delete")]
