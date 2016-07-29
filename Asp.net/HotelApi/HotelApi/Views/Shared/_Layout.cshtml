@@ -1,41 +1,99 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <title>Hoteluri Romanesti</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+
+    <link rel="stylesheet" type="text/css" href="css/slideshow.css" />
+    <script src="scripts/slide.js" type="text/javascript"></script>
+    <script type="text/javascript" src="scripts/jquery-3.1.0.min.js"></script>
+    <script src="scripts/script.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <header>
+        <div class="header-left-side">
+            <div class="logo_container">
+                <a id="home" href="index.html"><span class="logo">Hoteluri Romania</span></a>
+                <div>
+                    <img src="images/hotel.svg" class="img_logo" alt="Logo" />
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
-                </ul>
+            <div class="slideshow-container">
+                <div class="mySlides fade">
+                    <div class="numbertext">1 / 3</div>
+                    <img class="imgslide" src="images/img3.jpg" style="width:100%">
+                    <div class="text">Caption Text</div>
+                </div>
+
+                <div style="display:none" class="mySlides fade">
+                    <div class="numbertext">2 / 3</div>
+                    <img class="imgslide" src="images/img1.jpg" style="width:100%">
+                    <div class="text">Caption Two</div>
+                </div>
+
+                <div style="display:none" class="mySlides fade">
+                    <div class="numbertext">3 / 3</div>
+                    <img class="imgslide" src="images/img2.jpg" style="width:100%">
+                    <div class="text">Caption Three</div>
+                </div>
+
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
+
+        <br />
+
+        <div class="dots" style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+    </header>
+
+
+    <nav class="menu_horizontal">
+        <ul class="items_menu">
+            <li class="menu_item active"><a href="index.html">Home</a></li>
+            <li class="menu_item"><a href="rezerva.html">Rezerva Acum!</a></li>
+            <li class="menu_item"><a href="locatii.html">Locatii Turistice</a></li>
+            <li class="menu_item"><a href="adauga_hotel.html">Adauga Hotel</a></li>
+            <li class="menu_item"><a href="despre.html">Despre Noi</a></li>
+            <li>
+                <div class="box">
+                    <div class="container-3">
+                        <span class="icon"> 🔎</span>
+                        <input type="search" id="search" placeholder="Cauta..." />
+                    </div>
+                </div>
+            </li>
+
+
+        </ul>
+    </nav>
+    <div>
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <footer>
+        <div class="footer_top">
+            <div class="footer_utils">
+                <h3 style="background-color:rgba(99, 107, 99, 0.59)">
+                    Legaturi Utile:
+                </h3>
+                <ul id="links">
+                    <li id="link_util"><a href="#">Cazare Romania</a></li>
+                    <li id="link_util"><a href="#">Harta Romaniei</a></li>
+                    <li id="link_util"><a href="#">Pensiuni Turistice</a></li>
+                    <li id="link_util"><a href="#">Zone Camping</a></li>
+                </ul>
+            </div>
+            <div class="map_footer">
+                <img width="600" src="../Hotel/images/map.png" alt="Google Map of Iasi" />
+            </div>
+        </div>
+        <h4 id="copyright">©Copyright TeamNet Solutions SRL</h4>
+    </footer>
 </body>
 </html>
