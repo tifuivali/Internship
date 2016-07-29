@@ -4,6 +4,45 @@
         <name>HotelApi_</name>
     </assembly>
     <members>
+        <member name="M:HotelApi_.Controllers.HotelsController.GetHotels(HotelApi_.Models.HotelRequest)">
+            <summary>
+            Get All Products by request
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HotelApi_.Controllers.HotelsController.Add(HotelApi_.Models.Hotel)">
+            <summary>
+            Add hotel action
+            </summary>
+            <param name="hotel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HotelApi_.Controllers.HotelsController.Update(HotelApi_.Models.Hotel)">
+            <summary>
+            Update hotel action.
+            </summary>
+            <param name="hotel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HotelApi_.Controllers.HotelsController.GetValidId">
+            <summary>
+            Return a valid id.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HotelApi_.Controllers.HotelsController.Delete(System.UInt32)">
+            <summary>
+            Delete bspecified hotel from request.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HotelApi_.Controllers.HotelsController.GetListOfCity">
+            <summary>
+            Get distinct list of cities.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:HotelApi_.Models.HotelRequest">
             <summary>
             Hotel Request
@@ -540,45 +579,6 @@
             Initializes a new instance of the <see cref="T:HotelApi_.Areas.HelpPage.XmlDocumentationProvider"/> class.
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
-        </member>
-        <member name="M:HotelApi_.Controllers.HotelsController.GetHotels(HotelApi_.Models.HotelRequest)">
-            <summary>
-            Get All Products by request
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:HotelApi_.Controllers.HotelsController.Add(HotelApi_.Models.Hotel)">
-            <summary>
-            Add hotel action
-            </summary>
-            <param name="hotel"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HotelApi_.Controllers.HotelsController.Update(HotelApi_.Models.Hotel)">
-            <summary>
-            Update hotel action.
-            </summary>
-            <param name="hotel"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HotelApi_.Controllers.HotelsController.GetValidId">
-            <summary>
-            Return a valid id.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:HotelApi_.Controllers.HotelsController.Delete(System.UInt32)">
-            <summary>
-            Delete bspecified hotel from request.
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:HotelApi_.Controllers.HotelsController.GetListOfCity">
-            <summary>
-            Get distinct list of cities.
-            </summary>
-            <returns></returns>
         </member>
         <member name="T:HotelApi_.ManagerHotel.HotelManager">
             <summary>

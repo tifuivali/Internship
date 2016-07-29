@@ -1,0 +1,40 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model HotelApi_.Models.Autentification.User
+@{
+    ViewBag.Title = "Login";
+
+}
+
+@using (Html.BeginForm(new { ReturnUrl = "/Hotel/Index" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="Container">
+        <div class="login">
+            <h1>
+                Log In
+            </h1>
+            <p>
+                @Html.TextBoxFor(m => m.UserName, new { placeholder = "User Name" })
+                @Html.ValidationMessageFor(m => m.UserName)
+            </p>
+            <p>
+                @Html.PasswordFor(m => m.Password, new { placeholder = "Password" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </p>
+            <p class="rememeber_me">
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.LabelFor(m => m.RememberMe)
+            </p>
+            <p class="submit">
+                <input type="submit" value="Log in" />
+            </p>
+        </div>
+    </div>
+}

@@ -200,9 +200,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authorize\HotelAuthorize.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\LogoutController.cs" />
     <Compile Include="Models\AddExternalLoginBindingModel.cs" />
-    <Compile Include="Models\HotelRequest.cs" />
-    <Compile Include="Models\HotelResponse.cs" />
+    <Compile Include="Models\Autentification\User.cs" />
+    <Compile Include="Models\Hotel\HotelRequest.cs" />
+    <Compile Include="Models\Hotel\HotelResponse.cs" />
     <Compile Include="Models\ManageInfoViewModel.cs" />
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -249,7 +253,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Hotel.cs" />
+    <Compile Include="Models\Hotel\Hotel.cs" />
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="ManagerHotel\HotelManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -262,6 +266,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Models\UserInfoViewModel.cs" />
     <Compile Include="Models\UserLoginInfoViewModel.cs" />
+    <Compile Include="UserManager\UserManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -335,14 +340,15 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Hotel\Hotel.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\HelpPage\Views\HotelView\" />
     <Folder Include="css\" />
     <Folder Include="images\" />
-    <Folder Include="NewFolder1\" />
     <Folder Include="Views\Hotels\" />
+    <Folder Include="Views\Logout\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

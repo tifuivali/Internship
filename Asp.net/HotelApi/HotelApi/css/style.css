@@ -10,11 +10,18 @@ section {
 }
 
 
+
 .filterContent {
     float: left;
     left: 3%;
     position: relative;
     display: inline-flex;
+}
+
+.logMenu {
+    width: auto;
+    text-align: right;
+    margin-right: 5%;  
 }
 
 #selectPageSize {
@@ -36,7 +43,7 @@ section {
     height: 400px;
     background-color: #d3d3d3;
     padding: 8px;
-    border: 2px solid #19774a;;
+    border: 2px solid #19774a;
     -ms-border-radius: 15px;
     border-radius: 15px;    
 }
