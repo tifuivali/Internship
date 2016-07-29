@@ -23,6 +23,8 @@ namespace HotelApi_.Controllers
         // GET: Login
         public ActionResult Login()
         {
+            if (Session["User"] != null)
+                return Redirect("Hotel/Index");
             return View();
         }
 
@@ -43,6 +45,7 @@ namespace HotelApi_.Controllers
             else
             {
                 ModelState.AddModelError("", "Log in failed.");
+
             }
             return View();
         }
