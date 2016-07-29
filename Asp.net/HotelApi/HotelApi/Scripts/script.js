@@ -259,7 +259,7 @@
                 dataType: 'json',
                 success: function (data, status, xhr) {
                     for (var i = 0; i < data.Hotels.length; i++) {
-                        var hotel = convertHotelToLocal(data.Hotels[i]);
+                        var hotel = convertHoteFromExternReprezentationToIntern(data.Hotels[i]);
                         args.hotels.add(hotel);
                     }
                     args.totalItems = data.TotalItems;

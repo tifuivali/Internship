@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using HotelApi_.ManagerHotel;
@@ -17,33 +14,22 @@ namespace HotelApi_.Controllers
 
 
         /// <summary>
-        /// Get All Products
+        /// Get All Products by request
         /// </summary>
         /// <returns></returns>
         [Route("api/Hotels/GetHotels")]
         public HotelResponse GetHotels([FromUri] HotelRequest hotelRequest)
         {
-            if (hotelRequest == null)
-                return new HotelResponse()
-                {
-                    Hotels = hotelManager.GetHotelsPage(1, 10),
-                    TotalItems = hotelManager.Count
-                };
-            IEnumerable<Hotel> hotelFiltred = hotelManager.GetHotelSearchByName(hotelRequest.Name)
-                .Intersect(hotelManager.GetHotelByRating(hotelRequest.MinRating, hotelRequest.MaxRating))
-                .Intersect(hotelManager.GetHotelsByCity(hotelRequest.City))
-                .Intersect(hotelManager.GetHotesByRooms(hotelRequest.MinRoomsCount, hotelRequest.MaxRoomsCount));
-            return new HotelResponse()
-            {
-                Hotels = hotelManager.GetHotelsPageOf(hotelRequest.Page,hotelRequest.PageSize,hotelFiltred),
-                TotalItems = hotelFiltred.Count()
-            };
-
+            return hotelManager.FilterHotels(hotelRequest);
         }
         
 
 
-
+        /// <summary>
+        /// Add hotel action
+        /// </summary>
+        /// <param name="hotel"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("api/Hotels/Add")]
         public HttpResponseMessage Add([FromBody] Hotel hotel)
@@ -53,13 +39,11 @@ namespace HotelApi_.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, "Succes");
         }
        
-        [HttpGet]
-        [Route("api/Hotels/GetNumberItems")]
-        public int GetNumberItems()
-        {
-            return hotelManager.Count;
-        }
-
+        /// <summary>
+        /// Update hotel action.
+        /// </summary>
+        /// <param name="hotel"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("api/Hotels/Update")]
         public HttpResponseMessage Update([FromBody] Hotel hotel)
@@ -69,28 +53,27 @@ namespace HotelApi_.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, "Succes");
         }
      
-
+        /// <summary>
+        /// Return a valid id.
+        /// </summary>
+        /// <returns></returns>
         [Route("api/Hotels/GetValidId")]
         public uint GetValidId()
         {
             return hotelManager.GetValidId();
         }
 
+        /// <summary>
+        /// Delete bspecified hotel from request.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Route("api/Hotels/Delete")]
         public HttpResponseMessage Delete(uint id)
         {
             if(!hotelManager.Delete(id))
                 return Request.CreateResponse(HttpStatusCode.NotFound, "Not fund hotel with id:" + id);
             return Request.CreateResponse(HttpStatusCode.OK, "Success!");
-        }
-
-        [Route("api/Hotels/GetHotelById")]
-        public Hotel GetHotelById(int id)
-        {
-            if (hotelManager.Hotels.Count <= 0)
-                 hotelManager.PopulateHotels();
-            return hotelManager.Hotels.First(h => h.Id == id);
-
         }
 
     }

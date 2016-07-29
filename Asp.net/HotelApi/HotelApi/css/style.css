@@ -1,7 +1,7 @@
 ﻿body {
     padding-left: 100px;
     padding-right: 100px;
-    background-color: rgba(191, 191, 191, 0.79);
+    background-color: #bfbfbf;
 }
 
 
@@ -22,7 +22,10 @@ section {
     margin-left: 25px;
     display: inline-block;
     border: 1px solid #ccc;
+    -ms-border-radius: 4px;
     border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
@@ -33,9 +36,8 @@ section {
     background-color: #d3d3d3;
     padding: 8px;
     border: 2px solid #19774a;;
-    border-radius: 15px;
-
-    
+    -ms-border-radius: 15px;
+    border-radius: 15px;    
 }
 
 .filterContent-expanded button[value=x] {
@@ -51,9 +53,11 @@ section {
     margin-top: 8px;
     display: inline-block;
     border-color: #19774a;
+    -ms-border-radius: 4px;
     border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
-
 }
 
 .input {
@@ -63,7 +67,10 @@ section {
     margin-top: 8px;
     display: inline-block;
     border-color: #19774a;
+    -ms-border-radius: 4px;
     border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
@@ -80,7 +87,10 @@ section input {
     margin: 1px 0;
     display: inline-block;
     border: 1px solid #ccc;
+    -ms-border-radius: 4px;
     border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
@@ -90,10 +100,12 @@ section #btnConfirm {
     margin-top:25px;
     display: inline-block;
     border: 1px solid #ccc;
+    -ms-border-radius: 4px;
     border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     background-color:#19774a;
-    
 }
 
 #inputLoad {
@@ -102,7 +114,10 @@ section #btnConfirm {
     margin-left:25px;
     display: inline-block;
     border: 1px solid #ccc;
+    -ms-border-radius: 4px;
     border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
@@ -112,12 +127,15 @@ section #btnCancel {
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
+    -ms-border-radius: 4px;
     border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     background-color:#d12f2f;
 }
 
-section  #addButton{
+section  #addButton {
     width: 10%;
     background-color: #19774a;
     color: white;
@@ -125,17 +143,19 @@ section  #addButton{
     margin-left: 320px;
     margin: 8px 0;
     border: none;
+    -ms-border-radius: 4px;
     border-radius: 4px;
     cursor: pointer;
 }
 
-section  #btnLoad{
+section  #btnLoad {
     width: 10%;
     background-color: #19774a;
     color: white;
     padding: 14px 20px;
     margin-left: 25px;
     border: none;
+    -ms-border-radius: 4px;
     border-radius: 4px;
     cursor: pointer;
 }
@@ -148,6 +168,7 @@ section .btnDelete {
     margin-left: 320px;
     margin: 8px 0;
     border: none;
+    -ms-border-radius: 4px;
     border-radius: 4px;
     cursor: pointer;
 }
@@ -159,12 +180,14 @@ section .btnEdit {
     padding: 14px 20px;
     margin-left: 25px;
     border: none;
+    -ms-border-radius: 4px;
     border-radius: 4px;
     cursor: pointer;
 }
 
 header {
     background-color:seagreen;
+    -ms-border-radius: 200px;
     border-radius: 200px;
 }
 
@@ -188,7 +211,7 @@ p {
 table {
     border-collapse: collapse;
     width: 100%;
-    margin-top: 0px;
+    margin-top: 0;
 }
 
 th {
@@ -206,7 +229,7 @@ td {
 }
 
 tr:nth-child(even) {
-    background-color:rgba(213, 228, 213, 0.59);
+    background-color:#d5e4d5;
 }
 
 tr {
@@ -302,9 +325,6 @@ th {
   transition: all .55s ease;
 }
 
-.box {
-       
-}
 
 .fa-fa-search {
     background-color: darkkhaki;
@@ -352,7 +372,7 @@ th {
 .img_table {
     width:150px;
     height:150px;
-    border: 7px solid rgba(101, 115, 126, 0.33);
+    border: 7px solid #65737e;
     border-radius: 20px;
 }
 
@@ -366,7 +386,7 @@ footer {
     background-color: #19774a;
     margin-top: 25px;
     border-radius: 100px;
-    padding: 0px;
+    padding: 0;
     height:170px;
 }
 
@@ -407,7 +427,7 @@ footer {
 #link_util a {
     display: block;
     color: #000;
-    padding: 0px 0 1px 5px;
+    padding: 0 0 1px 5px;
     text-decoration: none;
 }
 
@@ -468,9 +488,6 @@ footer {
     margin-top:5px;
 
 }
-figure {
-    
-}
 
 #lista_locatii {
     margin-top:30px;
@@ -513,7 +530,7 @@ figcaption {
     margin-left:5%;
 }
 
-#rezerva_form input[type=text ], #rezerva_form input[type=email],#rezerva_form input[type=tel],#rezerva_form input[type=text ], select {
+#rezerva_form input[type=text], #rezerva_form input[type=email],#rezerva_form input[type=tel],#rezerva_form input[type=text], select {
     width: 30%;
     padding: 12px 20px;
     margin: 8px 0;
