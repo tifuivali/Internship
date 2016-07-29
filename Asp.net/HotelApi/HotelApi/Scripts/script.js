@@ -2,6 +2,8 @@
 
 (function () {
     "use strict";
+
+    //Create new Hotel object
     function Hotel(id, name, description, city, rooms_count, stars_count) {
         this.id = id;
         this.name = name;
@@ -15,16 +17,18 @@
 
     };
 
-
+    //Create new Hotels List
     function Hotels() {
         this.list = [];
 
     }
 
+    //Get Length of hotel list
     Hotels.prototype.length = function () {
         return this.list.length;
     }
 
+    //Add new hotels to hotel List
     Hotels.prototype.add = function (hotel) {
         var exists = false;
         for (var item in this.list) {
@@ -42,7 +46,7 @@
     };
 
 
-
+    //Update sfecific item of hotel list
     Hotels.prototype.update = function (hotel) {
         var exists = false;
         for (var item in this.list) {
@@ -58,6 +62,8 @@
         }
     };
 
+
+    //Delete item from hotel list
     Hotels.prototype.delete = function (id) {
         var exists = false;
         for (var item in this.list) {
@@ -73,7 +79,7 @@
         }
     };
 
-
+    //Get item by id from hotel list
     Hotels.prototype.getHotelById = function (id) {
         var exists = false;
         for (var item in this.list) {
@@ -89,7 +95,7 @@
         }
     }
 
-
+    //Get information (string) of specified hotel from hotel list
     Hotels.prototype.getInfo = function (id) {
         for (var item in this.list) {
             if (this.list[item].id === id) {
@@ -98,7 +104,7 @@
         }
     }
 
-
+    //Get all information ([strinmg]) of all items
     Hotels.prototype.getAllInfo = function () {
         var infos = [];
         for (var item in this.list) {
@@ -107,34 +113,17 @@
         return infos;
     };
 
+
+    //Return items by specified index
     Hotels.prototype.get = function (index) {
         return this.list[index];
     }
 
-    ///column must be the name of column
-    Hotels.prototype.filter = function (key, column) {
-        var filtredElements = [];
-        for (var i = 0 ; i < this.list.length; i++) {
-            if (this.list[i][column].toUpperCase().includes(key.toUpperCase().trim())) {
-                filtredElements.push(this.list[i]);
-            }
-        }
-        return filtredElements;
-    }
 
 
-
+    // Page Ready
 
     $(document).ready(function () {
-
-        /*
-        var hotel1 = new Hotel(1, "Hotel1", "aaa", "Iasi", 30, 4);
-        var hotel2 = new Hotel(2, "Hotel2", "bbbb", "Cluj Napoca", 100, 5);
-        var hotel3 = new Hotel(3, "Hotel3", "cccc", "Bucuresti", 40, 4);
-        var hotel4 = new Hotel(4, "Hotel4", "dddd", "Constanta", 150, 5);
-        var hotel5 = new Hotel(5, "Hotel5", "fff", "Pitesti", 20, 1);
-        */
-
 
         var args = {
             hotels: new Hotels(),
@@ -143,16 +132,24 @@
             page: 1,
         };
 
-        addFilterPage(args);
+        //activate Filter Page
+        addFilterBehavior(args);
+
         //activate search
-        exercise7(args);
+        addSearchBehavior(args);
+
+        //activate pagination
         addNumberOfPageBehavior(args);
+
+        //generate Table
         var generator = new HotelsTableGenerator(args);
         generator.generateTable();;
     });
 
 
-    function addFilterPage(args) {
+
+    //Filter
+    function addFilterBehavior(args) {
          $('.filterContent-expanded').hide();
         $('.filterContent-expanded button[value=x]')
             .click(function() {
@@ -190,6 +187,7 @@
             });
     }
 
+    //Number of page behavior 
     function addNumberOfPageBehavior(args) {
         $('.numberOfPage select').change(
                 function () {
@@ -200,32 +198,18 @@
                 });
     }
 
+    //Activate All Table Behaviors
     function activateTableFeatures(args) {
-        exercise3(args);
-        exercise4(args);
-        exercise5(args);
-        exercise6(args);
-        addPaginationBehavior(args);
+        addItemBehavior(args);
+        deleteItemBehavior(args);
+        editItemBehavior(args);
+        loadFileBehavior(args);
+        tablePaginationBehavior(args);
     }
 
 
-    function exercise1() {
-        console.log($('#hotelsContainer').html());
-        $('#third span').each(function () {
-            console.log($(this).html());
-        });
-        $('.right').each(function () {
-            console.log($(this).html());
-        });
-
-        $('h1').css('color', 'red');
-        $('span').css('color', 'blue');
-
-    }
-
-
-
-    function addPaginationBehavior(args) {
+    //table Pagination Behavior
+    function tablePaginationBehavior(args) {
         var container = args.container;
         var pagination = container.find('.pagination');
         pagination.on('click', 'li[data-id]', function () {
@@ -242,6 +226,8 @@
         this.args = args;
     }
 
+
+    //generate Table with specified parameters args
     HotelsTableGenerator.prototype.generateTable = function () {
         var container = this.args.container;
         if (this.args.itemsPerPage === null || this.args.itemsPerPage === undefined)
@@ -254,6 +240,8 @@
     };
 
 
+    //get specified page from url and generte table 
+    //is used in generor object at function generateTable
     function generatePageOfTable(args) {
         args.hotels.list = [];
         (function (args) {
@@ -275,7 +263,7 @@
                         args.hotels.add(hotel);
                     }
                     args.totalItems = data.TotalItems;
-                    generateTable(args);
+                    generateHtmlTable(args);
                     activateTableFeatures(args);
                 },
                 error: function (xhr, status, error) {
@@ -285,27 +273,8 @@
         })(args);
     }
 
-    function generatePaginationContainer(args) {
-        var tableContainer = args.container;
-        var paginationList = tableContainer.append('<div class="paginare"><ul class="pagination"></ul></div>').find('ul');
-        var nrPages = 0;
-        var itemsPerPage = args.itemsPerPage;
-
-        nrPages = parseInt(args.hotels.list.length / itemsPerPage) + 1;
-        paginationList.append('<li>«</li>');
-        for (var i = 1 ; i <= nrPages ; i++) {
-            if (args.page === i) {
-                paginationList.append('<li class="active" data-id=' + i + '>' + i + '</li>');
-            } else {
-                var itemList = $('<li></li>');
-                itemList.attr('data-id', i);
-                itemList.text(i);
-                paginationList.append(itemList);
-            }
-        }
-        paginationList.append('<li>»</li>');
-    }
-
+   
+    //generate html code for pagination 
     function generatePaginationContainerApi(args) {
         var tableContainer = args.container;
         var paginationList = tableContainer.append('<div class="paginare"><ul class="pagination"></ul></div>').find('ul');
@@ -327,7 +296,8 @@
         
     }
 
-    function generateTable(args) {
+    //generate Html Code for table
+    function generateHtmlTable(args) {
         var container;
         container = args.container;
         var divTemp = $('<div/>');
@@ -351,7 +321,7 @@
         //var itemsPage = getItemsPage(args);
         var tbody = tableHotels.append('<tbody></tbody>').find('tbody');
         for (var i = 0 ; i < args.hotels.list.length ; i++) {
-            tbody.append(createRow(args.hotels.list[i], args.columns));
+            tbody.append(createHtmlRowTable(args.hotels.list[i], args.columns));
         }
         $(divTemp).append('<input id=\'addButton\' type=\'button\' value=\'Add\'/>')
                     .append('<input id=\'btnLoad\' type=\'button\' value=\'Load\'/>');
@@ -361,7 +331,9 @@
         generatePaginationContainerApi(args);
     }
 
-    function generateStarsRating(numberOfStars) {
+
+    //generate Html code for hotel stars rating 
+    function generateHtmlStarsRating(numberOfStars) {
         var star = '<span>☆</span>';
         var divRating = '<div class="rating">';
         for (var i = 0 ; i < numberOfStars ; i++) {
@@ -371,20 +343,10 @@
         return divRating;
     }
 
-
-    function getItemsPage(args) {
-        var startItem = args.itemsPerPage * (args.page - 1);
-        if (startItem > args.hotels.list.length)
-            startItem = 0;
-        var endItem = args.itemsPerPage * args.page;
-        if (endItem > args.hotels.list.length) {
-            endItem = args.hotels.list.length
-        }
-        var itemsPage = args.hotels.list.slice(startItem, endItem);
-        return itemsPage;
-    }
-
-    function createRow(hotel, columns) {
+    //generate Html Code for a row of table
+    //hotel - containing data row
+    //columns - columns definition of table 
+    function createHtmlRowTable(hotel, columns) {
         var row = '';
         row += '<tr data-id=\'' + hotel.id + '\'>';
         var cell = '';
@@ -394,7 +356,7 @@
             cell += '<td>' + hotel.description + '</td>';
             cell += '<td>' + hotel.city + '</td>';
             cell += '<td>' + hotel.rooms_count + '</td>';
-            cell += '<td>' + generateStarsRating(hotel.stars_count) + '</td>';
+            cell += '<td>' + generateHtmlStarsRating(hotel.stars_count) + '</td>';
             cell += '<td><input type=\'button\' class=\'btnDelete\' value=\'Delete\'/> <input type=\'button\' class=\'btnEdit\' value=\'Edit\'/></td>';
             row += cell;
         }
@@ -406,7 +368,7 @@
                 }
                 if (columns[i].field.toLowerCase() === 'stars_count') {
                     var numberOfStars = hotel.stars_count;
-                    cell += generateStarsRating(numberOfStars);
+                    cell += generateHtmlStarsRating(numberOfStars);
                 }
 
             }
@@ -418,20 +380,8 @@
     }
 
 
-
-    function exercise2(args) {
-        generate2HotelsTest(args);
-    }
-
-    function generate2HotelsTest(args) {
-
-        var hotelTableGenerator = new HotelsTableGenerator(args);
-        hotelTableGenerator.generateTable();
-    }
-
-
-    //exercise 3
-    function exercise3(args) {
+    //add new item behavior
+    function addItemBehavior(args) {
 
 
         var container = args.container;
@@ -447,7 +397,7 @@
                 var hotel = getHotelFromRow($(this).closest('tr'));
                 try {
                     //args.hotels.add(hotel);
-                    var hotelToSend = convertHotel(hotel);
+                    var hotelToSend = convertHotelFromInternReorezentationToExtern(hotel);
                     $.post({
                         url: 'http://localhost:50581/api/Hotels/Add',
                         data: hotelToSend,
@@ -472,6 +422,9 @@
 
     }
 
+
+    //retrive a hotel from a specific table row
+    //context must be  table or table container
     function getHotelFromRow(context) {
         var hotel = new Hotel();
         hotel.id = parseInt($('input[data-id=id]', context).val());
@@ -484,8 +437,8 @@
     }
 
 
-    // exercise 4
-    function exercise4(args) {
+    // delete Behavior
+    function deleteItemBehavior(args) {
         var btnDelete = args.container.find('.btnDelete');
 
         btnDelete.on('click', function () {
@@ -516,7 +469,7 @@
     }
 
 
-
+    //create html code (row of input tags) for adding a hotel
     function createInputsRow(columns) {
         var row = '<tr>';
         if (columns === undefined || columns === null) {
@@ -526,7 +479,7 @@
             row += '<td><input data-id="city" type="text"/></td>';
             row += '<td><input data-id="rooms_count" type=\'number\'/></td>';
             row += '<td><input data-id=\'stars_count\' type=\'number\'/></td>';
-            var divOp = createDivOperations();
+            var divOp = createHtmlDivOperations();
             row += '<td>' + divOp;
             row += '</td>';
         } else {
@@ -537,14 +490,14 @@
                         row += '<td><input data-id=' + columns[i].type + 'type="text" /></td>';
                     }
                     else {
-                        row += '<td>' + createDivOperations() + '</td>';
+                        row += '<td>' + createHtmlDivOperations() + '</td>';
                     }
 
                 } else {
                     if (columns[i].field.toLowerCase() !== 'operations') {
                         row += '<td><input data-id=' + columns[i].field + 'type=' + columns[i].type + '/></td>';
                     } else {
-                        row += '<td>' + createDivOperations() + '</td>';
+                        row += '<td>' + createHtmlDivOperations() + '</td>';
                     }
                 }
             }
@@ -553,6 +506,7 @@
         return row;
     }
 
+    //create html code (row of input tags) for editing a hotel
     function createEditRow(hotel, columns) {
         var row = '<tr data-id="' + hotel.id + '">';
         if (columns === undefined || columns === null) {
@@ -562,7 +516,7 @@
             row += '<td><input data-id=\'city\' value=\'' + hotel.city + '\' type=\'text\'/></td>';
             row += '<td><input data-id=\'rooms_count\' value=\'' + hotel.rooms_count + '\' type=\'number\'/></td>';
             row += '<td><input data-id=\'stars_count\' value=\'' + hotel.stars_count + '\' type=\'number\'/></td>';
-            var divOp = createDivOperations();
+            var divOp = createHtmlDivOperations();
             row += '<td>' + divOp;
             row += '</td>';
         } else {
@@ -572,14 +526,14 @@
                         row += '<td><input data-id=' + columns[i].field + 'value=\'' + hotel[columns[i].field] + '\' type="text" readonly /></td>';
                     }
                     else {
-                        row += '<td>' + createDivOperations() + '</td>';
+                        row += '<td>' + createHtmlDivOperations() + '</td>';
                     }
 
                 } else {
                     if (columns[i].field.toLowerCase() !== 'operations') {
                         row += '<td><input data-id=' + columns[i].field + 'value=\'' + hotel[columns[i].field] + '\' type="' + columns[i].type + ' readonly /></td>';
                     } else {
-                        row += '<td>' + createDivOperations() + '</td>';
+                        row += '<td>' + createHtmlDivOperations() + '</td>';
                     }
                 }
             }
@@ -589,9 +543,9 @@
         return row;
     }
 
-    //covert Hotel
 
-    function convertHotel(hotel) {
+    //Convert a hotel object from intern  reprezentation to extern reprezentation
+    function convertHotelFromInternReorezentationToExtern(hotel) {
         var hotelToSend = {
             Id: hotel.id,
             City: hotel.city,
@@ -603,7 +557,8 @@
         return hotelToSend;
     }
 
-    function convertHotelToLocal(hotel) {
+    //Convert a hotel object from extern source to intern reprezentation
+    function convertHoteFromExternReprezentationToIntern(hotel) {
         var hotelToSend = {
             id: hotel.Id,
             city: hotel.City,
@@ -616,8 +571,8 @@
     }
 
 
-    //exercise5
-    function exercise5(args) {
+   //edit Bahavior
+    function editItemBehavior(args) {
         args.container.on('click', '.btnEdit', function () {
             var restoreRow = $(this).closest('tr').html();
             var tr = $(this).closest('tr');
@@ -627,7 +582,7 @@
             tbody.on('click', '#btnConfirm', function () {
                 var currentRow = $(this).closest('tr');
                 var editedHotel = getHotelFromRow(currentRow);
-                var hotelToSend = convertHotel(editedHotel);
+                var hotelToSend = convertHotelFromInternReorezentationToExtern(editedHotel);
                 $.post({
 
                     url: 'http://localhost:50581/api/Hotels/Update',
@@ -650,8 +605,8 @@
     }
 
 
-    //exercise 6
-    function exercise6(args) {
+    //load File Bahevior
+    function loadFileBehavior(args) {
         var container = args.container;
         var btnLoad = args.container.find("#btnLoad");
         $(btnLoad).on('click', function () {
@@ -665,13 +620,8 @@
     }
 
 
-
-    function filterOption() {
-        var op = $('.filter select').val();
-    }
-
-
-    function createDivOperations() {
+    //generateHtml for container with confirm cancel operation
+    function createHtmlDivOperations() {
         var div = '<div>';
         div += '<input type=\'button\' value=\'Confirm\' id=\'btnConfirm\'/>';
         div += '<input type=\'button\' value=\'Cancel\' id=\'btnCancel\'/>';
@@ -679,18 +629,13 @@
         return div;
     }
 
-    //exercise 7
-
-    function refreshTable(args) {
-        var generator = new HotelsTableGenerator(args);
-        generator.generateTable();
-    }
-
+    //reload Table (refresh)
     function refreshTableWithUrl(args) {
         args.hotels.list = [];
         var generator = new HotelsTableGenerator(args);
         generator.generateTable();
     }
+
 
     function loadTable(args) {
         // args.container.empty();
@@ -699,70 +644,17 @@
     }
 
 
-    function exercise7(args) {
+    //add Search Behavior
+    function addSearchBehavior(args) {
         var inputSearch = $('#search');
-        var btnClear = $('#btnClear');
-        btnClear.click(function () {
-            alert("clear");
-            refreshTable(args);
-        });
         inputSearch.on('input', function (e) {
             var nameHotel = inputSearch.val();
             args.page = 1;
             args.nameToSearch = nameHotel;
             var generator = new HotelsTableGenerator(args);
             generator.generateTable();
-        });
-        var searchContainer = $('.container-3');
-        searchContainer.on('click', '#btnSearch', function () {
-
-            var nameHotel = inputSearch.val();
-            filterDom(nameHotel, args, 1);
-        });
+        }); 
     }
 
-
-    function filterDom(key, args, column) {
-        var container = args.container;
-        container.find('tr[data-id]').each(function () {
-            var cellData = $(this).find('td:eq(' + column + ')').text();
-            if (cellData.toUpperCase().includes(key.toUpperCase().trim())) {
-                $(this).show();
-            }
-            else {
-                $(this).hide();
-            }
-
-        });
-    }
-
-    function filterElements(key, args, column) {
-        var container = args.container;
-        var filtredHotels = new Hotels();
-        filtredHotels.list = args.hotels.filter(key, column);
-        var filtredHotelsArgs = {
-            container: args.container,
-            hotels: filtredHotels,
-            page: args.page,
-            itemsPerPage: args.itemsPerPage,
-            columns: args.columns
-        }
-        var generator = new HotelsTableGenerator(filtredHotelsArgs);
-        generator.generateTable();
-    }
-
-    function filterRange(min, max, args, column) {
-        var container = args.container;
-        container.find('tr[data-id]').each(function () {
-            var cellData = parseInt($(this).find('td:eq(' + column + ')').text());
-            if (min <= cellData && max >= cellData) {
-                $(this).show();
-            }
-            else {
-                $(this).hide();
-            }
-
-        });
-    }
 
 })();
