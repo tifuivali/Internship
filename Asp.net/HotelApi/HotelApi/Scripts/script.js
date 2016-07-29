@@ -3,6 +3,7 @@
 (function () {
     "use strict";
 
+    var host = 'http://localhost/Hotels';
     //Create new Hotel object
     function Hotel(id, name, description, city, rooms_count, stars_count) {
         this.id = id;
@@ -128,7 +129,7 @@
         var args = {
             hotels: new Hotels(),
             container: $('#list_hotels'),
-            url: 'http://localhost:50581/api/Hotels',
+            url: host+'/api/Hotels',
             page: 1,
         };
 
@@ -210,7 +211,7 @@
 
     function generateHtmlOptionsCity() {
         var html = '<option value="">None</option>';
-        $.get('http://localhost:50581/api/Hotels/GetListOfCity',
+        $.get(host + '/api/Hotels/GetListOfCity',
             function (data) {
                 for (var i = 0; i < data.length; i++) {
                     html += '<option value="' + data[i] + '">' + data[i] + '</option>';
@@ -279,7 +280,7 @@
         args.hotels.list = [];
         (function (args) {
             $.ajax({
-                url: 'http://localhost:50581/api/Hotels/GetHotels' + '?' + $.param({
+                url: host+'/api/Hotels/GetHotels' + '?' + $.param({
                     Page: args.page,
                     PageSize: args.itemsPerPage,
                     Name: args.nameToSearch,
@@ -432,7 +433,7 @@
                     //args.hotels.add(hotel);
                     var hotelToSend = convertHotelFromInternReorezentationToExtern(hotel);
                     $.post({
-                        url: 'http://localhost:50581/api/Hotels/Add',
+                        url: host+'/api/Hotels/Add',
                         data: hotelToSend,
                         success: function (data, status, xhr) {
                             refreshTableWithUrl(args);
@@ -481,7 +482,7 @@
             if (response === true) {
                 //args.hotels.delete(hotelID);
                 $.ajax({
-                    url: 'http://localhost:50581/api/Hotels/Delete' +
+                    url: host+'/api/Hotels/Delete' +
                         '?' +
                         $.param({
                             "id": hotelID

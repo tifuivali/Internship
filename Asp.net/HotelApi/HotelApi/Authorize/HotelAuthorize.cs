@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace HotelApi_.Authorize
 {
@@ -10,13 +11,7 @@ namespace HotelApi_.Authorize
     {
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            /*
-            var authorized = base.AuthorizeCore(httpContext);
-            if (!authorized)
-            {
-                return false;
-            }
-            */
+          
             var user = httpContext.Session["User"];
             if (user == null)
             {
@@ -24,6 +19,12 @@ namespace HotelApi_.Authorize
             }
 
             return true;
+        }
+
+        protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
+        {
+            filterContext.Result = new RedirectToRouteResult(new
+                RouteValueDictionary(new {controller = "Login", action = "Login"}));
         }
     }
 }

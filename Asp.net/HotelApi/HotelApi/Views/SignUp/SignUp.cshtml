@@ -6,31 +6,27 @@
 
 @model HotelApi_.Models.Autentification.User
 @{
-    ViewBag.Title = "Login";
-
+    ViewBag.Title = "Sign Up";
 }
 
-@using (Html.BeginForm(new { ReturnUrl = Url.Action("Index","Hotel") }))
+@using (Html.BeginForm(new { ReturnUrl = "/Login/Login" }))
 {
     <div class="Container">
         <div class="login">
             <h1>
-                Log In
+                Register
             </h1>
             <p>
                 @Html.TextBoxFor(m => m.UserName, new { placeholder = "User Name" })
                 @Html.ValidationMessageFor(m => m.UserName)
             </p>
             <p>
-                @Html.PasswordFor(m => m.Password, new { placeholder = "Password" })
+                @Html.PasswordFor(m => m.Password, new {placeholder = "Password"})
                 @Html.ValidationMessageFor(m => m.Password)
             </p>
-            <p class="rememeber_me">
-                @Html.CheckBoxFor(m => m.RememberMe)
-                @Html.LabelFor(m => m.RememberMe)
-            </p>
+            <p>@Html.PasswordFor(m => m.Password,new {placeholder="Confirm Password"})</p>
             <p class="submit">
-                <input type="submit" value="Log in"/>
+                <input type="submit" value="Log in" />
             </p>
             <p class="validationMessage">
                 @Html.AntiForgeryToken()

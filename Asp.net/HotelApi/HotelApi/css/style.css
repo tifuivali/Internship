@@ -47,9 +47,9 @@ section {
 }
 
 #selectPageSize {
-    width: 200px;
+    width: 100px;
     padding: 12px 20px;
-    margin-left: 25px;
+    margin-left: 10px;
     display: inline-block;
     border: 1px solid #ccc;
     -ms-border-radius: 4px;
@@ -92,7 +92,7 @@ section {
 
 .input {
     width: 100%;
-    padding: 12px 20px;
+    padding: 2px 40px;
     margin-left: 10px;
     margin-top: 8px;
     display: inline-block;
@@ -107,7 +107,7 @@ section {
 
 .numberOfPage {
     margin-top: 40px;
-    width: 40%;
+    width: 0;
     display: flex;
 }
 
@@ -163,6 +163,10 @@ section #btnCancel {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     background-color:#d12f2f;
+}
+
+.validation-summary-errors {
+    color: red;
 }
 
 section  #addButton {

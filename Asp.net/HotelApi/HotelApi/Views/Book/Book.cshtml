@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Book";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<content>
+    <h1 style="font-size:30px; margin-top:20px; margin-left:80px;">Rezerva acum:</h1>
+    <hr style="margin-left:80px;" />
+    <form id="rezerva_form" action="#">
+        <label>Oras:</label><br />
+        <select>
+            <option>Arad</option>
+            <option>Bacau</option>
+            <option>Baia Mare</option>
+            <option>Bucuresti</option>
+            <option>Constanta</option>
+            <option>Cluj</option>
+            <option>Deva</option>
+            <option>Iasi</option>
+        </select>
+        <br />
+        <label>Nume:</label><br />
+        <input type="text" id="name" name="name" placeholder="Numele dumneavostra (Ex:Popescu Ionut)" required /><br />
+        <label>Email:</label><br />
+        <input type="email" placeholder="Email-ul dvs. (Ex:popescu.ionut@server.com)" required /><br />
+        <label>Telefon:</label><br />
+        <input type="tel" placeholder="Numarul dvs de telefon." required /><br />
+        <label>De la:</label><br />
+        <input type="date" required /><br />
+        <label>Pana la:</label><br />
+        <input type="date" required /><br />
+        <input type="submit" value="Rezerva!" />
+    </form>
+</content>
+
+

@@ -24,7 +24,7 @@ namespace HotelApi_.Controllers
         public ActionResult Login()
         {
             if (Session["User"] != null)
-                return Redirect("Hotel/Index");
+                return RedirectToAction("Index","Hotel");
             return View();
         }
 
@@ -40,7 +40,7 @@ namespace HotelApi_.Controllers
                     FormsAuthentication.SetAuthCookie(user.UserName, user.RememberMe);
                     return Redirect(returnUrl);
                 }
-                ModelState.AddModelError("", "Log in failed.");
+                ModelState.AddModelError("", "Incorect username or password.");
             }
             else
             {

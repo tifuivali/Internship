@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using HotelApi_.Models;
 
@@ -111,9 +112,9 @@ namespace HotelApi_.ManagerHotel
         /// <param name="itemsPerPage">Page Size.</param>
         /// <param name="listHotels">List of hotels.</param>
         /// <returns>List of hotels.</returns>
-        public IEnumerable<Hotel> GetHotelsPageOf(int page, int itemsPerPage,IEnumerable<Hotel> listHotels )
+        public IEnumerable<Hotel> GetHotelsPageOf(int page, int itemsPerPage, IEnumerable<Hotel> listHotels)
         {
-            
+
             if (hotels.Count <= 0)
                 PopulateHotels();
             int startIndex = itemsPerPage * (page - 1);
@@ -141,7 +142,7 @@ namespace HotelApi_.ManagerHotel
         /// <returns>A valid id.</returns>
         public uint GetValidId()
         {
-            uint maxId=0;
+            uint maxId = 0;
             foreach (var hotel in hotels)
             {
                 if (hotel.Id > maxId)
@@ -184,19 +185,48 @@ namespace HotelApi_.ManagerHotel
                 RoomsCount = 140
             });
 
-            for (int i = 4; i < 100; i++)
+            Add(new Hotel()
+            {
+                Id = (uint)4,
+                City = "Cluj Napoca",
+                Description = "Fara",
+                Name = "Hotel Europa",
+                Rating = 4,
+                RoomsCount = 140
+            });
+            string[] listCity = new[]
+             {
+              "Piatra Neamt", "Sibiu", "Brasov", "Constanta", "Timisoara", "Suceaava", "Botosani"
+             };
+
+
+            string[] names = new[]
+             {
+                "Hotel Havana", "Hotel Dormund", "Hotel OnSleep", "Hotel PeFelie", "Hotel Inside",
+                "Hotel Smecher"
+              };
+            var random = new Random();
+            for (int i = 5; i < 100; i++)
             {
                 Add(new Hotel()
                 {
                     Id = (uint)i,
-                    City = "Cluj Napoca",
+                    City = listCity[random.Next(0, listCity.Length-1)],
                     Description = "Fara",
-                    Name = "Hotel Europa",
-                    Rating = 4,
-                    RoomsCount = 140
+                    Name = names[random.Next(0,names.Length-1)],
+                    Rating =(short) random.Next(0,5),
+                    RoomsCount =(uint) random.Next(20,250)
                 });
             }
         }
+
+
+
+
+
+
+
+
 
         /// <summary>
         /// Delete a hotel by specified id.
@@ -267,7 +297,7 @@ namespace HotelApi_.ManagerHotel
         /// <returns></returns>
         public IEnumerable<string> GetListOfDistinctCity()
         {
-            List<string> cities =new List<string>();
+            List<string> cities = new List<string>();
             hotels.ForEach(h => cities.Add(h.City));
             cities = cities.Distinct().ToList();
             return cities;

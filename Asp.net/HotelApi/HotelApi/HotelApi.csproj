@@ -201,8 +201,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authorize\HotelAuthorize.cs" />
+    <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LogoutController.cs" />
+    <Compile Include="Controllers\SignUpController.cs" />
     <Compile Include="Models\AddExternalLoginBindingModel.cs" />
     <Compile Include="Models\Autentification\User.cs" />
     <Compile Include="Models\Hotel\HotelRequest.cs" />
@@ -341,6 +343,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Hotel\Hotel.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Book\Book.cshtml" />
+    <Content Include="Views\SignUp\SignUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

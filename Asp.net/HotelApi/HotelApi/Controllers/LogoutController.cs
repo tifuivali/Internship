@@ -14,7 +14,7 @@ namespace HotelApi_.Controllers
         {
             Session.Clear();
             FormsAuthentication.SignOut();
-            return Redirect("/Login/");
+            return RedirectToAction("Login","Login");
         }
     }
 }
