@@ -574,6 +574,12 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:HotelApi_.Controllers.HotelsController.GetListOfCity">
+            <summary>
+            Get distinct list of cities.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:HotelApi_.ManagerHotel.HotelManager">
             <summary>
             Hotel Manager Class
@@ -673,6 +679,12 @@
             Create a instance of HotelManager.
             </summary>
             <returns>Hotel Manager</returns>
+        </member>
+        <member name="M:HotelApi_.ManagerHotel.HotelManager.GetListOfDistinctCity">
+            <summary>
+            Get List of distinct cities.
+            </summary>
+            <returns></returns>
         </member>
     </members>
 </doc>

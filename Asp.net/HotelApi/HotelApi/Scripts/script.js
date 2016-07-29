@@ -150,22 +150,35 @@
 
     //Filter
     function addFilterBehavior(args) {
-         $('.filterContent-expanded').hide();
+        $('.filterContent-expanded').hide();
         $('.filterContent-expanded button[value=x]')
-            .click(function() {
+            .click(function () {
                 $('.filterContent-expanded').hide();
             });
-        $('.filterContent input')
+        $('.filterContent input[name=filter]')
             .click(function () {
                 $('.filterContent-expanded').show();
+                generateHtmlOptionsCity();
             });
         $('section')
             .click(function () {
                 $('.filterContent-expanded').hide();
             });
+        $('.filterContent input[name=clear')
+            .click(function () {
+                args.city = undefined;
+                args.itemsPerPage = parseInt($('.numberOfPage select').val());
+                args.page = 1;
+                args.nameToSearch = undefined;
+                args.minRating = undefined;
+                args.maxRating = undefined;
+                args.minRoomsCount = undefined;
+                args.maxRoomsCount = undefined;
+                refreshTableWithUrl(args);
+            });
 
         $('.filterContent-expanded input[name=filter]')
-            .click(function() {
+            .click(function () {
                 //filter elements
                 var expandedContainer = $(this).closest('.filterContent-expanded');
                 var city = expandedContainer.find('select').val();
@@ -185,7 +198,27 @@
                 var generator = new HotelsTableGenerator(args);
                 generator.generateTable();
             });
+        
     }
+
+    //add List of city
+    function addListOfCity(html) {
+        $('.filterContent-expanded select').html(html);
+    }
+
+    //generateHtmlOptionsCity
+
+    function generateHtmlOptionsCity() {
+        var html = '<option value="">None</option>';
+        $.get('http://localhost:50581/api/Hotels/GetListOfCity',
+            function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    html += '<option value="' + data[i] + '">' + data[i] + '</option>';
+                }
+                addListOfCity(html);
+            });
+    }
+
 
     //Number of page behavior 
     function addNumberOfPageBehavior(args) {
@@ -254,7 +287,7 @@
                     MinRating: args.minRating,
                     MinRoomsCount: args.minRoomsCount,
                     MaxRoomsCount: args.maxRoomsCount,
-                    City:args.city
+                    City: args.city
                 }),
                 dataType: 'json',
                 success: function (data, status, xhr) {
@@ -273,7 +306,7 @@
         })(args);
     }
 
-   
+
     //generate html code for pagination 
     function generatePaginationContainerApi(args) {
         var tableContainer = args.container;
@@ -293,7 +326,7 @@
             }
         }
         paginationList.append('<li>»</li>');
-        
+
     }
 
     //generate Html Code for table
@@ -392,7 +425,7 @@
                     function (data) {
                         $(tbody).find('input[data-id=id]').val(data);
                     });
-                    
+
             $(tbody).find('#btnConfirm').click(function () {
                 var hotel = getHotelFromRow($(this).closest('tr'));
                 try {
@@ -485,7 +518,7 @@
         } else {
             for (var i = 0 ; i < columns.length; i++) {
                 if (columns[i].type === undefined || columns[i].type === null) {
-                 
+
                     if (columns[i].toLowerCase() !== 'operations') {
                         row += '<td><input data-id=' + columns[i].type + 'type="text" /></td>';
                     }
@@ -571,7 +604,7 @@
     }
 
 
-   //edit Bahavior
+    //edit Bahavior
     function editItemBehavior(args) {
         args.container.on('click', '.btnEdit', function () {
             var restoreRow = $(this).closest('tr').html();
@@ -653,7 +686,7 @@
             args.nameToSearch = nameHotel;
             var generator = new HotelsTableGenerator(args);
             generator.generateTable();
-        }); 
+        });
     }
 
 

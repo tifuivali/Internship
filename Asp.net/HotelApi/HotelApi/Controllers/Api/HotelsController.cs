@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using HotelApi_.ManagerHotel;
@@ -74,6 +75,16 @@ namespace HotelApi_.Controllers
             if(!hotelManager.Delete(id))
                 return Request.CreateResponse(HttpStatusCode.NotFound, "Not fund hotel with id:" + id);
             return Request.CreateResponse(HttpStatusCode.OK, "Success!");
+        }
+
+        /// <summary>
+        /// Get distinct list of cities.
+        /// </summary>
+        /// <returns></returns>
+        [Route("api/Hotels/GetListOfCity")]
+        public IEnumerable<string> GetListOfCity()
+        {
+            return hotelManager.GetListOfDistinctCity();
         }
 
     }

@@ -260,5 +260,17 @@ namespace HotelApi_.ManagerHotel
                 TotalItems = hotelFiltred.Count()
             };
         }
+
+        /// <summary>
+        /// Get List of distinct cities.
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<string> GetListOfDistinctCity()
+        {
+            List<string> cities =new List<string>();
+            hotels.ForEach(h => cities.Add(h.City));
+            cities = cities.Distinct().ToList();
+            return cities;
+        }
     }
 }
