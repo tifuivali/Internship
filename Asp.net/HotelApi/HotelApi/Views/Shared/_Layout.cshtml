@@ -15,7 +15,7 @@
         <div class="header-left-side">
             <div class="logo_container">
                 
-                <a id="home" href="/Hotel/Index"><span class="logo">Hoteluri Romania</span></a>
+                <a id="home" href="@Url.Action("Index","Hotel")"><span class="logo">Hoteluri Romania</span></a>
                 <div>
                     <img src="@Url.Content("~/images/hotel.svg")" class="img_logo" alt="Logo"/>
                 </div>
@@ -58,7 +58,7 @@
         <ul class="items_menu">
             
             <li class="menu_item active"><a href="@Url.Action("Index", "Hotel")">Home</a></li>
-            <li class="menu_item"><a href="/Book/Book">Rezerva Acum!</a></li>
+            <li class="menu_item"><a href="@Url.Action("Reservations","Reservations")">Rezerva Acum!</a></li>
             <li class="menu_item"><a href="locatii.html">Locatii Turistice</a></li>
             <li class="menu_item"><a href="adauga_hotel.html">Adauga Hotel</a></li>
             <li class="menu_item"><a href="despre.html">Despre Noi</a></li>

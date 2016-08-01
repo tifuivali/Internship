@@ -1,15 +1,16 @@
 ﻿
 @{
-    ViewBag.Title = "Book";
+    ViewBag.Title = "Reservation";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
 <content>
     <h1 style="font-size:30px; margin-top:20px; margin-left:80px;">Rezerva acum:</h1>
     <hr style="margin-left:80px;" />
-    <form id="rezerva_form" action="#">
+    <form id="rezerva_form" method="post" >
         <label>Oras:</label><br />
-        <select>
+        <select name="city">
             <option>Arad</option>
             <option>Bacau</option>
             <option>Baia Mare</option>
@@ -23,15 +24,20 @@
         <label>Nume:</label><br />
         <input type="text" id="name" name="name" placeholder="Numele dumneavostra (Ex:Popescu Ionut)" required /><br />
         <label>Email:</label><br />
-        <input type="email" placeholder="Email-ul dvs. (Ex:popescu.ionut@server.com)" required /><br />
+        <input type="email" name="email" placeholder="Email-ul dvs. (Ex:popescu.ionut@server.com)" required /><br />
         <label>Telefon:</label><br />
-        <input type="tel" placeholder="Numarul dvs de telefon." required /><br />
+        <input type="tel" name="phone" placeholder="Numarul dvs de telefon." required /><br />
         <label>De la:</label><br />
-        <input type="date" required /><br />
+        <input type="date" name="checkin" required /><br />
         <label>Pana la:</label><br />
-        <input type="date" required /><br />
+        <input type="date" name="checkout" required /><br />
         <input type="submit" value="Rezerva!" />
+        <p class="validationMessage"></p>
     </form>
+    <div class="left-content">
+        <div id="list_reservations"></div>
+    </div>
+    <script src="@Url.Content("~/Scripts/reservation.js")"></script>
 </content>
 
 

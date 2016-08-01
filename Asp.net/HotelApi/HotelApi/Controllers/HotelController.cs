@@ -16,4 +16,6 @@ namespace HotelApi_.Controllers
             return View("Hotel");
         }
     }
+
+
 }

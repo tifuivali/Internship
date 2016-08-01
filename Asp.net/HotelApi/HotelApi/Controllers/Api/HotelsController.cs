@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Web.Http;
 using HotelApi_.ManagerHotel;
 using HotelApi_.Models;
+using HotelApi_.Models.Booking;
 
 namespace HotelApi_.Controllers
 {
@@ -11,7 +12,7 @@ namespace HotelApi_.Controllers
     {
 
         HotelManager hotelManager = HotelManager.GetInstance();
-
+       
 
 
         /// <summary>
@@ -23,7 +24,7 @@ namespace HotelApi_.Controllers
         {
             return hotelManager.FilterHotels(hotelRequest);
         }
-        
+
 
 
         /// <summary>
@@ -35,11 +36,11 @@ namespace HotelApi_.Controllers
         [Route("api/Hotels/Add")]
         public HttpResponseMessage Add([FromBody] Hotel hotel)
         {
-            if(!hotelManager.Add(hotel))
+            if (!hotelManager.Add(hotel))
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Hotel with the same id already exists!");
             return Request.CreateResponse(HttpStatusCode.OK, "Succes");
         }
-       
+
         /// <summary>
         /// Update hotel action.
         /// </summary>
@@ -53,7 +54,7 @@ namespace HotelApi_.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Hotel doesn't exists!");
             return Request.CreateResponse(HttpStatusCode.OK, "Succes");
         }
-     
+
         /// <summary>
         /// Return a valid id.
         /// </summary>
@@ -72,7 +73,7 @@ namespace HotelApi_.Controllers
         [Route("api/Hotels/Delete")]
         public HttpResponseMessage Delete(uint id)
         {
-            if(!hotelManager.Delete(id))
+            if (!hotelManager.Delete(id))
                 return Request.CreateResponse(HttpStatusCode.NotFound, "Not fund hotel with id:" + id);
             return Request.CreateResponse(HttpStatusCode.OK, "Success!");
         }
@@ -87,6 +88,10 @@ namespace HotelApi_.Controllers
             return hotelManager.GetListOfDistinctCity();
         }
 
+        
+
+    
+        
     }
 
 }

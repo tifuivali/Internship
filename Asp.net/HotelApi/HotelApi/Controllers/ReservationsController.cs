@@ -8,12 +8,14 @@ using HotelApi_.Authorize;
 namespace HotelApi_.Controllers
 {
     [HotelAuthorize]
-    public class BookController : Controller
+    public class ReservationsController : Controller
     {
-        // GET: Book
-        public ActionResult Book()
+        // GET: Reservation
+        public ActionResult Reservations()
         {
             return View();
         }
+
+
     }
 }

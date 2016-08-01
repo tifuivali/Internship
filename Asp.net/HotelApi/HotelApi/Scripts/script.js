@@ -133,6 +133,14 @@
             page: 1,
         };
 
+
+        try {
+            reserve()
+        }
+        catch(e) {
+            
+        }
+
         //activate Filter Page
         addFilterBehavior(args);
 
@@ -145,9 +153,9 @@
         //generate Table
         var generator = new HotelsTableGenerator(args);
         generator.generateTable();;
+
+        
     });
-
-
 
     //Filter
     function addFilterBehavior(args) {
@@ -422,7 +430,7 @@
         var btnAdd = container.find('#addButton');
         $(btnAdd).click(function () {
             var tbody = $(container).find('tbody').prepend(createInputsRow(args.columns));
-            $.get('api/Hotels/GetValidId',
+            $.get(host+'/api/Hotels/GetValidId',
                     function (data) {
                         $(tbody).find('input[data-id=id]').val(data);
                     });
@@ -689,6 +697,34 @@
             generator.generateTable();
         });
     }
+
+    //reservation
+
+    function reserve() {
+    
+        $('#rezerva_form')
+            .validate(
+            {
+                submitHandler: function(form) {
+                    var reservation = {};
+                    reservation.city = $(form).find('select[name=city]').val();
+                    reservation.name = $(form).find('input[name=name]').val();
+                    reservation.email = $(form).find('input[name=email]').val();
+                    reservation.phone = $(form).find('input[name=phone]').val();
+                    reservation.checkin = $(form).find('input[name=checkin]').val();
+                    reservation.ckeckout = $(form).find('input[name=checkout]').val();
+                    $.post(host + '/api/Booking/Reserve',
+                        reservation,
+                        function (data, success) {
+                            $(form).find(".validationMessage").html("Success");
+                        });
+                }
+            });
+
+    }
+
+
+    
 
 
 })();
