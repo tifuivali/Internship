@@ -52,5 +52,35 @@ namespace HotelApi_.BookingManager
             Add(book);
         }
 
+        public ReservationResponse GetReservations(ReservationRequest req)
+        {
+            var reservations = books.Skip(req.PageSize*(req.Page-1)).Take(req.PageSize);
+            ReservationResponse response = new ReservationResponse()
+            {
+                Reservations = reservations,
+                TotalItems = books.Count
+            };
+
+            return response;
+        }
+
+        public bool Update(Reservation reservation)
+        {
+            int index = -1;
+            for (int i = 0; i < books.Count; i++)
+            {
+                if (books[i].Id == reservation.Id)
+                {
+                    index = i;
+                    break;
+                }
+            }
+            if (index < 0)
+                return false;
+            books.RemoveAt(index);
+            books.Insert(index,reservation);
+            return true;
+        }
+
     }
 }

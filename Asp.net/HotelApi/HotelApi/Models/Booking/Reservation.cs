@@ -7,6 +7,8 @@ namespace HotelApi_.Models.Booking
 {
     public class Reservation
     {
+        public int Id { get; set; }
+
         public string City { get; set; }
 
         public string Name { get; set; }
@@ -18,5 +20,6 @@ namespace HotelApi_.Models.Booking
         public DateTime CheckIn { get; set; }
 
         public DateTime CheckOut { get; set; }
+
     }
 }

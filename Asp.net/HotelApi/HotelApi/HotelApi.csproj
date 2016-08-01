@@ -210,6 +210,8 @@
     <Compile Include="Models\AddExternalLoginBindingModel.cs" />
     <Compile Include="Models\Autentification\User.cs" />
     <Compile Include="Models\Booking\Reservation.cs" />
+    <Compile Include="Models\Booking\ReservationRequest.cs" />
+    <Compile Include="Models\Booking\RservationResponse.cs" />
     <Compile Include="Models\Hotel\HotelRequest.cs" />
     <Compile Include="Models\Hotel\HotelResponse.cs" />
     <Compile Include="Models\ManageInfoViewModel.cs" />
@@ -262,6 +264,11 @@
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="ManagerHotel\HotelManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Models\RegisterBindingModel.cs" />
     <Compile Include="Models\RegisterExternalBindingModel.cs" />
@@ -277,6 +284,8 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="css\slideshow.css" />
+    <Content Include="css\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -310,7 +319,12 @@
     </Content>
     <Content Include="Scripts\hotels.json" />
     <Content Include="Scripts\hotels2.json" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\index.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-2.1.0.min.map" />
@@ -353,7 +367,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\HelpPage\Views\HotelView\" />
-    <Folder Include="css\" />
     <Folder Include="images\" />
     <Folder Include="Views\Hotels\" />
     <Folder Include="Views\Logout\" />

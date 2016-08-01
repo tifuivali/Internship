@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -13,9 +14,10 @@ namespace HotelApi_.Controllers.Api
 
         [HttpGet]
         [Route("api/Booking/AllReservations")]
-        public IEnumerable<Reservation> AllReservations()
+        public ReservationResponse AllReservations([FromUri]  ReservationRequest reservationRequest)
         {
-            return bookingManager.Books;
+         
+            return bookingManager.GetReservations(reservationRequest);
         }
 
         [HttpPost]
@@ -24,6 +26,16 @@ namespace HotelApi_.Controllers.Api
         {
             bookingManager.Add(reservation);
             return Request.CreateResponse(HttpStatusCode.OK, "Booking was succesfuly!");
+        }
+
+        [HttpPost]
+        [Route("api/Booking/Update")]
+        public HttpResponseMessage Update([FromBody] Reservation reservation)
+        {
+            if(bookingManager.Update(reservation))
+                return  Request.CreateResponse(HttpStatusCode.OK,"Updated!");
+
+            return Request.CreateResponse(HttpStatusCode.NotFound, "Reservation with thios id not found!");
         }
     }
 }

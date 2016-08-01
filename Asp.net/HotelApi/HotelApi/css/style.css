@@ -33,6 +33,18 @@ section {
     margin-bottom: 10%;
 }
 
+
+.reservation {
+    display: inline-flex;
+    width: 100%;
+}
+
+#list_reservations {
+    width: 100%;
+    margin-left: 4%;
+    padding: 8px;
+}
+
 .filterContent {
     float: left;
     left: 3%;
@@ -390,6 +402,8 @@ th {
     text-decoration: none;
 }
 
+
+
 .menu_item a:hover:not(.active) {
     background-color: #111;
 }
@@ -558,14 +572,14 @@ figcaption {
 #rezerva_form {
     padding:25px;
     background-color:#ddd;
-    width:50%;
+    width:25%;
     border:2px solid #aaa;
     border-radius:20px;
     margin-left:5%;
 }
 
 #rezerva_form input[type=text], #rezerva_form input[type=email],#rezerva_form input[type=tel],#rezerva_form input[type=text], select {
-    width: 30%;
+    width: 70%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -576,20 +590,55 @@ figcaption {
 
 
 
-#rezerva_form input[type=date] {
-    width: 30%;
+#rezerva_form, input[type=date]{
+    width: 40%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+}
+
+#list_reservations input{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+#list_reservations input[type=button]{
+    width: 20%;
+    background-color: #19774a;
+    color: white;
+    padding: 14px 20px;
+    margin-left: 320px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#list_reservations table input[type=button]{
+    width: 100%;
+    background-color: #19774a;
+    color: white;
+    padding: 14px 20px;
+    margin-left: 320px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 
 
 #rezerva_form input[type=submit] {
-    width: 10%;
+    width: 20%;
     background-color: #19774a;
     color: white;
     padding: 14px 20px;
