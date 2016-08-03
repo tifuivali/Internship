@@ -33,19 +33,18 @@ select * from PersonsBokingOn2016;
 drop proc VerifyNumberBookings
 create procedure VerifyNumberBookings @number int
 as
-with CtePresonsMessages(PersonId,NumberBookings) as
-		(select PersonId,count(PersonId) NumberBookings
-			from Bookings 
-			group by PersonId
+with CtePresonsMessages(Name,Id,NumberBookings) as
+		(select concat(Persons.FirstName,' ',Persons.Lastname) Name,Persons.Id Id,count(PersonId) NumberBookings
+			from Bookings right join Persons on (Bookings.PersonId = Persons.Id)
+			group by Persons.Id,Persons.FirstName,Persons.LastName
 		)
-select 'Ok' MessagesOk 
+select Name,NumberBookings,'Ok' MessagesOk 
 	from CtePresonsMessages 
 	where NumberBookings>=@number
-union
-select 'Not enough' MessagesBad
+union all
+select Name,NumberBookings,'Not enough' MessagesBad
 		from CtePresonsMessages 
-		where NumberBookings<@number
+		where NumberBookings<@number;
 	
 
 exec VerifyNumberBookings 2;
-				
