@@ -1,12 +1,12 @@
 
---drop procedure GetInfo; 
+drop procedure GetInfo; 
  
-create procedure GetInfo @hotelName nchar(50)
+create procedure GetInfo @hotelName nvarchar(50)
 as
-declare @hotelId int;
+declare @hotelId int ;
 select top 1 @hotelId=Hotels.Id  
 	from Hotels
-	where ltrim(rtrim(upper(Name)))=ltrim(rtrim(upper(@hotelName)));
+	where rtrim(upper(Name))=rtrim(upper(@hotelName));
 
 select 
 	count(*) as 'NumberOfRooms' ,
@@ -35,4 +35,5 @@ from Rooms where Rooms.HotelId=@hotelId;
 
 
 
-exec GetInfo @hotelName='Hotel Euuropa';
+exec GetInfo @hotelName='Hotel Europa';
+

@@ -1,11 +1,11 @@
 
 --drop proc AddHotel;
 create procedure AddHotel 
-@hotelName nchar(50),
+@hotelName nvarchar(50),
 @hotelLocationId int ,
 @floorNumber int,
 @numberOfBeds int,
-@roomType nchar(20)
+@roomType nvarchar(20)
 as
 declare @hotelId int;
 declare @roomId int;
@@ -25,7 +25,7 @@ insert into Rooms
 go
 
 create procedure UpdateHotel 
-@hotelid int,@hotelName nchar(50),
+@hotelid int,@hotelName nvarchar(50),
 @locationId int,
 @floorNumber int,
 @numberOfBeds int,
@@ -57,7 +57,7 @@ create function GetHotelNameById (@hotelId int)
 returns nchar 
 as
 begin
-declare @name nchar(50);
+declare @name nvarchar(50);
 select @name=Name 
 	from Hotels 
 	where Id=@hotelId;

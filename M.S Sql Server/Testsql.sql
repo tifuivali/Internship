@@ -19,3 +19,4 @@ select count(HotelId) as 'Number of Bookings',HotelId
 	from Bookings 
 	group by HotelId;
 
+
