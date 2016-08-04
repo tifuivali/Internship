@@ -131,5 +131,3 @@ exec Insert5TestRecords;
 
 
 select * from Locations;
-
-
