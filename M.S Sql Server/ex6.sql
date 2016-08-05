@@ -1,8 +1,8 @@
 
 
-select distinct Name , HotelId 
-	from Hotels inner join Bookings 
-	on (Hotels.Id=Bookings.HotelId);
+select distinct Name , Id
+	from Hotels 
+	where Id in (select HotelId from Bookings);
 
 select distinct Hotels.Id,Name 
 	from Hotels left join Bookings 
