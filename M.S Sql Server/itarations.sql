@@ -134,3 +134,11 @@ select * from Locations;
 
 
 
+exec sp_addlinkedserver @server='IASI-2814KL2',@srvproduct='';
+
+select @@SERVERNAME;
+
+SELECT @@servername
+SELECT @@servicename;
+
+
