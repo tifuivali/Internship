@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using HotelApi_.Models;
+using HotelApi_.Models.Filter;
+using Newtonsoft.Json;
 
 namespace HotelApi_.ManagerHotel
 {
@@ -211,11 +214,11 @@ namespace HotelApi_.ManagerHotel
                 Add(new Hotel()
                 {
                     Id = (uint)i,
-                    City = listCity[random.Next(0, listCity.Length-1)],
+                    City = listCity[random.Next(0, listCity.Length - 1)],
                     Description = "Fara",
-                    Name = names[random.Next(0,names.Length-1)],
-                    Rating =(short) random.Next(0,5),
-                    RoomsCount =(uint) random.Next(20,250)
+                    Name = names[random.Next(0, names.Length - 1)],
+                    Rating = (short)random.Next(0, 5),
+                    RoomsCount = (uint)random.Next(20, 250)
                 });
             }
         }
@@ -272,14 +275,308 @@ namespace HotelApi_.ManagerHotel
             return hotelManager ?? (hotelManager = new HotelManager());
         }
 
+
+        private IEnumerable<Hotel> FilderById(IEnumerable<Hotel> hotelsCopy,FilterItem filter)
+        {
+            int value = int.Parse(filter.Value);
+            switch (filter.Operator)
+            {
+                case "eq":
+                    {
+                        return hotelsCopy.Where(h => h.Id == value);
+                    }
+                case "neq":
+                    {
+                        return hotelsCopy.Where(h => h.Id != value);
+                    }
+                case "gte":
+                    {
+                        return hotelsCopy.Where(h => h.Id >= value);
+                    }
+                case "lte":
+                    {
+                        return hotelsCopy.Where(h => h.Id <= value);
+                    }
+                case "gt":
+                    {
+                        return hotelsCopy.Where(h => h.Id > value);
+                    }
+                case "lt":
+                    {
+                        return hotelsCopy.Where(h => h.Id < value);
+                    }
+            }
+            return hotelsCopy;
+        }
+
+
+
+        private IEnumerable<Hotel> FilterByName(IEnumerable<Hotel> hotelsCopy, FilterItem filter)
+        {
+            string value = filter.Value;
+            value = value.ToUpper();
+            switch (filter.Operator)
+            {
+                case "eq":
+                    {
+                        return hotelsCopy.Where(h => h.Name.ToUpper() == value);
+                    }
+                case "neq":
+                    {
+                        return hotelsCopy.Where(h => h.Name.ToUpper() != value);
+                    }
+                case "startswith":
+                    {
+                        return hotelsCopy.Where(h => h.Name.ToUpper().StartsWith(value));
+                    }
+                case "contains":
+                    {
+                        return hotelsCopy.Where(h => h.Name.ToUpper().Contains(value));
+                    }
+                case "doesnotcontain":
+                    {
+                        return hotelsCopy.Where(h => !h.Name.ToUpper().Contains(value));
+                    }
+                case "endswith":
+                    {
+                        return hotelsCopy.Where(h => h.Name.ToUpper().EndsWith(value));
+                    }
+            }
+            return hotelsCopy;
+        }
+
+        public IEnumerable<Hotel> FilterHotelByFilterItem(FilterItem filter)
+        {
+            var hotelsCopy =(IEnumerable<Hotel>) hotels.ToList();
+            if (filter.Field != null)
+            {
+                if (filter.Field == "Id")
+                {
+                    return FilderById(hotelsCopy, filter);
+                }
+                if (filter.Field == "Name")
+                {
+                    return FilterByName(hotelsCopy, filter);
+                }
+                if (filter.Field == "Description")
+                {
+                    return FilterByDescription(hotelsCopy, filter);
+                }
+                if (filter.Field == "RoomsCount")
+                {
+                    return FilderByRooms(hotelsCopy, filter);
+                }
+                if (filter.Field == "City")
+                {
+                    return FilterByCity(hotelsCopy, filter);
+                }
+                if (filter.Field == "Rating")
+                {
+                    return FilderByRating(hotelsCopy, filter);
+                }
+            }
+            if (filter.Filters != null)
+            {
+                if (filter.Logic == "and")
+                {
+                    foreach (var internFilter in filter.Filters)
+                    {
+                        hotelsCopy = hotelsCopy.Intersect(FilterHotelByFilterItem(internFilter));
+                    }
+                    return hotelsCopy;
+                }
+                if (filter.Logic == "or")
+                {
+                    foreach (var internFilter in filter.Filters)
+                    {
+                        hotelsCopy = hotelsCopy.Union(FilterHotelByFilterItem(internFilter));
+                    }
+                    return hotelsCopy;
+                }
+                return hotelsCopy;
+            }
+            return hotelsCopy;
+        }
+
+
+        public IEnumerable<Hotel> FilterHotelsByFilter(Filter filter)
+        {
+            var hotelsCopy = (IEnumerable<Hotel>) hotels.ToList();
+            if (filter.Logic == "and")
+            {
+                foreach (var internFilter in filter.Filters)
+                {
+                    hotelsCopy = hotelsCopy.Intersect(FilterHotelByFilterItem(internFilter));
+                }
+                return hotelsCopy;
+            }
+            if (filter.Logic == "and")
+            {
+                foreach (var internFilter in filter.Filters)
+                {
+                    hotelsCopy = hotelsCopy.Union(FilterHotelByFilterItem(internFilter));
+                }
+                return hotelsCopy;
+            }
+            return hotelsCopy;
+        }
+
+
+        private IEnumerable<Hotel> FilterByDescription(IEnumerable<Hotel> hotelsCopy, FilterItem filter)
+        {
+            string value = filter.Value;
+            value = value.ToUpper();
+            switch (filter.Operator)
+            {
+                case "eq":
+                    {
+                        return hotelsCopy.Where(h => h.Description.ToUpper() == value);
+                    }
+                case "neq":
+                    {
+                        return hotelsCopy.Where(h => h.Description.ToUpper() != value);
+                    }
+                case "startswith":
+                    {
+                        return hotelsCopy.Where(h => h.Description.ToUpper().StartsWith(value));
+                    }
+                case "contains":
+                    {
+                        return hotelsCopy.Where(h => h.Description.ToUpper().Contains(value));
+                    }
+                case "doesnotcontain":
+                    {
+                        return hotelsCopy.Where(h => !h.Description.ToUpper().Contains(value));
+                    }
+                case "endswith":
+                    {
+                        return hotelsCopy.Where(h => h.Description.ToUpper().EndsWith(value));
+                    }
+            }
+            return hotelsCopy;
+        }
+
+        private IEnumerable<Hotel> FilterByCity(IEnumerable<Hotel> hotelsCopy, FilterItem filter)
+        {
+            string value = filter.Value;
+            value = value.ToUpper();
+            switch (filter.Operator)
+            {
+                case "eq":
+                    {
+                        return hotelsCopy.Where(h => h.City.ToUpper() == value);
+                    }
+                case "neq":
+                    {
+                        return hotelsCopy.Where(h => h.City.ToUpper() != value);
+                    }
+                case "startswith":
+                    {
+                        return hotelsCopy.Where(h => h.City.ToUpper().StartsWith(value));
+                    }
+                case "contains":
+                    {
+                        return hotelsCopy.Where(h => h.City.ToUpper().Contains(value));
+                    }
+                case "doesnotcontain":
+                    {
+                        return hotelsCopy.Where(h => !h.City.ToUpper().Contains(value));
+                    }
+                case "endswith":
+                    {
+                        return hotelsCopy.Where(h => h.City.ToUpper().EndsWith(value));
+                    }
+            }
+            return hotelsCopy;
+        }
+
+        private IEnumerable<Hotel> FilderByRooms(IEnumerable<Hotel> hotelsCopy, FilterItem filter)
+        {
+            int value = int.Parse(filter.Value);
+            switch (filter.Operator)
+            {
+                case "eq":
+                    {
+                        return hotelsCopy.Where(h => h.RoomsCount == value);
+                    }
+                case "neq":
+                    {
+                        return hotelsCopy.Where(h => h.RoomsCount != value);
+                    }
+                case "gte":
+                    {
+                        return hotelsCopy.Where(h => h.RoomsCount >= value);
+                    }
+                case "lte":
+                    {
+                        return hotelsCopy.Where(h => h.RoomsCount <= value);
+                    }
+                case "gt":
+                    {
+                        return hotelsCopy.Where(h => h.RoomsCount > value);
+                    }
+                case "lt":
+                    {
+                        return hotelsCopy.Where(h => h.RoomsCount < value);
+                    }
+            }
+            return hotelsCopy;
+        }
+
+        private IEnumerable<Hotel> FilderByRating(IEnumerable<Hotel> hotelsCopy, FilterItem filter)
+        {
+            int value = int.Parse(filter.Value);
+            switch (filter.Operator)
+            {
+                case "eq":
+                    {
+                        return hotelsCopy.Where(h => h.Rating == value);
+                    }
+                case "neq":
+                    {
+                        return hotelsCopy.Where(h => h.Rating != value);
+                    }
+                case "gte":
+                    {
+                        return hotelsCopy.Where(h => h.Rating >= value);
+                    }
+                case "lte":
+                    {
+                        return hotelsCopy.Where(h => h.Rating <= value);
+                    }
+                case "gt":
+                    {
+                        return hotelsCopy.Where(h => h.Rating > value);
+                    }
+                case "lt":
+                    {
+                        return hotelsCopy.Where(h => h.Rating < value);
+                    }
+            }
+            return hotelsCopy;
+        }
+
         public HotelResponse FilterHotels(HotelRequest hotelRequest)
         {
+            Filter filter = null;
             if (hotelRequest == null)
                 return new HotelResponse()
                 {
                     Hotels = hotelManager.GetHotelsPage(1, 10),
                     TotalItems = hotelManager.Count
                 };
+            if (hotelRequest.Filter != null)
+            {
+                filter = JsonConvert.DeserializeObject<Filter>(hotelRequest.Filter);
+                return new HotelResponse()
+                {
+                    Hotels = GetHotelsPageOf(hotelRequest.Page,hotelRequest.PageSize,FilterHotelsByFilter(filter)),
+                    TotalItems = Hotels.Count
+                };
+            }
+
+
+
             IEnumerable<Hotel> hotelFiltred = hotelManager.GetHotelSearchByName(hotelRequest.Name)
                 .Intersect(hotelManager.GetHotelByRating(hotelRequest.MinRating, hotelRequest.MaxRating))
                 .Intersect(hotelManager.GetHotelsByCity(hotelRequest.City))

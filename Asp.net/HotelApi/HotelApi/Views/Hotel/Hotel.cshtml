@@ -1,95 +1,104 @@
 ﻿@{
     Layout = "../Shared/_Layout.cshtml";
 }
+<link href="@Url.Content("~/Content/kendo/2015.3.930/kendo.material.min.css")" rel="stylesheet" />
+<link href="@Url.Content("~/Content/kendo/2015.3.930/kendo.common-material.min.css")" rel="stylesheet" />
+<link href="@Url.Content("~/Content/kendo/2015.3.930/kendo.default.mobile.min.css")" rel="stylesheet" />
+<script type="text/javascript" src="@Url.Content("~/Scripts/index.js")"></script>
 
-    <script type="text/javascript" src="@Url.Content("~/Scripts/index.js")"></script>
-    <div class="intro">
-        <h1>
-            Hoteluri Romania
-        </h1>
-        <hr />
-        <p>
-            Acest site ofera o lista variata cu hoteluri din diferite zone ale Romaniei. Poti cauta un hotel ,rezerva camere ,sau vizualiza locuri frumoase din romania unde sa iti petreci vacantele.
+<div class="intro">
+    <h1>
+        Hoteluri Romania
+    </h1>
+    <hr />
+    <p>
+        Acest site ofera o lista variata cu hoteluri din diferite zone ale Romaniei. Poti cauta un hotel ,rezerva camere ,sau vizualiza locuri frumoase din romania unde sa iti petreci vacantele.
 
-        </p>
-        <p>
-            Poti vizualiza lista cu hotelurile inscrise la noi pe site in lista de mai jos:
+    </p>
+    <p>
+        Poti vizualiza lista cu hotelurile inscrise la noi pe site in lista de mai jos:
 
-        </p>
-
+    </p>
 
 
+
+</div>
+<div class="numberOfPage">
+
+    <div class="filterContent">
+        <input class="input" name="filter" type="button" value="Filter" />
+        <input class="input" name="clear" type="button" value="Clear" />
     </div>
-    <div class="numberOfPage">
+    <select id="selectPageSize">
+        <option value="5">5</option>
+        <option value="10" selected>10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+        <option value="200">200</option>
+    </select>
 
-        <div class="filterContent">
-            <input class="input" name="filter" type="button" value="Filter"/>
-            <input class="input" name="clear" type="button" value="Clear"/>
-        </div>
-        <select id="selectPageSize">
-            <option value="5">5</option>
-            <option value="10" selected>10</option>
-            <option value="20">20</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-            <option value="200">200</option>
-        </select>
-
-    </div>
-    <div class="filterContent-expanded">
-        <button value="x">X</button>
-        <label>City:</label>
-        <select>
-            <option value="">None</option>
-            <option value="Iasi">Iasi</option>
-        </select>
-        <label>Rooms Count:</label>
-        <input name="minRoomsCount" type="number" min="0" class="input" value="0" max="500"/>
-        <label>-</label>
-        <input type="number" name="maxRoomsCount"  min="0" class="input" value="0" max="500"/>
-        <br/>
-        <label>Rating:</label>
-        <input type="number" name="minRating" class="input" min="0" value="0" max="500"/>
-        <label>-</label>
-        <input type="number" name="maxRating" class="input" min="0" value="0" max="500"/>
-        <br/>
-        <input type="button" name="filter" class="input" value="Filter"/>
-    </div>
+</div>
+<div class="filterContent-expanded">
+    <button value="x">X</button>
+    <label>City:</label>
+    <select>
+        <option value="">None</option>
+        <option value="Iasi">Iasi</option>
+    </select>
+    <label>Rooms Count:</label>
+    <input name="minRoomsCount" type="number" min="0" class="input" value="0" max="500" />
+    <label>-</label>
+    <input type="number" name="maxRoomsCount" min="0" class="input" value="0" max="500" />
+    <br />
+    <label>Rating:</label>
+    <input type="number" name="minRating" class="input" min="0" value="0" max="500" />
+    <label>-</label>
+    <input type="number" name="maxRating" class="input" min="0" value="0" max="500" />
+    <br />
+    <input type="button" name="filter" class="input" value="Filter" />
+</div>
 
 
 
-    <section id="list_hotels" style="overflow-x:auto">
-        <table id="list">
-            <thead>
-                <tr>
-                    <th>Imagine</th>
-                    <th>Nume</th>
-                    <th>Adresa</th>
-                    <th>Numar Locuri</th>
-                    <th>Numar Stele</th>
-                    <th>Site</th>
-                    <th>Descriere</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </section>
-    <section id="list_hotels2"></section>
+<section id="list_hotels" style="overflow-x: auto">
+    <table id="list">
+        <thead>
+            <tr>
+                <th>Imagine</th>
+                <th>Nume</th>
+                <th>Adresa</th>
+                <th>Numar Locuri</th>
+                <th>Numar Stele</th>
+                <th>Site</th>
+                <th>Descriere</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</section>
 
-    <!--
-    <div class="paginare">
-        <ul class="pagination">
-            <li><a href="#">«</a></li>
-            <li><a class="active" href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">6</a></li>
-            <li><a href="#">7</a></li>
-            <li><a href="#">»</a></li>
-        </ul>
-    </div>
-    -->
+<br />
+<br />
+<br />
+<br />
 
+<h3> Kendo Grid </h3>
 
+<div id="list_hotels2"></div>
+
+<!--
+<div class="paginare">
+    <ul class="pagination">
+        <li><a href="#">«</a></li>
+        <li><a class="active" href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">6</a></li>
+        <li><a href="#">7</a></li>
+        <li><a href="#">»</a></li>
+    </ul>
+</div>
+-->

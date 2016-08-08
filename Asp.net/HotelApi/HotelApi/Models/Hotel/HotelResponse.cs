@@ -16,5 +16,7 @@ namespace HotelApi_.Models
         /// Get Total Items.
         /// </summary>
         public int TotalItems { get; set; }
+
+        public Filter.Filter Filter { get; set; }
     }
 }

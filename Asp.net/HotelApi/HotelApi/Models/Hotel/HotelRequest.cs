@@ -44,5 +44,7 @@
         /// Number of max stars.
         /// </summary>
         public int MaxRating { get; set; }
+
+        public string Filter { get; set; }
     }
 }

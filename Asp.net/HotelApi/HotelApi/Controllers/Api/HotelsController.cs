@@ -5,6 +5,8 @@ using System.Web.Http;
 using HotelApi_.ManagerHotel;
 using HotelApi_.Models;
 using HotelApi_.Models.Booking;
+using HotelApi_.Models.Filter;
+using Newtonsoft.Json;
 
 namespace HotelApi_.Controllers
 {
