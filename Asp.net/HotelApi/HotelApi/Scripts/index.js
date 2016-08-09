@@ -56,7 +56,7 @@ function grid() {
                         dataType: "jsonp" // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
                     },
                     update: function (options) {
-                        $.post({
+                        $.ajax({
                             url: "http://localhost/Hotels/api/Hotels/Update",
                             dataType: "jsonp", // "jsonp" is required for cross-domain requests; use "json" for same-domain requests
                             // send the updated data items as the "models" service parameter encoded in JSON
@@ -111,7 +111,8 @@ function grid() {
                 fileName: "Hotels -Export"
             },
             editable: {
-                mode: "inline"
+                mode: "inline",
+                template: '<button class="k-button k-button-icontext k-grid-edit"><span class="k-icon k-edit"></span>Edit</button>'
             },
             height: 550,
             filterable: true,
