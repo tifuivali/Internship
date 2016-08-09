@@ -17,6 +17,9 @@ namespace HotelApi_.Models.Autentification
         [Required]
         public string Password { get; set; }
 
+        [Compare("Password")]
+        public string ConfirmPassword { get; set; }
+
         public bool RememberMe { get; set; }
 
     }

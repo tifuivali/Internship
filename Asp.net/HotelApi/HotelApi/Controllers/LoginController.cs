@@ -11,12 +11,12 @@ namespace HotelApi_.Controllers
 {
     public class LoginController : Controller
     {
-        private UserManager.UserManagerList _userManagerList;
+        private UserManager.IUserManager _userManager;
 
         public LoginController()
         {
-            _userManagerList = UserManager.UserManagerList.GetInstace();
-            _userManagerList.Populate();
+            _userManager = UserManager.UserManagerDb.GetInstance();
+            
         }
 
 
@@ -33,11 +33,11 @@ namespace HotelApi_.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = _userManagerList.GetUser(tempUserName);
+                var user = _userManager.GetUser(tempUserName);
                 if (user != null)
                 {
                     Session["User"] = user;
-                    FormsAuthentication.SetAuthCookie(user.UserName, user.RememberMe);
+                    FormsAuthentication.SetAuthCookie(user.UserName, tempUserName.RememberMe);
                     return Redirect(returnUrl);
                 }
                 ModelState.AddModelError("", "Incorect username or password.");

@@ -29,6 +29,11 @@ namespace HotelApi_.UserManager
             return users.FirstOrDefault(u => u.UserName == user.UserName & u.Password == user.Password);
         }
 
+        public void AddUser(User user)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Populate()
         {
             users.Add(new User() {UserId = 1,Password = "vali",UserName = "vali"});

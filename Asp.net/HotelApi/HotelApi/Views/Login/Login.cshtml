@@ -19,10 +19,12 @@
             </h1>
             <p>
                 @Html.TextBoxFor(m => m.UserName, new { placeholder = "User Name" })
+                <br/>
                 @Html.ValidationMessageFor(m => m.UserName)
             </p>
             <p>
                 @Html.PasswordFor(m => m.Password, new { placeholder = "Password" })
+                <br/>
                 @Html.ValidationMessageFor(m => m.Password)
             </p>
             <p class="rememeber_me">
@@ -31,6 +33,9 @@
             </p>
             <p class="submit">
                 <input type="submit" value="Log in"/>
+            </p>
+            <p>
+                <a href="@Url.Action("SignUp","SignUp")">Sign Up</a>
             </p>
             <p class="validationMessage">
                 @Html.AntiForgeryToken()

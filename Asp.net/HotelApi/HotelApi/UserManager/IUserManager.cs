@@ -10,5 +10,7 @@ namespace HotelApi_.UserManager
     public interface IUserManager
     {
         User GetUser(User user);
+
+        void AddUser(User user);
     }
 }
