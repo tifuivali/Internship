@@ -10,8 +10,7 @@ namespace HotelApi_.Controllers
 {
     public class HotelsController : ApiController
     {
-
-        HotelManager hotelManager = HotelManager.GetInstance();
+        private HotelManager hotelManager = HotelDbManager.GetInstance();
        
 
 
