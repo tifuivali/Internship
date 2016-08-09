@@ -267,7 +267,7 @@ namespace HotelApi_.ManagerHotel
         /// Create a instance of HotelManager.
         /// </summary>
         /// <returns>Hotel Manager</returns>
-        public override HotelManager GetInstance()
+        public static HotelManagerList GetInstance()
         {
             return hotelManager ?? (hotelManager = new HotelManagerList());
         }

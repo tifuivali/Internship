@@ -11,12 +11,12 @@ namespace HotelApi_.Controllers
 {
     public class LoginController : Controller
     {
-        private UserManager.UserManager userManager;
+        private UserManager.UserManagerList _userManagerList;
 
         public LoginController()
         {
-            userManager = UserManager.UserManager.GetInstace();
-            userManager.Populate();
+            _userManagerList = UserManager.UserManagerList.GetInstace();
+            _userManagerList.Populate();
         }
 
 
@@ -33,7 +33,7 @@ namespace HotelApi_.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = userManager.GetUser(tempUserName);
+                var user = _userManagerList.GetUser(tempUserName);
                 if (user != null)
                 {
                     Session["User"] = user;

@@ -30,8 +30,6 @@ namespace HotelApi_.ManagerHotel
 
         bool Delete(uint id);
 
-        HotelManager GetInstance();
-
         IEnumerable<string> GetListOfDistinctCity();
 
         HotelResponse FilterHotels(HotelRequest hotelRequest);

@@ -24,7 +24,7 @@ namespace HotelApi_.ManagerHotel
 
         public abstract IEnumerable<Hotel> GetHotelSearchByName(string searchText);
 
-        public IEnumerable<Hotel> GetHotelsPageOf(int page, int itemsPerPage, IEnumerable<Hotel> listHotels)
+        public virtual IEnumerable<Hotel> GetHotelsPageOf(int page, int itemsPerPage, IEnumerable<Hotel> listHotels)
         {
             int startIndex = itemsPerPage * (page - 1);
             return listHotels.Skip(startIndex).Take(itemsPerPage);
@@ -35,8 +35,6 @@ namespace HotelApi_.ManagerHotel
         public abstract uint GetValidId();
 
         public abstract bool Delete(uint id);
-
-        public abstract HotelManager GetInstance();
 
         public abstract IEnumerable<string> GetListOfDistinctCity();
 

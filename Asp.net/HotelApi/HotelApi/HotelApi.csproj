@@ -281,7 +281,9 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Models\UserInfoViewModel.cs" />
     <Compile Include="Models\UserLoginInfoViewModel.cs" />
-    <Compile Include="UserManager\UserManager.cs" />
+    <Compile Include="UserManager\IUserManager.cs" />
+    <Compile Include="UserManager\UserManagerDb.cs" />
+    <Compile Include="UserManager\UserManagerList.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

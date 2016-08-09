@@ -6,22 +6,22 @@ using HotelApi_.Models.Autentification;
 
 namespace HotelApi_.UserManager
 {
-    public class UserManager
+    public class UserManagerList:IUserManager
     {
-        private static UserManager instance;
+        private static UserManagerList instance;
 
         private List<User> users;
 
         public List<User> Users => users.ToList();
 
-        private UserManager()
+        private UserManagerList()
         {
             users = new List<User>();
         }
 
-        public static UserManager GetInstace()
+        public static UserManagerList GetInstace()
         {
-            return instance ?? (instance = new UserManager());
+            return instance ?? (instance = new UserManagerList());
         }
 
         public User GetUser(User user)

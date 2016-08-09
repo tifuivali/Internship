@@ -43,6 +43,112 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:HotelApi_.ManagerHotel.HotelManagerList">
+            <summary>
+            Hotel Manager Class
+            </summary>
+        </member>
+        <member name="M:HotelApi_.ManagerHotel.HotelManagerList.#ctor">
+            <summary>
+            Create a new instance of HotelManager.
+            </summary>
+        </member>
+        <member name="M:HotelApi_.ManagerHotel.HotelManagerList.Add(HotelApi_.Models.Hotel)">
+            <summary>
+            Add new hotel to list.
+            </summary>
+            <param name="hotel">Hotel will be added to list.</param>
+            <returns>True if opperation secceded , false otherwise.</returns>
+        </member>
+        <member name="P:HotelApi_.ManagerHotel.HotelManagerList.Count">
+            <summary>
+            Get number of hotels.
+            </summary>
+        </member>
+        <member name="M:HotelApi_.ManagerHotel.HotelManagerList.Update(HotelApi_.Models.Hotel)">
+            <summary>
+            Update a hotel with sfecified hotel.
+            </summary>
+            <param name="hotel">Hotel that containing the same id with hotel that will be updated.</param>
+            <returns>True if opperation secceded , false otherwise.</returns>
+        </member>
+        <member name="M:HotelApi_.ManagerHotel.HotelManagerList.GetHotelsByCity(System.String)">
+            <summary>
+            Get hotels from list that matches specified city.
+            </summary>
+            <param name="city">Name of city.</param>
+            <returns>List of hotels.</returns>
+        </member>
+        <member name="M:HotelApi_.ManagerHotel.HotelManagerList.GetHotesByRooms(System.Int32,System.Int32)">
+            <summary>
+            Get hotels from list that matches specified inerval of rooms count.
+            </summary>
+            <param name="minRooms">Number of minimum numbers of rooms.</param>
+            <param name="maxRooms">Number of maximum numbers of romms.</param>
+            <returns>List of hotels.</returns>
+        </member>
+        <member name="M:HotelApi_.ManagerHotel.HotelManagerList.GetHotelByRating(System.Int32,System.Int32)">
+            <summary>
+            Get hotel that matches specified interval of stars.
+            </summary>
+            <param name="minRating">Minimum number of stars.</param>
+            <param name="maxRating">Maximum number of stars.</param>
+            <returns>List of hotels.</returns>
+        </member>
+        <member name="M:HotelApi_.ManagerHotel.HotelManagerList.GetHotelSearchByName(System.String)">
+            <summary>
+            Get hotels that matches specified name.
+            </summary>
+            <param name="searchText">Name of hotel.</param>
+            <returns>List of hotels.</returns>
+        </member>
+        <member name="M:HotelApi_.ManagerHotel.HotelManagerList.GetHotelsPageOf(System.Int32,System.Int32,System.Collections.Generic.IEnumerable{HotelApi_.Models.Hotel})">
+            <summary>
+            Get elements at specified page of specified list.
+            </summary>
+            <param name="page">Number of page.</param>
+            <param name="itemsPerPage">Page Size.</param>
+            <param name="listHotels">List of hotels.</param>
+            <returns>List of hotels.</returns>
+        </member>
+        <member name="M:HotelApi_.ManagerHotel.HotelManagerList.GetHotelsPage(System.Int32,System.Int32)">
+            <summary>
+            Get elements at specified page from hotels list.
+            </summary>
+            <param name="page">Number of page.</param>
+            <param name="itemsPerPage">Page Size.</param>
+            <returns>List of hotels.</returns>
+        </member>
+        <member name="M:HotelApi_.ManagerHotel.HotelManagerList.GetValidId">
+            <summary>
+            Retrive a valid(unused) hotel id.
+            </summary>
+            <returns>A valid id.</returns>
+        </member>
+        <member name="M:HotelApi_.ManagerHotel.HotelManagerList.Delete(System.UInt32)">
+            <summary>
+            Delete a hotel by specified id.
+            </summary>
+            <param name="id">Id of hotel that will be deleted.</param>
+            <returns>True if opperattion done , false otherwise. </returns>
+        </member>
+        <member name="P:HotelApi_.ManagerHotel.HotelManagerList.Hotels">
+            <summary>
+            Get or set list of hotels.
+            </summary>
+        </member>
+        <member name="M:HotelApi_.ManagerHotel.HotelManagerList.GetInstance">
+            <summary>
+            Create a instance of HotelManager.
+            </summary>
+            <returns>Hotel Manager</returns>
+        </member>
+        <member name="M:HotelApi_.ManagerHotel.HotelManagerList.GetListOfDistinctCity">
+            <summary>
+            Get List of distinct cities.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:HotelApi_.Models.HotelRequest">
             <summary>
             Hotel Request
@@ -579,112 +685,6 @@
             Initializes a new instance of the <see cref="T:HotelApi_.Areas.HelpPage.XmlDocumentationProvider"/> class.
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
-        </member>
-        <member name="T:HotelApi_.ManagerHotel.HotelManager">
-            <summary>
-            Hotel Manager Class
-            </summary>
-        </member>
-        <member name="M:HotelApi_.ManagerHotel.HotelManager.#ctor">
-            <summary>
-            Create a new instance of HotelManager.
-            </summary>
-        </member>
-        <member name="M:HotelApi_.ManagerHotel.HotelManager.Add(HotelApi_.Models.Hotel)">
-            <summary>
-            Add new hotel to list.
-            </summary>
-            <param name="hotel">Hotel will be added to list.</param>
-            <returns>True if opperation secceded , false otherwise.</returns>
-        </member>
-        <member name="P:HotelApi_.ManagerHotel.HotelManager.Count">
-            <summary>
-            Get number of hotels.
-            </summary>
-        </member>
-        <member name="M:HotelApi_.ManagerHotel.HotelManager.Update(HotelApi_.Models.Hotel)">
-            <summary>
-            Update a hotel with sfecified hotel.
-            </summary>
-            <param name="hotel">Hotel that containing the same id with hotel that will be updated.</param>
-            <returns>True if opperation secceded , false otherwise.</returns>
-        </member>
-        <member name="M:HotelApi_.ManagerHotel.HotelManager.GetHotelsByCity(System.String)">
-            <summary>
-            Get hotels from list that matches specified city.
-            </summary>
-            <param name="city">Name of city.</param>
-            <returns>List of hotels.</returns>
-        </member>
-        <member name="M:HotelApi_.ManagerHotel.HotelManager.GetHotesByRooms(System.Int32,System.Int32)">
-            <summary>
-            Get hotels from list that matches specified inerval of rooms count.
-            </summary>
-            <param name="minRooms">Number of minimum numbers of rooms.</param>
-            <param name="maxRooms">Number of maximum numbers of romms.</param>
-            <returns>List of hotels.</returns>
-        </member>
-        <member name="M:HotelApi_.ManagerHotel.HotelManager.GetHotelByRating(System.Int32,System.Int32)">
-            <summary>
-            Get hotel that matches specified interval of stars.
-            </summary>
-            <param name="minRating">Minimum number of stars.</param>
-            <param name="maxRating">Maximum number of stars.</param>
-            <returns>List of hotels.</returns>
-        </member>
-        <member name="M:HotelApi_.ManagerHotel.HotelManager.GetHotelSearchByName(System.String)">
-            <summary>
-            Get hotels that matches specified name.
-            </summary>
-            <param name="searchText">Name of hotel.</param>
-            <returns>List of hotels.</returns>
-        </member>
-        <member name="M:HotelApi_.ManagerHotel.HotelManager.GetHotelsPageOf(System.Int32,System.Int32,System.Collections.Generic.IEnumerable{HotelApi_.Models.Hotel})">
-            <summary>
-            Get elements at specified page of specified list.
-            </summary>
-            <param name="page">Number of page.</param>
-            <param name="itemsPerPage">Page Size.</param>
-            <param name="listHotels">List of hotels.</param>
-            <returns>List of hotels.</returns>
-        </member>
-        <member name="M:HotelApi_.ManagerHotel.HotelManager.GetHotelsPage(System.Int32,System.Int32)">
-            <summary>
-            Get elements at specified page from hotels list.
-            </summary>
-            <param name="page">Number of page.</param>
-            <param name="itemsPerPage">Page Size.</param>
-            <returns>List of hotels.</returns>
-        </member>
-        <member name="M:HotelApi_.ManagerHotel.HotelManager.GetValidId">
-            <summary>
-            Retrive a valid(unused) hotel id.
-            </summary>
-            <returns>A valid id.</returns>
-        </member>
-        <member name="M:HotelApi_.ManagerHotel.HotelManager.Delete(System.UInt32)">
-            <summary>
-            Delete a hotel by specified id.
-            </summary>
-            <param name="id">Id of hotel that will be deleted.</param>
-            <returns>True if opperattion done , false otherwise. </returns>
-        </member>
-        <member name="P:HotelApi_.ManagerHotel.HotelManager.Hotels">
-            <summary>
-            Get or set list of hotels.
-            </summary>
-        </member>
-        <member name="M:HotelApi_.ManagerHotel.HotelManager.GetInstance">
-            <summary>
-            Create a instance of HotelManager.
-            </summary>
-            <returns>Hotel Manager</returns>
-        </member>
-        <member name="M:HotelApi_.ManagerHotel.HotelManager.GetListOfDistinctCity">
-            <summary>
-            Get List of distinct cities.
-            </summary>
-            <returns></returns>
         </member>
     </members>
 </doc>

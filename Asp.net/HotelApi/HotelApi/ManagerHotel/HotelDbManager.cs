@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using HotelApi_.Models;
 
 namespace HotelApi_.ManagerHotel
@@ -20,10 +21,17 @@ namespace HotelApi_.ManagerHotel
 
         public override bool Delete(uint id)
         {
-            throw new NotImplementedException();
+            var cmd = new SqlCommand();
+            cmd.CommandText = "DeleteHotel";
+            cmd.Connection = connection;
+            cmd.CommandType=CommandType.StoredProcedure;
+            var idParam = new SqlParameter("@id",(int) id);
+            cmd.Parameters.Add(idParam);
+            cmd.ExecuteNonQuery();
+            return true;
         }
 
-        public static override HotelManager GetInstance()
+        public static HotelDbManager GetInstance()
         {
             if (hotelDbManagermanager == null)
                 hotelDbManagermanager = new HotelDbManager();
@@ -32,7 +40,7 @@ namespace HotelApi_.ManagerHotel
 
         public override IEnumerable<string> GetListOfDistinctCity()
         {
-            SqlCommand cmd = new SqlCommand("select dinstinct from Locations", connection);
+            SqlCommand cmd = new SqlCommand("select distinct City from Locations", connection);
             List<string> cities = new List<string>();
             using (var reader = cmd.ExecuteReader())
             {
@@ -46,17 +54,42 @@ namespace HotelApi_.ManagerHotel
 
         public override HotelResponse FilterHotels(HotelRequest hotelRequest)
         {
-            
+            if (hotelRequest.Name == null)
+                hotelRequest.Name = "";
+            if (hotelRequest.City == null)
+                hotelRequest.City = "";
+            IEnumerable<Hotel> hotels;
+            var cmd = new SqlCommand();
+            cmd.CommandText = "FilterHotels";
+            cmd.CommandType= CommandType.StoredProcedure;
+            cmd.Connection = connection;
+            var pageParam = new SqlParameter("@page",hotelRequest.Page);
+            var pageSizeParam = new SqlParameter("@pageSize",hotelRequest.PageSize);
+            var nameParam = new SqlParameter("@name",hotelRequest.Name);
+            var cityParam =new SqlParameter("@city",hotelRequest.City);
+            var minRoomsParam = new SqlParameter("@minRooms",hotelRequest.MinRoomsCount);
+            var maxRoomsParam = new SqlParameter("@maxRooms",hotelRequest.MaxRoomsCount);
+            var minRatingParam = new SqlParameter("@minRating",hotelRequest.MinRating);
+            var maxRatingParam = new SqlParameter("@maxRating",hotelRequest.MaxRating);
+            cmd.Parameters.AddRange(new []{pageParam,nameParam,pageSizeParam,cityParam,minRoomsParam,maxRoomsParam,minRatingParam,maxRatingParam});
+            hotels = GetHotelsFromSqlComand(cmd);
+            var response = new HotelResponse()
+            {
+                Hotels = hotels,
+                TotalItems = hotels.Count()
+            };
+            return response;
         }
 
         private SqlParameter[] GetHotelBindParams(Hotel hotel)
         {
-            var idHotelParam = new SqlParameter("@id", hotel.Id);
+            var idHotelParam = new SqlParameter("@id",(int) hotel.Id);
+            var nameHotelParam = new SqlParameter("@name",hotel.Name);
             var descriprionParam = new SqlParameter("@description", hotel.Description);
             var cityParam = new SqlParameter("@city", hotel.City);
-            var roomsCountParam = new SqlParameter("@roomsCount", hotel.RoomsCount);
-            var ratingParam = new SqlParameter("@rating", hotel.Rating);
-            return new[] { idHotelParam, descriprionParam, cityParam, roomsCountParam, ratingParam };
+            var roomsCountParam = new SqlParameter("@roomsCount",(int) hotel.RoomsCount);
+            var ratingParam = new SqlParameter("@rating",(int) hotel.Rating);
+            return new[] { idHotelParam,nameHotelParam, descriprionParam, cityParam, roomsCountParam, ratingParam };
         }
 
         public override bool Add(Hotel hotel)
@@ -87,21 +120,23 @@ namespace HotelApi_.ManagerHotel
 
         private IEnumerable<Hotel> GetHotelsFromSqlComand(SqlCommand cmd)
         {
-            List<Hotel> hotels = null;
+            List<Hotel> hotels = new List<Hotel>();
 
             using (var reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
                 {
+                   
                     var hotel = new Hotel()
                     {
                         City = (string)reader["City"],
                         Description = (string)reader["Description"],
-                        Id = (uint)reader["Id"],
+                        Id = (uint)reader.GetInt32(reader.GetOrdinal("Id")),
                         Name = (string)reader["Name"],
-                        Rating = (short)reader["Rating"],
-                        RoomsCount = (uint)reader["RoomsCount"]
+                        Rating = (short)reader.GetInt32(reader.GetOrdinal("Rating")),
+                        RoomsCount = (uint)reader.GetInt32(reader.GetOrdinal("RoomsCount"))
                     };
+                    
                     hotels.Add(hotel);
                 }
             }
@@ -170,7 +205,7 @@ namespace HotelApi_.ManagerHotel
         public override uint GetValidId()
         {
             var cmd = new SqlCommand("select max(Id) from Hotels", connection);
-            uint id = (uint)cmd.ExecuteScalar();
+            uint id = (uint)(int)cmd.ExecuteScalar();
             return id + 1;
         }
 

@@ -51,13 +51,14 @@ create procedure AddNewHotel
 
 go
 
+
 create proc GetHotelsByCity
 @cityName nvarchar(50)
 as
 select h.Id as 'Id',h.Name as 'Name',h.Description as 'Description',l.City as 'City',h.RoomsCount as 'RoomsCount',h.Rating as 'Rating'
 		from Hotels h join Locations l 
 		on (h.LocationId = l.Id)
-		where LTRIM(RTRIM(upper(l.City))) like LTRIM(RTRIM(upper('%' + @cityName +'%') ));
+		where LTRIM(RTRIM(upper(l.City))) like upper('%' +LTRIM(RTRIM( @cityName)) +'%')
 
 go
 
@@ -91,7 +92,7 @@ as
 select h.Id as 'Id',h.Name as 'Name',h.Description as 'Description',l.City as 'City',h.RoomsCount as 'RoomsCount',h.Rating as 'Rating'
 		from Hotels h join Locations l 
 		on (h.LocationId = l.Id)
-		where LTRIM(RTRIM(h.Name)) like LTRIM(rtrim(upper('%' + @name + '%')));
+		where LTRIM(RTRIM(h.Name)) like upper('%' + LTRIM(rtrim(@name)) + '%');
 
 
 go
@@ -110,6 +111,9 @@ select h.Id as 'Id',h.Name as 'Name',h.Description as 'Description',l.City as 'C
 
 go
 
+drop proc FilterHotels;
+
+go
 
 create proc FilterHotels
 @page int,
@@ -119,11 +123,44 @@ create proc FilterHotels
 @minRooms int,
 @maxRooms int,
 @minRating int,
-@maxrating int
+@maxRating int
 as
+declare @maxCurentRooms int;
+declare @maxCurrentRating int;
+if(@maxRating <=0)
+	begin
+	  select @maxCurrentRating = max(Rating) from Hotels;
+	  set @maxRating = @maxCurrentRating;
+	end
+if(@maxRooms <=0)
+	begin
+	  select @maxCurentRooms = max(RoomsCount) from Hotels;
+	  set @maxRooms = @maxCurentRooms;
+	end;
+
 select h.Id as 'Id',h.Name as 'Name',h.Description as 'Description',l.City as 'City',h.RoomsCount as 'RoomsCount',h.Rating as 'Rating'
 		from Hotels h join Locations l 
 		on (h.LocationId = l.Id)
+		where ltrim(rtrim(upper(h.Name))) like ltrim(rtrim(upper('%' + @name +'%'))) 
+			   and h.RoomsCount >= @minRooms and h.RoomsCount <= @maxRooms 
+			   and ltrim(rtrim(upper(l.City))) like upper('%' + ltrim(rtrim(@city)) + '%')
+			   and h.Rating >= @minRating and h.Rating <= @maxrating 
 		order by h.Id
 		offset (( @page - 1) * @pageSize) ROWS
 		fetch next @pageSize rows only;
+
+go
+
+drop proc DeleteHotel;
+go
+
+drop proc DeleteHotel;
+
+create procedure DeleteHotel
+@id int
+as
+delete from Bookings where HotelId = @id;
+delete from Rooms where HotelId = @id;
+delete from Hotels where Id = @id;
+
+exec DeleteHotel 50;
