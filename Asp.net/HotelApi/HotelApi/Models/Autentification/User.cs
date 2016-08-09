@@ -17,10 +17,15 @@ namespace HotelApi_.Models.Autentification
         [Required]
         public string Password { get; set; }
 
+        public bool RememberMe { get; set; }
+
+    }
+
+    public class RegisterUser:User
+    {
+
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
-
-        public bool RememberMe { get; set; }
 
     }
 }

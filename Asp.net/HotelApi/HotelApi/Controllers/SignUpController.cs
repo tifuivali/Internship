@@ -18,7 +18,7 @@ namespace HotelApi_.Controllers
         }
 
         [HttpPost]
-        public ActionResult SignUp(User tempUser)
+        public ActionResult SignUp(RegisterUser tempUser)
         {
             if (ModelState.IsValid)
             {

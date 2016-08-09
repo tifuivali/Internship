@@ -28,7 +28,7 @@ namespace HotelApi_.UserManager
             return userManagerDb;
         }
 
-        public void AddUser(User user)
+        public void AddUser(RegisterUser user)
         {
             var cmd = new SqlCommand();
             cmd.Connection = connection;
@@ -50,13 +50,14 @@ namespace HotelApi_.UserManager
             var cmd = new SqlCommand();
             cmd.Connection = connection;
             cmd.CommandText =
-                "select * from Users where UserName=@userName and Password = @password";
+                "select top 1 * from Users where UserName=@userName and Password = @password";
           
             cmd.Parameters.AddRange(GetUserSqlParams(user));
             using (var reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
                 {
+                    userCheck = new User();
                     userCheck.UserName = (string)reader["UserName"];
                     userCheck.Password = (string)reader["Password"];
                     userCheck.RememberMe = true;
