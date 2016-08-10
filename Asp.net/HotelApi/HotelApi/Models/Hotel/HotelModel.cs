@@ -1,8 +1,8 @@
 ﻿namespace HotelApi_.Models
 {
-    public class Hotel
+    public class HotelModel
     {
-        public uint Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
@@ -10,16 +10,16 @@
 
         public string City { get; set; }
 
-        public uint RoomsCount { get; set; }
+        public int RoomsCount { get; set; }
 
         public short Rating { get; set; }
 
         public override bool Equals(object obj)
         {
-            if (obj.GetType() != typeof(Hotel))
+            if (obj.GetType() != typeof(HotelModel))
                 return false;
-            Hotel hotel = (Hotel)obj;
-            return hotel.Id == Id;
+            HotelModel hotelModel = (HotelModel)obj;
+            return hotelModel.Id == Id;
         }
     }
 

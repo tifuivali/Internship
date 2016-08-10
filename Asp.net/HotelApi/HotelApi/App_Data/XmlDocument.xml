@@ -10,18 +10,18 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HotelApi_.Controllers.HotelsController.Add(HotelApi_.Models.Hotel)">
+        <member name="M:HotelApi_.Controllers.HotelsController.Add(HotelApi_.Models.HotelModel)">
             <summary>
             Add hotel action
             </summary>
-            <param name="hotel"></param>
+            <param name="hotelModel"></param>
             <returns></returns>
         </member>
-        <member name="M:HotelApi_.Controllers.HotelsController.Update(HotelApi_.Models.Hotel)">
+        <member name="M:HotelApi_.Controllers.HotelsController.Update(HotelApi_.Models.HotelModel)">
             <summary>
             Update hotel action.
             </summary>
-            <param name="hotel"></param>
+            <param name="hotelModel"></param>
             <returns></returns>
         </member>
         <member name="M:HotelApi_.Controllers.HotelsController.GetValidId">
@@ -30,7 +30,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:HotelApi_.Controllers.HotelsController.Delete(System.UInt32)">
+        <member name="M:HotelApi_.Controllers.HotelsController.Delete(System.Int32)">
             <summary>
             Delete bspecified hotel from request.
             </summary>
@@ -53,11 +53,11 @@
             Create a new instance of HotelManager.
             </summary>
         </member>
-        <member name="M:HotelApi_.ManagerHotel.HotelManagerList.Add(HotelApi_.Models.Hotel)">
+        <member name="M:HotelApi_.ManagerHotel.HotelManagerList.Add(HotelApi_.Models.HotelModel)">
             <summary>
             Add new hotel to list.
             </summary>
-            <param name="hotel">Hotel will be added to list.</param>
+            <param name="hotelModel">Hotel will be added to list.</param>
             <returns>True if opperation secceded , false otherwise.</returns>
         </member>
         <member name="P:HotelApi_.ManagerHotel.HotelManagerList.Count">
@@ -65,11 +65,11 @@
             Get number of hotels.
             </summary>
         </member>
-        <member name="M:HotelApi_.ManagerHotel.HotelManagerList.Update(HotelApi_.Models.Hotel)">
+        <member name="M:HotelApi_.ManagerHotel.HotelManagerList.Update(HotelApi_.Models.HotelModel)">
             <summary>
             Update a hotel with sfecified hotel.
             </summary>
-            <param name="hotel">Hotel that containing the same id with hotel that will be updated.</param>
+            <param name="hotelModel">Hotel that containing the same id with hotel that will be updated.</param>
             <returns>True if opperation secceded , false otherwise.</returns>
         </member>
         <member name="M:HotelApi_.ManagerHotel.HotelManagerList.GetHotelsByCity(System.String)">
@@ -102,7 +102,7 @@
             <param name="searchText">Name of hotel.</param>
             <returns>List of hotels.</returns>
         </member>
-        <member name="M:HotelApi_.ManagerHotel.HotelManagerList.GetHotelsPageOf(System.Int32,System.Int32,System.Collections.Generic.IEnumerable{HotelApi_.Models.Hotel})">
+        <member name="M:HotelApi_.ManagerHotel.HotelManagerList.GetHotelsPageOf(System.Int32,System.Int32,System.Collections.Generic.IEnumerable{HotelApi_.Models.HotelModel})">
             <summary>
             Get elements at specified page of specified list.
             </summary>
@@ -125,7 +125,7 @@
             </summary>
             <returns>A valid id.</returns>
         </member>
-        <member name="M:HotelApi_.ManagerHotel.HotelManagerList.Delete(System.UInt32)">
+        <member name="M:HotelApi_.ManagerHotel.HotelManagerList.Delete(System.Int32)">
             <summary>
             Delete a hotel by specified id.
             </summary>

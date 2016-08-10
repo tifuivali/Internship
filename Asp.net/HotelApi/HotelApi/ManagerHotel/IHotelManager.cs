@@ -10,25 +10,25 @@ namespace HotelApi_.ManagerHotel
 {
     public interface IHotelManager
     {
-        bool Add(Hotel hotel);
+        bool Add(HotelModel hotelModel);
 
-        bool Update(Hotel hotel);
+        bool Update(HotelModel hotelModel);
 
-        IEnumerable<Hotel> GetHotelsByCity(string city);
+        IEnumerable<HotelModel> GetHotelsByCity(string city);
 
-        IEnumerable<Hotel> GetHotesByRooms(int minRooms, int maxRooms);
+        IEnumerable<HotelModel> GetHotesByRooms(int minRooms, int maxRooms);
 
-        IEnumerable<Hotel> GetHotelByRating(int minRating, int maxRating);
+        IEnumerable<HotelModel> GetHotelByRating(int minRating, int maxRating);
 
-        IEnumerable<Hotel> GetHotelSearchByName(string searchText);
+        IEnumerable<HotelModel> GetHotelSearchByName(string searchText);
 
-        IEnumerable<Hotel> GetHotelsPageOf(int page, int itemsPerPage, IEnumerable<Hotel> listHotels);
+        IEnumerable<HotelModel> GetHotelsPageOf(int page, int itemsPerPage, IEnumerable<HotelModel> listHotels);
 
-        IEnumerable<Hotel> GetHotelsPage(int page, int itemsPerPage);
+        IEnumerable<HotelModel> GetHotelsPage(int page, int itemsPerPage);
 
-        uint GetValidId();
+        int GetValidId();
 
-        bool Delete(uint id);
+        bool Delete(int id);
 
         IEnumerable<string> GetListOfDistinctCity();
 

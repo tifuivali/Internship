@@ -9,32 +9,32 @@ namespace HotelApi_.ManagerHotel
 {
     public abstract class HotelManager:IHotelManager
     {
-        public abstract bool Add(Hotel hotel);
-        public abstract bool Update(Hotel hotel);
+        public abstract bool Add(HotelModel hotelModel);
+        public abstract bool Update(HotelModel hotelModel);
 
         public int Count { get; set; }
 
-        public abstract IEnumerable<Hotel> GetHotelsByCity(string city);
+        public abstract IEnumerable<HotelModel> GetHotelsByCity(string city);
 
 
-        public abstract IEnumerable<Hotel> GetHotesByRooms(int minRooms, int maxRooms);
+        public abstract IEnumerable<HotelModel> GetHotesByRooms(int minRooms, int maxRooms);
 
 
-        public abstract IEnumerable<Hotel> GetHotelByRating(int minRating, int maxRating);
+        public abstract IEnumerable<HotelModel> GetHotelByRating(int minRating, int maxRating);
 
-        public abstract IEnumerable<Hotel> GetHotelSearchByName(string searchText);
+        public abstract IEnumerable<HotelModel> GetHotelSearchByName(string searchText);
 
-        public virtual IEnumerable<Hotel> GetHotelsPageOf(int page, int itemsPerPage, IEnumerable<Hotel> listHotels)
+        public virtual IEnumerable<HotelModel> GetHotelsPageOf(int page, int itemsPerPage, IEnumerable<HotelModel> listHotels)
         {
             int startIndex = itemsPerPage * (page - 1);
             return listHotels.Skip(startIndex).Take(itemsPerPage);
         }
 
-        public abstract IEnumerable<Hotel> GetHotelsPage(int page, int itemsPerPage);
+        public abstract IEnumerable<HotelModel> GetHotelsPage(int page, int itemsPerPage);
 
-        public abstract uint GetValidId();
+        public abstract int GetValidId();
 
-        public abstract bool Delete(uint id);
+        public abstract bool Delete(int id);
 
         public abstract IEnumerable<string> GetListOfDistinctCity();
 

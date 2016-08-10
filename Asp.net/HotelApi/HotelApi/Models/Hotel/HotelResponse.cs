@@ -10,7 +10,7 @@ namespace HotelApi_.Models
         /// <summary>
         /// List of Hotels.
         /// </summary>
-        public IEnumerable<Hotel> Hotels { get; set; }
+        public IEnumerable<HotelModel> Hotels { get; set; }
 
         /// <summary>
         /// Get Total Items.

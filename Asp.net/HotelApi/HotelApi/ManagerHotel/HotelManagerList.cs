@@ -15,19 +15,19 @@ namespace HotelApi_.ManagerHotel
         /// </summary>
         private HotelManagerList()
         {
-            Hotels = new List<Hotel>();
+            Hotels = new List<HotelModel>();
         }
 
         /// <summary>
         /// Add new hotel to list.
         /// </summary>
-        /// <param name="hotel">Hotel will be added to list.</param>
+        /// <param name="hotelModel">Hotel will be added to list.</param>
         /// <returns>True if opperation secceded , false otherwise.</returns>
-        public override bool Add(Hotel hotel)
+        public override bool Add(HotelModel hotelModel)
         {
-            if (hotels.Contains(hotel))
+            if (hotels.Contains(hotelModel))
                 return false;
-            hotels.Add(hotel);
+            hotels.Add(hotelModel);
             return true;
         }
 
@@ -39,15 +39,15 @@ namespace HotelApi_.ManagerHotel
         /// <summary>
         /// Update a hotel with sfecified hotel.
         /// </summary>
-        /// <param name="hotel">Hotel that containing the same id with hotel that will be updated.</param>
+        /// <param name="hotelModel">Hotel that containing the same id with hotel that will be updated.</param>
         /// <returns>True if opperation secceded , false otherwise.</returns>
-        public override bool Update(Hotel hotel)
+        public override bool Update(HotelModel hotelModel)
         {
-            if (!hotels.Contains(hotel))
+            if (!hotels.Contains(hotelModel))
                 return false;
-            int index = hotelManager.Hotels.IndexOf(hotel);
+            int index = hotelManager.Hotels.IndexOf(hotelModel);
             hotelManager.hotels.RemoveAt(index);
-            hotelManager.hotels.Insert(index, hotel);
+            hotelManager.hotels.Insert(index, hotelModel);
             return true;
         }
 
@@ -57,7 +57,7 @@ namespace HotelApi_.ManagerHotel
         /// </summary>
         /// <param name="city">Name of city.</param>
         /// <returns>List of hotels.</returns>
-        public override IEnumerable<Hotel> GetHotelsByCity(string city)
+        public override IEnumerable<HotelModel> GetHotelsByCity(string city)
         {
             if (city == null)
                 return Hotels;
@@ -70,7 +70,7 @@ namespace HotelApi_.ManagerHotel
         /// <param name="minRooms">Number of minimum numbers of rooms.</param>
         /// <param name="maxRooms">Number of maximum numbers of romms.</param>
         /// <returns>List of hotels.</returns>
-        public override IEnumerable<Hotel> GetHotesByRooms(int minRooms, int maxRooms)
+        public override IEnumerable<HotelModel> GetHotesByRooms(int minRooms, int maxRooms)
         {
             if (minRooms <= 0 || maxRooms <= 0)
                 return Hotels;
@@ -83,7 +83,7 @@ namespace HotelApi_.ManagerHotel
         /// <param name="minRating">Minimum number of stars.</param>
         /// <param name="maxRating">Maximum number of stars.</param>
         /// <returns>List of hotels.</returns>
-        public override IEnumerable<Hotel> GetHotelByRating(int minRating, int maxRating)
+        public override IEnumerable<HotelModel> GetHotelByRating(int minRating, int maxRating)
         {
             if (minRating <= 0 || maxRating <= 0)
                 return Hotels;
@@ -95,7 +95,7 @@ namespace HotelApi_.ManagerHotel
         /// </summary>
         /// <param name="searchText">Name of hotel.</param>
         /// <returns>List of hotels.</returns>
-        public override IEnumerable<Hotel> GetHotelSearchByName(string searchText)
+        public override IEnumerable<HotelModel> GetHotelSearchByName(string searchText)
         {
             if (hotels.Count <= 0)
                 PopulateHotels();
@@ -112,7 +112,7 @@ namespace HotelApi_.ManagerHotel
         /// <param name="itemsPerPage">Page Size.</param>
         /// <param name="listHotels">List of hotels.</param>
         /// <returns>List of hotels.</returns>
-        public override IEnumerable<Hotel> GetHotelsPageOf(int page, int itemsPerPage, IEnumerable<Hotel> listHotels)
+        public override IEnumerable<HotelModel> GetHotelsPageOf(int page, int itemsPerPage, IEnumerable<HotelModel> listHotels)
         {
 
             if (hotels.Count <= 0)
@@ -127,7 +127,7 @@ namespace HotelApi_.ManagerHotel
         /// <param name="page">Number of page.</param>
         /// <param name="itemsPerPage">Page Size.</param>
         /// <returns>List of hotels.</returns>
-        public override IEnumerable<Hotel> GetHotelsPage(int page, int itemsPerPage)
+        public override IEnumerable<HotelModel> GetHotelsPage(int page, int itemsPerPage)
         {
 
             if (hotels.Count <= 0)
@@ -140,9 +140,9 @@ namespace HotelApi_.ManagerHotel
         /// Retrive a valid(unused) hotel id.
         /// </summary>
         /// <returns>A valid id.</returns>
-        public override uint GetValidId()
+        public override int GetValidId()
         {
-            uint maxId = 0;
+            int maxId = 0;
             foreach (var hotel in hotels)
             {
                 if (hotel.Id > maxId)
@@ -155,7 +155,7 @@ namespace HotelApi_.ManagerHotel
 
         private void PopulateHotels()
         {
-            Add(new Hotel()
+            Add(new HotelModel()
             {
                 Id = 1,
                 Name = "Hotel Victoria",
@@ -165,7 +165,7 @@ namespace HotelApi_.ManagerHotel
                 RoomsCount = 60
             });
 
-            Add(new Hotel()
+            Add(new HotelModel()
             {
                 Id = 2,
                 City = "Iasi",
@@ -175,7 +175,7 @@ namespace HotelApi_.ManagerHotel
                 RoomsCount = 200
             });
 
-            Add(new Hotel()
+            Add(new HotelModel()
             {
                 Id = 3,
                 City = "Cluj Napoca",
@@ -185,9 +185,9 @@ namespace HotelApi_.ManagerHotel
                 RoomsCount = 140
             });
 
-            Add(new Hotel()
+            Add(new HotelModel()
             {
-                Id = (uint)4,
+                Id = (int)4,
                 City = "Cluj Napoca",
                 Description = "Fara",
                 Name = "Hotel Europa",
@@ -208,14 +208,14 @@ namespace HotelApi_.ManagerHotel
             var random = new Random();
             for (int i = 5; i < 100; i++)
             {
-                Add(new Hotel()
+                Add(new HotelModel()
                 {
-                    Id = (uint)i,
+                    Id = (int)i,
                     City = listCity[random.Next(0, listCity.Length-1)],
                     Description = "Fara",
                     Name = names[random.Next(0,names.Length-1)],
                     Rating =(short) random.Next(0,5),
-                    RoomsCount =(uint) random.Next(20,250)
+                    RoomsCount =(int) random.Next(20,250)
                 });
             }
         }
@@ -233,7 +233,7 @@ namespace HotelApi_.ManagerHotel
         /// </summary>
         /// <param name="id">Id of hotel that will be deleted.</param>
         /// <returns>True if opperattion done , false otherwise. </returns>
-        public override bool Delete(uint id)
+        public override bool Delete(int id)
         {
             int index = -1;
             for (int i = 0; i < hotels.Count; i++)
@@ -250,12 +250,12 @@ namespace HotelApi_.ManagerHotel
             return true;
         }
 
-        private List<Hotel> hotels;
+        private List<HotelModel> hotels;
 
         /// <summary>
         /// Get or set list of hotels.
         /// </summary>
-        public List<Hotel> Hotels
+        public List<HotelModel> Hotels
         {
             get { return hotels.ToList(); }
             private set { hotels = value; }
@@ -280,7 +280,7 @@ namespace HotelApi_.ManagerHotel
                     Hotels = hotelManager.GetHotelsPage(1, 10),
                     TotalItems = hotelManager.Count
                 };
-            IEnumerable<Hotel> hotelFiltred = hotelManager.GetHotelSearchByName(hotelRequest.Name)
+            IEnumerable<HotelModel> hotelFiltred = hotelManager.GetHotelSearchByName(hotelRequest.Name)
                 .Intersect(hotelManager.GetHotelByRating(hotelRequest.MinRating, hotelRequest.MaxRating))
                 .Intersect(hotelManager.GetHotelsByCity(hotelRequest.City))
                 .Intersect(hotelManager.GetHotesByRooms(hotelRequest.MinRoomsCount, hotelRequest.MaxRoomsCount));

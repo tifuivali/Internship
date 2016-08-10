@@ -10,7 +10,7 @@ namespace HotelApi_.Controllers
 {
     public class HotelsController : ApiController
     {
-        private HotelManager hotelManager = HotelDbManager.GetInstance();
+        private HotelManager hotelManager = HotelManagerHibernate.GetInstance();
        
 
 
@@ -29,13 +29,13 @@ namespace HotelApi_.Controllers
         /// <summary>
         /// Add hotel action
         /// </summary>
-        /// <param name="hotel"></param>
+        /// <param name="hotelModel"></param>
         /// <returns></returns>
         [HttpPost]
         [Route("api/Hotels/Add")]
-        public HttpResponseMessage Add([FromBody] Hotel hotel)
+        public HttpResponseMessage Add([FromBody] HotelModel hotelModel)
         {
-            if (!hotelManager.Add(hotel))
+            if (!hotelManager.Add(hotelModel))
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Hotel with the same id already exists!");
             return Request.CreateResponse(HttpStatusCode.OK, "Succes");
         }
@@ -43,13 +43,13 @@ namespace HotelApi_.Controllers
         /// <summary>
         /// Update hotel action.
         /// </summary>
-        /// <param name="hotel"></param>
+        /// <param name="hotelModel"></param>
         /// <returns></returns>
         [HttpPost]
         [Route("api/Hotels/Update")]
-        public HttpResponseMessage Update([FromBody] Hotel hotel)
+        public HttpResponseMessage Update([FromBody] HotelModel hotelModel)
         {
-            if (!hotelManager.Update(hotel))
+            if (!hotelManager.Update(hotelModel))
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Hotel doesn't exists!");
             return Request.CreateResponse(HttpStatusCode.OK, "Succes");
         }
@@ -59,7 +59,7 @@ namespace HotelApi_.Controllers
         /// </summary>
         /// <returns></returns>
         [Route("api/Hotels/GetValidId")]
-        public uint GetValidId()
+        public int GetValidId()
         {
             return hotelManager.GetValidId();
         }
@@ -70,7 +70,7 @@ namespace HotelApi_.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [Route("api/Hotels/Delete")]
-        public HttpResponseMessage Delete(uint id)
+        public HttpResponseMessage Delete(int id)
         {
             if (!hotelManager.Delete(id))
                 return Request.CreateResponse(HttpStatusCode.NotFound, "Not fund hotel with id:" + id);
