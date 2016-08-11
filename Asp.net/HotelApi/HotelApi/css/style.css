@@ -235,6 +235,11 @@ header {
     background-color:seagreen;
     -ms-border-radius: 200px;
     border-radius: 200px;
+    display:inline-table;
+    min-height: 100%;
+    width: 100%;
+    min-width: 50%;
+    
 }
 
 hr{

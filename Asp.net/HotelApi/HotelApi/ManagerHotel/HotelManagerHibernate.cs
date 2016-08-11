@@ -133,7 +133,7 @@ namespace HotelApi_.ManagerHotel
             {
                 using (var transaction = session.BeginTransaction())
                 {
-                    var hotel = session.Get<HotelEntity>(id);
+                    var hotel = session.Load<HotelEntity>(id);
                     var rooms = session.Query<RoomEntity>()
                         .Where(x => x.HotelId == hotel.Id);
                     foreach (var room in rooms.ToList())
