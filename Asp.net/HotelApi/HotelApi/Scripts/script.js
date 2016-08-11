@@ -2,7 +2,7 @@
 
 "use strict";
 
-var host = 'http://localhost/Hotels';
+var host = 'http://192.168.51.121/Hotels';
 //Create new Hotel object
 function Hotel(id, name, description, city, rooms_count, stars_count) {
     this.id = id;
