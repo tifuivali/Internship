@@ -1,4 +1,6 @@
-﻿namespace HotelApi_.Models
+﻿using HotelApi_.Entities;
+
+namespace HotelApi_.Models
 {
     public class HotelModel
     {
@@ -20,6 +22,21 @@
                 return false;
             HotelModel hotelModel = (HotelModel)obj;
             return hotelModel.Id == Id;
+        }
+
+        public HotelModel()
+        {
+            
+        }
+
+        public HotelModel(HotelEntity hotelEntity)
+        {
+            Id = hotelEntity.Id;
+            City = hotelEntity.Location.City;
+            Description = hotelEntity.Description;
+            Name = hotelEntity.Name;
+            Rating = (short) hotelEntity.Rating;
+            RoomsCount = hotelEntity.Rooms.Count;
         }
     }
 

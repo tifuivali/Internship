@@ -12,7 +12,8 @@ namespace HotelApi_.Mappers
         public RoomMap()
         {
             Table("Rooms");
-            Id(x => x.Id);
+            Id(x => x.Id).Not.Nullable();
+            Map(x => x.HotelId);
         }
     }
 }

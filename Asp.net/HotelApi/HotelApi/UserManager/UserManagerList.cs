@@ -29,7 +29,7 @@ namespace HotelApi_.UserManager
             return users.FirstOrDefault(u => u.UserName == user.UserName & u.Password == user.Password);
         }
 
-        public void AddUser(RegisterUser user)
+        public bool AddUser(RegisterUser user)
         {
             throw new NotImplementedException();
         }

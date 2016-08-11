@@ -11,6 +11,6 @@ namespace HotelApi_.UserManager
     {
         User GetUser(User user);
 
-        void AddUser(RegisterUser user);
+        bool AddUser(RegisterUser user);
     }
 }

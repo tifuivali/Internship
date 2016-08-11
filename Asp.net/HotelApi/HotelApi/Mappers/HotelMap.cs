@@ -13,12 +13,18 @@ namespace HotelApi_.Mappers
         public HotelMap()
         {
             Table("Hotels");
-            Id(x => x.Id);
+            Id(x => x.Id).GeneratedBy.Assigned();
             Map(x => x.Name);
             Map(x => x.Description);
             HasMany<RoomEntity>(x => x.Rooms).KeyColumns.Add("Id")
-                                             .Cascade.AllDeleteOrphan();
-            References(x => x.Location).Column("LocationId");
+                .Not.LazyLoad()
+                .Inverse()
+                .Cascade.Delete().Cascade.SaveUpdate();
+
+
+            References(x => x.Location).Column("LocationId")
+                .Cascade.SaveUpdate();
+                                   
             Map(x => x.Rating);
         }
 

@@ -23,9 +23,11 @@ namespace HotelApi_.Controllers
             if (ModelState.IsValid)
             {
                 userManager = UserManagerDb.GetInstance();
-                userManager.AddUser(tempUser);
-
-                return RedirectToAction("Login", "Login");
+                if (userManager.AddUser(tempUser))
+                {
+                    return RedirectToAction("Login", "Login");
+                }
+                ModelState.AddModelError("","Username already exists! Please choose another user name!");
             }
             return View();
 

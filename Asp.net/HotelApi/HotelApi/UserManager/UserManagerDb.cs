@@ -28,13 +28,22 @@ namespace HotelApi_.UserManager
             return userManagerDb;
         }
 
-        public void AddUser(RegisterUser user)
+        public bool AddUser(RegisterUser user)
         {
             var cmd = new SqlCommand();
+            cmd.Connection = connection;
+            cmd.CommandText = "select count(*) from Users where UserName=@userName";
+            var userNameParam=new SqlParameter("@userName",user.UserName);
+            cmd.Parameters.Add(userNameParam);
+            var nrUsers = (int) cmd.ExecuteScalar();
+            if (nrUsers > 0)
+                return false;
+            cmd = new SqlCommand();
             cmd.Connection = connection;
             cmd.CommandText = "insert into Users values (@userName,@password)";
             cmd.Parameters.AddRange(GetUserSqlParams(user));
             cmd.ExecuteNonQuery();
+            return true;
         }
 
         private SqlParameter[] GetUserSqlParams(User user)

@@ -18,6 +18,12 @@ namespace HotelApi_
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            NHibernateHelper.OpenSession();
+        }
+
+        protected void Application_End()
+        {
+            NHibernateHelper.CloseSession();
         }
     }
 }

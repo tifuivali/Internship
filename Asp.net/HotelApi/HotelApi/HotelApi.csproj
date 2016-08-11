@@ -223,7 +223,9 @@
     <Compile Include="App_Start\NHibernateProfilerBootstrapper.cs" />
     <Compile Include="Authorize\HotelAuthorize.cs" />
     <Compile Include="BookingManager\BookingManager.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\Api\BookingController.cs" />
+    <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\ReservationsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LogoutController.cs" />
@@ -398,11 +400,14 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Reservations\Reservations.cshtml" />
     <Content Include="Views\SignUp\SignUp.cshtml" />
+    <Content Include="Views\Locations\Locations.cshtml" />
+    <Content Include="Views\About\About.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\HelpPage\Views\HotelView\" />
     <Folder Include="images\" />
+    <Folder Include="Views\Home\NewFolder1\" />
     <Folder Include="Views\Hotels\" />
     <Folder Include="Views\Logout\" />
   </ItemGroup>

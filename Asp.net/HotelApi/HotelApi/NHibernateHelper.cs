@@ -13,6 +13,7 @@ namespace HotelApi_
     class NHibernateHelper
     {
         private static ISessionFactory _sessionFactory;
+        private static ISession session;
         private static ISessionFactory SessionFactory
         {
             get
@@ -35,9 +36,38 @@ namespace HotelApi_
         }
         public static ISession OpenSession()
         {
-            return SessionFactory.OpenSession();
+            if (session == null)
+                session = SessionFactory.OpenSession();
+            return session;
         }
 
+        public static void StartSession()
+        {
+            session = SessionFactory.OpenSession();
+        }
+
+        public static void CloseSession()
+        {
+            session.Close();
+        }
+
+        public static ISession GetSession()
+        {
+          //  if (session == null)
+          //      session = SessionFactory.OpenSession();
+        //    if (session.IsOpen == false)
+//session = SessionFactory.OpenSession();
+            return session;
+        }
+
+        public static void Delete<TEntity>( ISession session, object id)
+        {
+            var queryString = string.Format("delete {0} where id = :id",
+                                            typeof(TEntity));
+            session.CreateQuery(queryString)
+                   .SetParameter("id", id)
+                   .ExecuteUpdate();
+        }
 
     }
 }
