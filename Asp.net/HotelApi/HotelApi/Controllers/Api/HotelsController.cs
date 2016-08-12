@@ -5,13 +5,15 @@ using System.Web.Http;
 using HotelApi_.ManagerHotel;
 using HotelApi_.Models;
 using HotelApi_.Models.Booking;
+using HotelApi_.Service;
 
 namespace HotelApi_.Controllers
 {
     public class HotelsController : ApiController
     {
-        private HotelManager hotelManager = HotelManagerHibernate.GetInstance();
-       
+
+        //   private IHotelManager hotelManager = HotelManagerHibernate.GetInstance();
+        private IHotelManager hotelManager =(IHotelManager) ServiceLocator.GetService(typeof(IHotelManager));
 
 
         /// <summary>
@@ -35,6 +37,12 @@ namespace HotelApi_.Controllers
         [Route("api/Hotels/Add")]
         public HttpResponseMessage Add([FromBody] HotelModel hotelModel)
         {
+            if(hotelModel.Name.Length>50)
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Hotel name length too large!");
+            if(hotelModel.Description.Length>500)
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Hotel description length too large!");
+            if(hotelModel.Rating == 6)
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Value for rating is not valid!");
             if (!hotelManager.Add(hotelModel))
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Hotel with the same id already exists!");
             return Request.CreateResponse(HttpStatusCode.OK, "Succes");
@@ -49,6 +57,14 @@ namespace HotelApi_.Controllers
         [Route("api/Hotels/Update")]
         public HttpResponseMessage Update([FromBody] HotelModel hotelModel)
         {
+            if (hotelModel.Name.Length > 50)
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Hotel name length too large!");
+            if (hotelModel.Description.Length > 500)
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Hotel description length too large!");
+            if (hotelModel.Rating == 6)
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Value for rating is not valid!");
+            if (!hotelManager.Add(hotelModel))
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Hotel with the same id already exists!");
             if (!hotelManager.Update(hotelModel))
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Hotel doesn't exists!");
             return Request.CreateResponse(HttpStatusCode.OK, "Succes");

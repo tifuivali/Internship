@@ -2,7 +2,7 @@
 
 "use strict";
 
-var host = 'http://192.168.51.121/Hotels';
+var host = 'http://localhost/Hotels';
 //Create new Hotel object
 function Hotel(id, name, description, city, rooms_count, stars_count) {
     this.id = id;
@@ -521,12 +521,12 @@ function deleteItemBehavior(args) {
 function createInputsRow(columns) {
     var row = '<tr>';
     if (columns === undefined || columns === null) {
-        row += '<td><input data-id="id" type="number"/></td>';
+        row += '<td><input data-id="id" type="number" min="0" max="9999"/></td>';
         row += '<td><input data-id="name" type="text"/></td>';
         row += '<td><input data-id="description" type="text"></td>';
         row += '<td><input data-id="city" type="text"/></td>';
-        row += '<td><input data-id="rooms_count" type=\'number\'/></td>';
-        row += '<td><input data-id=\'stars_count\' type=\'number\'/></td>';
+        row += '<td><input data-id="rooms_count" min="0" max="9999" type=\'number\'/></td>';
+        row += '<td><input data-id=\'stars_count\' min="1" max="7" type=\'number\'/></td>';
         var divOp = createHtmlDivOperations();
         row += '<td>' + divOp;
         row += '</td>';
@@ -558,12 +558,12 @@ function createInputsRow(columns) {
 function createEditRow(hotel, columns) {
     var row = '<tr data-id="' + hotel.id + '">';
     if (columns === undefined || columns === null) {
-        row += '<td><input data-id=\'id\' value=\'' + hotel.id + '\' type=\'number\' readonly /></td>';
+        row += '<td><input data-id=\'id\' value=\'' + hotel.id + '\' type=\'number\' min="0" max="9999" readonly /></td>';
         row += '<td><input data-id=\'name\' value=\'' + hotel.name + '\' type=\'text\'/></td>';
         row += '<td><input data-id=\'description\' value=\'' + hotel.description + '\' type=\'text\'/></td>';
         row += '<td><input data-id=\'city\' value=\'' + hotel.city + '\' type=\'text\'/></td>';
-        row += '<td><input data-id=\'rooms_count\' value=\'' + hotel.rooms_count + '\' type=\'number\'/></td>';
-        row += '<td><input data-id=\'stars_count\' value=\'' + hotel.stars_count + '\' type=\'number\'/></td>';
+        row += '<td><input data-id=\'rooms_count\' value=\'' + hotel.rooms_count + '\' type=\'number\' min="0" max="9999"/></td>';
+        row += '<td><input data-id=\'stars_count\' value=\'' + hotel.stars_count + '\' type=\'number\' min="1" max="7"/></td>';
         var divOp = createHtmlDivOperations();
         row += '<td>' + divOp;
         row += '</td>';

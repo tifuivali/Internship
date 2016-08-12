@@ -1,5 +1,10 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.Linq;
+using HotelApi_;
+using HotelApi_.Entities;
+using NHibernate.Criterion;
+using NHibernate.Linq;
 
 namespace TestDb
 {
@@ -8,40 +13,19 @@ namespace TestDb
         static void Main(string[] args)
         {
             SqlConnection conn = new SqlConnection("Data Source =IASI-H5BP4G7;Initial Catalog=Bookings;User ID=sa;Password=1234%asd");
-            SqlDataReader reader = null;
-            try
+            using (var session = NHibernateHelper.OpenSession())
             {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("select * from Hotels",conn);
-                reader = cmd.ExecuteReader();
-                for (int i = 0; i < reader.FieldCount; i++)
+                var query = session.Query<PersonEntity>()
+                    .Where(x => x.Bookings.Any(p => Math.Abs(p.BookingDate.Year-x.RegisterDate.Year)>2))
+                    .Select(x => x.FirstName);
+                var persons = query.ToList();
+                foreach (var pers in persons)
                 {
-                    Console.Write($"{reader.GetName(i)} | ");
-                }
-                Console.WriteLine();
-                while (reader.Read())
-                {
-                    for (int i = 0; i < reader.FieldCount; i++)
-                    {
-                        Console.Write($"{reader[i]} || ");
-                    }
+                    Console.WriteLine(pers);
+                    Console.WriteLine();
                     Console.WriteLine();
                 }
-               
-
             }
-            finally
-            {
-                if (reader != null)
-                {
-                    reader.Close();
-                }
-                if (conn != null)
-                {
-                    conn.Close();
-                }
-            }
-
             Console.ReadKey();
         }
     }

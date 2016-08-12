@@ -10,7 +10,7 @@ using NHibernate.Tool.hbm2ddl;
 
 namespace HotelApi_
 {
-    class NHibernateHelper
+    public class NHibernateHelper
     {
         private static ISessionFactory _sessionFactory;
         private static ISession session;
@@ -46,17 +46,12 @@ namespace HotelApi_
             session = SessionFactory.OpenSession();
         }
 
-        public static void CloseSession()
-        {
-            session.Close();
-        }
-
         public static ISession GetSession()
         {
-          //  if (session == null)
-          //      session = SessionFactory.OpenSession();
-        //    if (session.IsOpen == false)
-//session = SessionFactory.OpenSession();
+             if (session == null)
+                 session = SessionFactory.OpenSession();
+             if(!session.IsOpen)
+                session= SessionFactory.OpenSession();
             return session;
         }
 

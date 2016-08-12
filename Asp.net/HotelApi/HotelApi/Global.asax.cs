@@ -6,6 +6,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using HotelApi_.ManagerHotel;
+using HotelApi_.Service;
 
 namespace HotelApi_
 {
@@ -18,12 +20,14 @@ namespace HotelApi_
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            NHibernateHelper.OpenSession();
+            ServiceLocator.Activate();
+            ServiceLocator.RegisterService(typeof(IHotelManager),typeof(HotelManagerHibernate));
+            
         }
 
         protected void Application_End()
         {
-            NHibernateHelper.CloseSession();
+            ServiceLocator.Disapose();
         }
     }
 }

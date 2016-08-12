@@ -2,9 +2,9 @@
 .slideshow-container {
   position:relative;
   text-align: center;
-  float:inherit;
-  display: inline-table;
+  display: inline-flex;
   margin-top: 2%;
+    padding-left: 20%;
   }
 
 /* Next & previous buttons */

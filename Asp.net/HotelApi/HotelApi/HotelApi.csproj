@@ -223,6 +223,8 @@
     <Compile Include="App_Start\NHibernateProfilerBootstrapper.cs" />
     <Compile Include="Authorize\HotelAuthorize.cs" />
     <Compile Include="BookingManager\BookingManager.cs" />
+    <Compile Include="BookingManager\BookingManagerNHibernate.cs" />
+    <Compile Include="BookingManager\IBookingManager.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\Api\BookingController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
@@ -230,15 +232,19 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LogoutController.cs" />
     <Compile Include="Controllers\SignUpController.cs" />
+    <Compile Include="Entities\BookingEntity.cs" />
     <Compile Include="Entities\HotelEntity.cs" />
     <Compile Include="Entities\LocationEntity.cs" />
+    <Compile Include="Entities\PersonEntity.cs" />
     <Compile Include="Entities\RoomEntity.cs" />
     <Compile Include="ManagerHotel\HotelDbManager.cs" />
     <Compile Include="ManagerHotel\HotelManager.cs" />
     <Compile Include="ManagerHotel\HotelManagerHibernate.cs" />
     <Compile Include="ManagerHotel\IHotelManager.cs" />
+    <Compile Include="Mappers\BookingMap.cs" />
     <Compile Include="Mappers\HotelMap.cs" />
     <Compile Include="Mappers\LocationMap.cs" />
+    <Compile Include="Mappers\PersonMap.cs" />
     <Compile Include="Mappers\RoomMap.cs" />
     <Compile Include="Models\AddExternalLoginBindingModel.cs" />
     <Compile Include="Models\Autentification\User.cs" />
@@ -309,6 +315,8 @@
     <Compile Include="Models\RemoveLoginBindingModel.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Models\SetPasswordBindingModel.cs" />
+    <Compile Include="Service\ServiceLocator.cs" />
+    <Compile Include="Service\StartServiceException.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Models\UserInfoViewModel.cs" />
     <Compile Include="Models\UserLoginInfoViewModel.cs" />

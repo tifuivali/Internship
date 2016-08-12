@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace HotelApi_.BookingManager
 {
-    public class BookingManager
+    public class BookingManager:IBookingManager
     {
         private static BookingManager bookingManager;
 
@@ -27,9 +27,10 @@ namespace HotelApi_.BookingManager
             return bookingManager ?? (bookingManager = new BookingManager());
         }
 
-        public void Add(Reservation reservation)
+        public bool Add(Reservation reservation)
         {
             books.Add(reservation);
+            return true;
         }
 
         public void Add(FormCollection collection)
